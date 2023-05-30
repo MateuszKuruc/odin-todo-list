@@ -16,6 +16,8 @@ function createHeader() {
 function createMain() {
     const main = document.createElement('div');
     main.classList.add('main');
+
+    return main;
 }
 
 function createFooter() {
@@ -44,5 +46,7 @@ function startWebsite() {
     const content = document.getElementById('content');
 
     content.appendChild(createHeader());
+    content.appendChild(createMain());
     content.appendChild(createFooter());
+    
 }
