@@ -1,1 +1,1 @@
-console.log("bububu");
+(()=>{"use strict";document.getElementById("content").appendChild(function(){const e=document.createElement("div");e.classList.add("header");const t=document.createElement("h1");return t.innerHTML="To-do List",e.appendChild(t),e}())})();
