@@ -10,5 +10,17 @@
 
 .header {
     height: 10vh;
+    display: flex;
     background-color:chocolate;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer {
+    display: flex;
+    height: 10vh;
+    background-color: chocolate;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
