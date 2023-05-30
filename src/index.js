@@ -1,1 +1,2 @@
-console.log('bububu');
+import startWebsite from './website'
+startWebsite();
