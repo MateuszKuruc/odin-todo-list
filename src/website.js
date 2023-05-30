@@ -17,6 +17,44 @@ function createMain() {
     const main = document.createElement('div');
     main.classList.add('main');
 
+    const sidebar = document.createElement('div');
+    sidebar.classList.add('sidebar');
+
+    const home = document.createElement('div');
+    home.classList.add('home');
+    
+    const homeTitle = document.createElement('h2');
+    homeTitle.innerHTML = 'Home';
+    home.appendChild(homeTitle);
+
+    const allTasks = document.createElement('div');
+    allTasks.classList.add('allTasks');
+    allTasks.innerHTML = 'All Tasks'
+
+    const todayTasks = document.createElement('div');
+    todayTasks.classList.add('todayTasks');
+    todayTasks.innerHTML = 'Today';
+
+    const projects = document.createElement('div');
+    projects.classList.add('projects');
+
+    const projectsTitle = document.createElement('h2');
+    projectsTitle.innerHTML = 'Projects';
+    projects.appendChild(projectsTitle);
+
+    const addProject = document.createElement('div');
+    addProject.classList.add('addProject');
+    addProject.innerHTML = 'Add Project';
+    projects.appendChild(addProject);
+
+    sidebar.appendChild(home);
+    home.appendChild(allTasks);
+    home.appendChild(todayTasks);
+    sidebar.appendChild(projects);
+    
+
+    main.appendChild(sidebar);
+
     return main;
 }
 

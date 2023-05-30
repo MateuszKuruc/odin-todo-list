@@ -26,6 +26,13 @@
 }
 
 .main {
+    display: grid;
     height: 80vh;
+    grid-template-columns: 1fr 4fr;
     /* border: 5px solid black; */
+}
+
+.sidebar {
+    background-color: lightblue;
+    /* border: 1px solid black; */
 }
