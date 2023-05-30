@@ -1,90 +1,88 @@
 export default startWebsite;
-import github from './img/github.svg';
+import github from "./img/github.svg";
 
 function createHeader() {
-    const header = document.createElement('div');
-    header.classList.add('header');
+  const header = document.createElement("div");
+  header.classList.add("header");
 
-    const siteName = document.createElement('h1');
-    siteName.innerHTML = 'To-do List'
+  const siteName = document.createElement("h1");
+  siteName.innerHTML = "To-do List";
 
-    header.appendChild(siteName);
+  header.appendChild(siteName);
 
-    return header;
+  return header;
 }
 
 function createMain() {
-    const main = document.createElement('div');
-    main.classList.add('main');
+  const main = document.createElement("div");
+  main.classList.add("main");
 
-    const sidebar = document.createElement('div');
-    sidebar.classList.add('sidebar');
+  const sidebar = document.createElement("div");
+  sidebar.classList.add("sidebar");
 
-    const home = document.createElement('div');
-    home.classList.add('home');
-    
-    const homeTitle = document.createElement('h2');
-    homeTitle.innerHTML = 'Home';
-    home.appendChild(homeTitle);
+  const home = document.createElement("div");
+  home.classList.add("home");
 
-    const allTasks = document.createElement('div');
-    allTasks.classList.add('allTasks');
-    allTasks.innerHTML = 'All Tasks'
+  const homeTitle = document.createElement("h2");
+  homeTitle.innerHTML = "Home";
+  home.appendChild(homeTitle);
 
-    const todayTasks = document.createElement('div');
-    todayTasks.classList.add('todayTasks');
-    todayTasks.innerHTML = 'Today';
+  const allTasks = document.createElement("div");
+  allTasks.classList.add("allTasks");
+  allTasks.innerHTML = "All Tasks";
 
-    const projects = document.createElement('div');
-    projects.classList.add('projects');
+  const todayTasks = document.createElement("div");
+  todayTasks.classList.add("todayTasks");
+  todayTasks.innerHTML = "Today";
 
-    const projectsTitle = document.createElement('h2');
-    projectsTitle.innerHTML = 'Projects';
-    projects.appendChild(projectsTitle);
+  const projects = document.createElement("div");
+  projects.classList.add("projects");
 
-    const addProject = document.createElement('div');
-    addProject.classList.add('addProject');
-    addProject.innerHTML = 'Add Project';
-    projects.appendChild(addProject);
+  const projectsTitle = document.createElement("h2");
+  projectsTitle.innerHTML = "Projects";
+  projects.appendChild(projectsTitle);
 
-    sidebar.appendChild(home);
-    home.appendChild(allTasks);
-    home.appendChild(todayTasks);
-    sidebar.appendChild(projects);
-    
+  const addProject = document.createElement("div");
+  addProject.classList.add("addProject");
+  addProject.innerHTML = "Add Project";
+  projects.appendChild(addProject);
 
-    main.appendChild(sidebar);
+  sidebar.appendChild(home);
+  home.appendChild(allTasks);
+  home.appendChild(todayTasks);
+  sidebar.appendChild(projects);
 
-    return main;
+  main.appendChild(sidebar);
+
+  return main;
 }
 
 function createFooter() {
-    const footer = document.createElement('div');
-    footer.classList.add('footer');
+  const footer = document.createElement("div");
+  footer.classList.add("footer");
 
-    const signature = document.createElement('h4');
-    signature.innerHTML = 'Mateusz Kuruc 2023';
+  const signature = document.createElement("h4");
+  signature.innerHTML = "Mateusz Kuruc 2023";
 
-    const githubImg = document.createElement('img');
-    githubImg.src = github;
+  const githubImg = document.createElement("img");
+  githubImg.src = github;
 
-    const githubLink = document.createElement('a');
-    githubLink.href = "https://github.com/MateuszKuruc?tab=repositories";
-    githubLink.target = "blank";
+  const githubLink = document.createElement("a");
+  githubLink.href = "https://github.com/MateuszKuruc?tab=repositories";
+  githubLink.target = "blank";
 
-    githubLink.appendChild(githubImg);
+  githubLink.appendChild(githubImg);
 
-    footer.appendChild(signature);
-    footer.appendChild(githubLink);
+  footer.appendChild(signature);
+  footer.appendChild(githubLink);
 
-    return footer;
+  return footer;
 }
 
 function startWebsite() {
-    const content = document.getElementById('content');
+  const content = document.getElementById("content");
 
-    content.appendChild(createHeader());
-    content.appendChild(createMain());
-    content.appendChild(createFooter());
-    
+  content.appendChild(createHeader());
+  content.appendChild(createMain());
+  content.appendChild(createFooter());
 }
