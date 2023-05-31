@@ -27,11 +27,11 @@ function createMain() {
   homeTitle.innerHTML = "Home";
   home.appendChild(homeTitle);
 
-  const allTasks = document.createElement("div");
+  const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
   allTasks.innerHTML = "All Tasks";
 
-  const todayTasks = document.createElement("div");
+  const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
   todayTasks.innerHTML = "Today";
 
@@ -42,7 +42,7 @@ function createMain() {
   projectsTitle.innerHTML = "Projects";
   projects.appendChild(projectsTitle);
 
-  const addProject = document.createElement("div");
+  const addProject = document.createElement("button");
   addProject.classList.add("addProject");
   addProject.innerHTML = "Add Project";
   projects.appendChild(addProject);

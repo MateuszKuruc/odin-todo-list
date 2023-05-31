@@ -39,5 +39,10 @@
     /* border: 1px solid black; */
     padding: 1rem;
     gap: 1rem;
-    
+
+}
+
+.home {
+    display: flex;
+    flex-direction: column;
 }
