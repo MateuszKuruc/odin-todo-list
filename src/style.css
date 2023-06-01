@@ -29,6 +29,7 @@
     display: grid;
     height: 80vh;
     grid-template-columns: 1fr 4fr;
+    /* background-color: red; */
     /* border: 5px solid black; */
 }
 

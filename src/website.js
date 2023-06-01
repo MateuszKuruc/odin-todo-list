@@ -42,10 +42,20 @@ function createMain() {
   projectsTitle.innerHTML = "Projects";
   projects.appendChild(projectsTitle);
 
+  const inputProject = document.createElement("input");
+  inputProject.classList.add("inputProject");
+  inputProject.type = "text";
+  inputProject.placeholder = "Enter project name";
+  projects.appendChild(inputProject);
+
   const addProject = document.createElement("button");
   addProject.classList.add("addProject");
   addProject.innerHTML = "Add Project";
   projects.appendChild(addProject);
+
+  const projectsContainer = document.createElement('div');
+  projectsContainer.classList.add('projectsContainer');
+  projects.appendChild(projectsContainer);
 
   sidebar.appendChild(home);
   home.appendChild(allTasks);
