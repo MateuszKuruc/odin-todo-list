@@ -47,3 +47,22 @@
     display: flex;
     flex-direction: column;
 }
+
+.mainDisplay {
+    background-color: salmon;
+}
+
+button {
+    width: 150px;
+}
+
+.tasksContainer {
+    background-color: blue;
+    border: 5px solid yellow;
+}
+
+.taskElement {
+    border: 5px solid white;
+    width: 200px;
+    background-color: blue;
+}

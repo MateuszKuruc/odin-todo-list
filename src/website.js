@@ -1,4 +1,5 @@
 export default startWebsite;
+import { loadAllTasks } from "./allTasks";
 import github from "./img/github.svg";
 
 function createHeader() {
@@ -13,9 +14,12 @@ function createHeader() {
   return header;
 }
 
-function createMain() {
+export function createMain() {
   const main = document.createElement("div");
   main.classList.add("main");
+
+  const mainDisplay = document.createElement("div");
+  mainDisplay.classList.add("mainDisplay");
 
   const sidebar = document.createElement("div");
   sidebar.classList.add("sidebar");
@@ -30,6 +34,7 @@ function createMain() {
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
   allTasks.innerHTML = "All Tasks";
+  allTasks.addEventListener('click', loadAllTasks)
 
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
@@ -57,12 +62,17 @@ function createMain() {
   projectsContainer.classList.add('projectsContainer');
   projects.appendChild(projectsContainer);
 
+//   const tasksContainer = document.createElement('div');
+//   tasksContainer.classList.add('tasksContainer');
+//   mainDisplay.appendChild(tasksContainer);
+
   sidebar.appendChild(home);
   home.appendChild(allTasks);
   home.appendChild(todayTasks);
   sidebar.appendChild(projects);
 
   main.appendChild(sidebar);
+  main.appendChild(mainDisplay);
 
   return main;
 }
