@@ -2,6 +2,8 @@ import { taskList } from "./projects";
 import { projectList } from "./projects";
 import { Task } from "./projects";
 
+taskList.push(new Task('mati', 'pami'))
+
 export function loadAllTasks() {
   const mainDisplay = document.querySelector(".mainDisplay");
   mainDisplay.innerHTML = "";
@@ -53,7 +55,7 @@ export function loadAllTasks() {
     taskName.classList.add("taskName");
     taskName.innerHTML = task.title;
 
-    const taskDesc = document.createElement("h4");
+    const taskDesc = document.createElement("p");
     taskDesc.innerHTML = task.description;
 
     const taskDelete = document.createElement("button");
@@ -92,7 +94,6 @@ export function createTask() {
   const taskDescription = document.querySelector(".taskDescription");
 
   if (taskTitle.value != "") {
-    console.log("oh, it is not empty");
     const newTask = new Task(taskTitle.value, taskDescription.value);
     console.log(newTask);
     taskList.push(newTask);
