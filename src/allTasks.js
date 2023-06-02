@@ -1,7 +1,7 @@
 import { taskList } from "./tasks";
 import { projectList } from "./tasks";
 import { Task } from "./tasks";
-import { createMain } from "./website";
+// import { createMain } from "./website";
 
 export function loadAllTasks() {
   const mainDisplay = document.querySelector(".mainDisplay");
@@ -31,6 +31,8 @@ export function loadAllTasks() {
 
   mainDisplay.appendChild(taskForm);
 
+  // toggle form hidden + clear form + 
+  // change new task button to 'cancel' and back
   const addNewTask = document.createElement("button");
   addNewTask.innerHTML = "Add new task";
   addNewTask.addEventListener('click', () => {
@@ -38,8 +40,11 @@ export function loadAllTasks() {
     addNewTask.innerHTML = 'Cancel';
     addNewTask.addEventListener('click', () => {
         addNewTask.innerHTML = 'Add new task'
+        taskTitle.value = '';
+        taskDescription.value = '';
     })
   });
+  mainDisplay.appendChild(addNewTask);
 
   taskList.forEach((task) => {
     const taskElement = document.createElement("div");
@@ -58,7 +63,7 @@ export function loadAllTasks() {
     mainDisplay.appendChild(taskElement);
   });
 
-  mainDisplay.appendChild(addNewTask);
+  
 
   return mainDisplay;
 }
