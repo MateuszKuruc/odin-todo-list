@@ -1,8 +1,7 @@
-// export default projectTasks
+
 
 export let projectList = [];
 export let taskList = [];
-import { loadAllTasks } from "./allTasks";
 
 
 export class Project {
@@ -23,7 +22,7 @@ export class Task {
 }
 
 function generateId() {
-    return Date.now().toString();
+  return Date.now().toString();
 }
 
 export function createProject() {
@@ -44,7 +43,6 @@ export function createProject() {
 }
 
 function displayProjects() {
-    
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
 
@@ -52,13 +50,11 @@ function displayProjects() {
     const projectElement = document.createElement("div");
     projectElement.classList.add("project");
 
-    const projectName = document.createElement("h3");
+    const projectName = document.createElement("button");
+    projectName.classList.add('projectName');
     projectName.innerHTML = project.name;
-
 
     projectElement.appendChild(projectName);
     projectsContainer.appendChild(projectElement);
   });
 }
-
-

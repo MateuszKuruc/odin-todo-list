@@ -1,6 +1,6 @@
-import { taskList } from "./projects";
-import { projectList } from "./projects";
-import { Task } from "./projects";
+import { taskList } from "./createProjects";
+import { projectList } from "./createProjects";
+import { Task } from "./createProjects";
 
 taskList.push(new Task('mati', 'pami'))
 
@@ -35,6 +35,7 @@ export function loadAllTasks() {
   // toggle form hidden + clear form +
   // change new task button to 'cancel' and back
   const addNewTask = document.createElement("button");
+  addNewTask.classList.add('addNewTask');
   addNewTask.innerHTML = "Add new task";
   addNewTask.addEventListener("click", () => {
     toggleForm(taskForm);

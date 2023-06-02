@@ -1,8 +1,8 @@
 import startWebsite from "./website";
 import "./style.css";
-import { createProject } from "./projects";
-import { displayTasks } from "./projects";
-import { createTask } from "./projects";
+import { createProject } from "./createProjects";
+import { displayTasks } from "./createProjects";
+import { createTask } from "./createProjects";
 startWebsite();
 createProject();
 // displayTasks();
