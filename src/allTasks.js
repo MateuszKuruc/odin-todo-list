@@ -1,7 +1,6 @@
-import { taskList } from "./tasks";
-import { projectList } from "./tasks";
-import { Task } from "./tasks";
-// import { createMain } from "./website";
+import { taskList } from "./projects";
+import { projectList } from "./projects";
+import { Task } from "./projects";
 
 export function loadAllTasks() {
   const mainDisplay = document.querySelector(".mainDisplay");
@@ -9,12 +8,12 @@ export function loadAllTasks() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  taskForm.classList.add('hidden');
+  taskForm.classList.add("hidden");
 
   const taskTitle = document.createElement("input");
   taskTitle.classList.add("taskTitle");
   taskTitle.type = "text";
-  taskTitle.placeholder = "Task name";
+  taskTitle.placeholder = "* Task name";
 
   const taskDescription = document.createElement("input");
   taskDescription.classList.add("taskDescription");
@@ -31,79 +30,64 @@ export function loadAllTasks() {
 
   mainDisplay.appendChild(taskForm);
 
-  // toggle form hidden + clear form + 
+  // toggle form hidden + clear form +
   // change new task button to 'cancel' and back
   const addNewTask = document.createElement("button");
   addNewTask.innerHTML = "Add new task";
-  addNewTask.addEventListener('click', () => {
-    toggleForm(taskForm);  
-    addNewTask.innerHTML = 'Cancel';
-    addNewTask.addEventListener('click', () => {
-        addNewTask.innerHTML = 'Add new task'
-        taskTitle.value = '';
-        taskDescription.value = '';
-    })
+  addNewTask.addEventListener("click", () => {
+    toggleForm(taskForm);
+    addNewTask.innerHTML = "Cancel";
+    addNewTask.addEventListener("click", () => {
+      addNewTask.innerHTML = "Add new task";
+      taskTitle.value = "";
+      taskDescription.value = "";
+    });
   });
   mainDisplay.appendChild(addNewTask);
 
   taskList.forEach((task) => {
     const taskElement = document.createElement("div");
-    taskElement.classList.add('taskElement');
+    taskElement.classList.add("taskElement");
 
-    const taskName = document.createElement('h3');
-    taskName.classList.add('taskName');
+    const taskName = document.createElement("h3");
+    taskName.classList.add("taskName");
     taskName.innerHTML = task.title;
 
-    const taskDesc = document.createElement('h4');
+    const taskDesc = document.createElement("h4");
     taskDesc.innerHTML = task.description;
+
+    const taskDelete = document.createElement("button");
+    taskDelete.classList.add("taskDelete");
+    taskDelete.innerHTML = "Delete";
+
+    taskDelete.addEventListener("click", () => {
+      removeTask(task.id);
+    });
 
     taskElement.appendChild(taskName);
     taskElement.appendChild(taskDesc);
+    taskElement.appendChild(taskDelete);
 
     mainDisplay.appendChild(taskElement);
   });
 
-  
-
   return mainDisplay;
 }
 
-function toggleForm(taskForm) {
-    taskForm.classList.toggle('hidden');
+function removeTask(taskId) {
+  const taskIndex = taskList.findIndex((task) => task.id === taskId);
+  console.log("usuwamy?");
+  if (taskIndex !== -1) {
+    taskList.splice(taskIndex, 1);
+    loadAllTasks(); // Update the UI to reflect the changes
+  }
 }
 
-// function createTaskForm() {
-//   const mainDisplay = document.querySelector(".mainDisplay");
-//   const taskForm = document.createElement("div");
-//   taskForm.classList.add("taskForm");
-
-//   const taskTitle = document.createElement("input");
-//   taskTitle.classList.add("taskTitle");
-//   taskTitle.type = "text";
-//   taskTitle.placeholder = "Task name";
-
-//   const taskDescription = document.createElement("input");
-//   taskDescription.classList.add("taskDescription");
-//   taskDescription.type = "text";
-//   taskDescription.placeholder = "Task description";
-
-//   const taskButton = document.createElement("button");
-//   taskButton.innerHTML = "Create task";
-//   taskButton.addEventListener("click", createTask);
-
-//   taskForm.appendChild(taskTitle);
-//   taskForm.appendChild(taskDescription);
-//   taskForm.appendChild(taskButton);
-
-//   mainDisplay.appendChild(taskForm);
-
-//   return mainDisplay;
-// }
+function toggleForm(taskForm) {
+  taskForm.classList.toggle("hidden");
+}
 
 export function createTask() {
-
-  console.log("bobobo");
-  const taskForm = document.querySelector(".taskForm");
   const taskTitle = document.querySelector(".taskTitle");
   const taskDescription = document.querySelector(".taskDescription");
 
@@ -113,11 +97,9 @@ export function createTask() {
     console.log(newTask);
     taskList.push(newTask);
     loadAllTasks();
-    taskTitle.value = '';
-    taskDescription.value = '';
+    taskTitle.value = "";
+    taskDescription.value = "";
+  } else {
+    console.log('blad');
   }
-
-  // if (taskTitle.value != && taskTitle.value.length > 0) {
-
-  // }
 }

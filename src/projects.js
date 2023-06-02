@@ -14,6 +14,7 @@ export class Project {
 
 export class Task {
   constructor(title, description) {
+    this.id = generateId();
     this.title = title;
     this.description = description;
     // this.dueDate = dueDate;
@@ -21,8 +22,8 @@ export class Task {
   }
 }
 
-function createTask() {
-
+function generateId() {
+    return Date.now().toString();
 }
 
 export function createProject() {
@@ -62,7 +63,3 @@ function displayProjects() {
 }
 
 
-export function displayTasks() {
-  const main = document.querySelector(".main");
-  const mainDisplay = document.querySelector(".mainDisplay");
-}
