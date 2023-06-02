@@ -66,3 +66,7 @@ button {
     width: 200px;
     background-color: blue;
 }
+
+.hidden {
+    display: none;
+}

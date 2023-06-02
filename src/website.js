@@ -1,6 +1,7 @@
 export default startWebsite;
 import { loadAllTasks } from "./allTasks";
 import github from "./img/github.svg";
+import { createTask } from "./allTasks";
 
 function createHeader() {
   const header = document.createElement("div");
@@ -34,7 +35,7 @@ export function createMain() {
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
   allTasks.innerHTML = "All Tasks";
-  allTasks.addEventListener('click', loadAllTasks)
+  allTasks.addEventListener("click", loadAllTasks);
 
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
@@ -58,13 +59,31 @@ export function createMain() {
   addProject.innerHTML = "Add Project";
   projects.appendChild(addProject);
 
-  const projectsContainer = document.createElement('div');
-  projectsContainer.classList.add('projectsContainer');
+  const projectsContainer = document.createElement("div");
+  projectsContainer.classList.add("projectsContainer");
   projects.appendChild(projectsContainer);
 
-//   const tasksContainer = document.createElement('div');
-//   tasksContainer.classList.add('tasksContainer');
-//   mainDisplay.appendChild(tasksContainer);
+//   const taskForm = document.createElement("div");
+//   taskForm.classList.add("taskForm");
+// //   taskForm.classList.add('hidden');
+
+//   const taskTitle = document.createElement("input");
+//   taskTitle.classList.add("taskTitle");
+//   taskTitle.type = "text";
+//   taskTitle.placeholder = "Task name";
+
+//   const taskDescription = document.createElement("input");
+//   taskDescription.classList.add("taskDescription");
+//   taskDescription.type = "text";
+//   taskDescription.placeholder = "Task description";
+
+//   const taskButton = document.createElement("button");
+//   taskButton.innerHTML = "Create task";
+//   taskButton.addEventListener("click", createTask);
+
+//   taskForm.appendChild(taskTitle);
+//   taskForm.appendChild(taskDescription);
+//   taskForm.appendChild(taskButton);
 
   sidebar.appendChild(home);
   home.appendChild(allTasks);
@@ -72,10 +91,39 @@ export function createMain() {
   sidebar.appendChild(projects);
 
   main.appendChild(sidebar);
+//   mainDisplay.appendChild(taskForm);
   main.appendChild(mainDisplay);
 
   return main;
 }
+
+// function createTaskForm() {
+//     const mainDisplay = document.querySelector(".mainDisplay");
+//     const taskForm = document.createElement("div");
+//     taskForm.classList.add("taskForm");
+
+//     const taskTitle = document.createElement("input");
+//     taskTitle.classList.add("taskTitle");
+//     taskTitle.type = "text";
+//     taskTitle.placeholder = "Task name";
+
+//     const taskDescription = document.createElement("input");
+//     taskDescription.classList.add("taskDescription");
+//     taskDescription.type = "text";
+//     taskDescription.placeholder = "Task description";
+
+//     const taskButton = document.createElement("button");
+//     taskButton.innerHTML = "Create task";
+//     taskButton.addEventListener("click", createTask);
+
+//     taskForm.appendChild(taskTitle);
+//     taskForm.appendChild(taskDescription);
+//     taskForm.appendChild(taskButton);
+
+//     mainDisplay.appendChild(taskForm);
+
+//     return mainDisplay;
+//   }
 
 function createFooter() {
   const footer = document.createElement("div");
