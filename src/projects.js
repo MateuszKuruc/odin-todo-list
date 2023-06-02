@@ -57,7 +57,6 @@ function displayProjects() {
 
 
     projectElement.appendChild(projectName);
-    // projectElement.appendChild(addTask);
     projectsContainer.appendChild(projectElement);
   });
 }
