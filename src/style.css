@@ -29,8 +29,8 @@
   display: grid;
   height: 80vh;
   grid-template-columns: 1fr 4fr;
+  /* border: 5px solid red; */
   /* background-color: red; */
-  /* border: 5px solid black; */
 }
 
 .sidebar {
@@ -51,6 +51,7 @@
   background-color: white;
   display: flex;
   flex-direction: column;
+  /* border: 5px solid red; */
 }
 
 button {

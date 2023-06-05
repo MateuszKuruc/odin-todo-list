@@ -1,6 +1,9 @@
 import { taskList } from "./createProjects";
 import { projectList } from "./createProjects";
 import { Task } from "./createProjects";
+import { currentProjectId } from "./createProjects";
+import { getCurrentProject } from "./createProjects";
+import { getCurrentProjectId } from "./createProjects";
 
 taskList.push(new Task('mati', 'pami'))
 
@@ -77,7 +80,7 @@ export function loadAllTasks() {
   return mainDisplay;
 }
 
-function removeTask(taskId) {
+export function removeTask(taskId) {
   const taskIndex = taskList.findIndex((task) => task.id === taskId);
   console.log("usuwamy?");
   if (taskIndex !== -1) {
@@ -86,18 +89,40 @@ function removeTask(taskId) {
   }
 }
 
-function toggleForm(taskForm) {
+export function toggleForm(taskForm) {
   taskForm.classList.toggle("hidden");
 }
 
-export function createTask() {
+// original version
+
+// export function createTask() {
+//   const taskTitle = document.querySelector(".taskTitle");
+//   const taskDescription = document.querySelector(".taskDescription");
+
+//   if (taskTitle.value != "") {
+//     const newTask = new Task(taskTitle.value, taskDescription.value);
+//     console.log(newTask);
+//     taskList.push(newTask);
+//     loadAllTasks();
+//     taskTitle.value = "";
+//     taskDescription.value = "";
+//   } else {
+//     console.log('blad');
+//   }
+// }
+
+function createTask() {
   const taskTitle = document.querySelector(".taskTitle");
   const taskDescription = document.querySelector(".taskDescription");
 
   if (taskTitle.value != "") {
     const newTask = new Task(taskTitle.value, taskDescription.value);
     console.log(newTask);
-    taskList.push(newTask);
+
+    const currentProject = getCurrentProject();
+    currentProject.taskList.push(newTask);
+
+    // taskList.push(newTask);
     loadAllTasks();
     taskTitle.value = "";
     taskDescription.value = "";

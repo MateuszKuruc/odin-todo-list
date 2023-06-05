@@ -1,5 +1,4 @@
 export default startWebsite;
-import { loadAllTasks } from "./createTasks";
 import github from "./img/github.svg";
 
 function createHeader() {
@@ -29,12 +28,10 @@ export function createMain() {
 
   const homeTitle = document.createElement("h2");
   homeTitle.innerHTML = "Home";
-  home.appendChild(homeTitle);
 
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
   allTasks.innerHTML = "All Tasks";
-  allTasks.addEventListener("click", loadAllTasks);
 
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
@@ -45,27 +42,29 @@ export function createMain() {
 
   const projectsTitle = document.createElement("h2");
   projectsTitle.innerHTML = "Projects";
-  projects.appendChild(projectsTitle);
 
   const inputProject = document.createElement("input");
   inputProject.classList.add("inputProject");
   inputProject.type = "text";
   inputProject.placeholder = "Enter project name";
-  projects.appendChild(inputProject);
 
   const addProject = document.createElement("button");
   addProject.classList.add("addProject");
   addProject.innerHTML = "Add Project";
-  projects.appendChild(addProject);
 
   const projectsContainer = document.createElement("div");
   projectsContainer.classList.add("projectsContainer");
   projects.appendChild(projectsContainer);
 
+  projects.appendChild(projectsTitle);
+  projects.appendChild(inputProject);
+  projects.appendChild(addProject);
+
   sidebar.appendChild(home);
+  sidebar.appendChild(projects);
+  home.appendChild(homeTitle);
   home.appendChild(allTasks);
   home.appendChild(todayTasks);
-  sidebar.appendChild(projects);
 
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);
