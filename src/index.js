@@ -1,9 +1,10 @@
-import startWebsite from "./website";
+import startWebsite from "./websiteBase";
 import "./style.css";
-import { createProject } from "./createProjects";
-import { displayTasks } from "./createProjects";
-import { createTask } from "./createProjects";
+import { Task } from "./createItems";
+import { Project } from "./createItems";
+// import { projectList } from "./createItems";
+import { createProject } from "./performAction";
+
 startWebsite();
 createProject();
-// displayTasks();
-// createTask();
+// const item1 = new Task('mati', 'bambati');

@@ -1,9 +1,4 @@
-import { taskList } from "./createProjects";
-import { projectList } from "./createProjects";
-import { Task } from "./createProjects";
-import { currentProjectId } from "./createProjects";
-import { getCurrentProject } from "./createProjects";
-import { getCurrentProjectId } from "./createProjects";
+
 
 taskList.push(new Task('mati', 'pami'))
 
