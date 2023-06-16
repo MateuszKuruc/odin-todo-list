@@ -1,5 +1,6 @@
 export default startWebsite;
 import github from "./img/github.svg";
+import { createTasks } from "./performAction";
 
 function createHeader() {
   const header = document.createElement("div");

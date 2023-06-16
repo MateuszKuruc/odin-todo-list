@@ -5,13 +5,17 @@ import { Project } from "./createItems";
 import { Task } from "./createItems";
 
 
-const testProject = new Project('mati bambati');
-testProject.addTask('jedzonko');
+
 // projectList.push('mati');
 
 const testTask = new Task('pranie', 'osobno biale i czarne');
-console.log(testTask, 'test Task');
-console.log(generalTaskList, 'generalTaskList');
+const testTask2 = new Task('obiad', 'pizza giuseppe')
+const testProject = new Project('mati bambati');
+testProject.addTask(testTask2);
+console.log(testProject);
+
+// console.log(testTask, 'test Task');
+// console.log(generalTaskList, 'generalTaskList');
 
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
@@ -31,23 +35,34 @@ export function createProject() {
   });
 }
 
-function createTasks() {
-  toggleForm();
+export function createTasks() {
+  
+
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
   const taskButton = document.querySelector(".taskButton");
 
-  if (taskTitleInput.value != "" && taskTitleInput.value.length != 0) {
+  if (taskTitleInput.value != "" && taskTitleInput.value.length != 0 && currentProjectId === null) {
     const newTask = new Task(taskTitleInput.value, taskDescriptionInput.value);
-    console.log(generalTaskList);
+    console.log(generalTaskList, 'general list here');
 
-    console.log("creating task");
     displayAllTasks();
+    toggleForm();
     return newTask;
-  }
+    
+} else if (currentProjectId != null) {
+  const newTask = new Task(taskTitleInput.value, taskDescriptionInput.value);
+  const project = Project.findProjectById(currentProjectId);
+  console.log(project);
+
+  project.addTask(newTask);
+  console.log(project, 'znowu project');
+}
 }
 
-function controlTaskDisplay() {
+
+
+export function controlTaskDisplay() {
   const allTasks = document.querySelector('.allTasks');
   allTasks.addEventListener('click', displayAllTasks)
 
@@ -56,25 +71,45 @@ function controlTaskDisplay() {
 
 function displayAllTasks() {
   const projectTasksContainer = document.querySelector('.projectTasksContainer');
+projectTasksContainer.innerHTML = '';
+currentProjectId = null;
+
    generalTaskList.forEach((task) => {
     const taskElement = document.createElement('div');
     taskElement.classList.add('taskElement');
 
     const taskTitleDisplay = document.createElement('h2');
     taskTitleDisplay.classList.add('taskTitleDisplay');
+    taskTitleDisplay.innerHTML = task.title;
 
     const taskDescriptionDisplay = document.createElement('p');
     taskDescriptionDisplay.classList.add('taskDescriptionDisplay');
+    taskDescriptionDisplay.innerHTML = task.description;
 
+    const taskDelete = document.createElement('button');
+    taskDelete.classList.add('taskDelete');
+    taskDelete.innerHTML = 'Delete task';
+
+    taskDelete.addEventListener('click', () => {
+      task.removeTask(generalTaskList);
+      displayAllTasks();
+      console.log(generalTaskList);
+    })
 
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
+    taskElement.appendChild(taskDelete);
     projectTasksContainer.appendChild(taskElement);
     
    })
 }
 
 export function displayProjects() {
+  const taskTitleInput = document.querySelector(".taskTitleInput");
+  const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+  const mainDisplay = document.querySelector('.mainDisplay');
+
+  const taskButton = document.querySelector('.taskButton');
 
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
@@ -91,37 +126,41 @@ export function displayProjects() {
     projectDelete.classList.add("projectDelete");
     projectDelete.innerHTML = "Delete";
 
+    const addNewTask = document.createElement('button');
+    addNewTask.classList.add('addNewTask');
+    addNewTask.innerHTML = 'Add task to the project';
+
     projectName.addEventListener("click", () => {
       currentProjectId = project.id;
       console.log(currentProjectId);
       displayProjectDetails();
     });
 
-
     projectDelete.addEventListener('click', () => {
       project.removeProject(projectList);
       displayProjects();
       console.log(projectList);
-    })
+    });
 
+
+    mainDisplay.appendChild(addNewTask);
     projectElement.appendChild(projectName);
     projectElement.appendChild(projectDelete);
     projectsContainer.appendChild(projectElement);
   });
 }
 
-function displayProjectDetails() {
+export function displayProjectDetails() {
   console.log('displaying project details');
   const mainDisplay = document.querySelector(".mainDisplay");
   mainDisplay.innerHTML = "";
-
 
 
   // add code below to display all tasks within the project
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  // taskForm.classList.add("hidden");
+  taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");

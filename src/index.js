@@ -6,11 +6,15 @@ import { Project } from "./createItems";
 import { createProject } from "./performAction";
 import { displayProjects } from "./performAction";
 import { projectList } from "./createItems";
-
+import { controlTaskDisplay } from "./performAction";
+import { displayProjectDetails } from "./performAction";
 
 startWebsite();
 createProject();
 displayProjects();
+controlTaskDisplay();
+displayProjectDetails();
 console.log(projectList);
+
 
 // const item1 = new Task('mati', 'bambati');
