@@ -25,10 +25,6 @@ export class Project {
         projectList.push(this);
     }
 
-    // addProject() {
-    //     projectList.push(this);
-    // }
-
     removeProject(projectList) {
         currentProjectId = this.id;
         const index = projectList.findIndex(project => project.id === currentProjectId);

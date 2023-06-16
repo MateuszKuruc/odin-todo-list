@@ -123,3 +123,7 @@ background-color: yellow;
 .projectDelete {
   width: 100px;
 }
+
+.projectTasksContainer {
+  border: 3px solid red;
+}

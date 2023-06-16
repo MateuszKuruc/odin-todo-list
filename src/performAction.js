@@ -4,6 +4,15 @@ import { generalTaskList } from "./createItems";
 import { Project } from "./createItems";
 import { Task } from "./createItems";
 
+
+const testProject = new Project('mati bambati');
+testProject.addTask('jedzonko');
+// projectList.push('mati');
+
+const testTask = new Task('pranie', 'osobno biale i czarne');
+console.log(testTask, 'test Task');
+console.log(generalTaskList, 'generalTaskList');
+
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
   const addProject = document.querySelector(".addProject");
@@ -11,7 +20,6 @@ export function createProject() {
   addProject.addEventListener("click", () => {
     if (inputProject.value != "" && inputProject.value.length != 0) {
       const newProject = new Project(inputProject.value);
-      // projectList.push(newProject);
       console.log(newProject);
       console.log(projectList);
       displayProjects();
@@ -23,7 +31,50 @@ export function createProject() {
   });
 }
 
-function displayProjects() {
+function createTasks() {
+  toggleForm();
+  const taskTitleInput = document.querySelector(".taskTitleInput");
+  const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+  const taskButton = document.querySelector(".taskButton");
+
+  if (taskTitleInput.value != "" && taskTitleInput.value.length != 0) {
+    const newTask = new Task(taskTitleInput.value, taskDescriptionInput.value);
+    console.log(generalTaskList);
+
+    console.log("creating task");
+    displayAllTasks();
+    return newTask;
+  }
+}
+
+function controlTaskDisplay() {
+  const allTasks = document.querySelector('.allTasks');
+  allTasks.addEventListener('click', displayAllTasks)
+
+  const todayTasks = document.querySelector('.todayTasks');
+}
+
+function displayAllTasks() {
+  const projectTasksContainer = document.querySelector('.projectTasksContainer');
+   generalTaskList.forEach((task) => {
+    const taskElement = document.createElement('div');
+    taskElement.classList.add('taskElement');
+
+    const taskTitleDisplay = document.createElement('h2');
+    taskTitleDisplay.classList.add('taskTitleDisplay');
+
+    const taskDescriptionDisplay = document.createElement('p');
+    taskDescriptionDisplay.classList.add('taskDescriptionDisplay');
+
+
+    taskElement.appendChild(taskTitleDisplay);
+    taskElement.appendChild(taskDescriptionDisplay);
+    projectTasksContainer.appendChild(taskElement);
+    
+   })
+}
+
+export function displayProjects() {
 
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
@@ -70,17 +121,17 @@ function displayProjectDetails() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  taskForm.classList.add("hidden");
+  // taskForm.classList.add("hidden");
 
-  const taskTitle = document.createElement("input");
-  taskTitle.classList.add("taskTitle");
-  taskTitle.type = "text";
-  taskTitle.placeholder = "* Task name";
+  const taskTitleInput = document.createElement("input");
+  taskTitleInput.classList.add("taskTitleInput");
+  taskTitleInput.type = "text";
+  taskTitleInput.placeholder = "* Task name";
 
-  const taskDescription = document.createElement("input");
-  taskDescription.classList.add("taskDescription");
-  taskDescription.type = "text";
-  taskDescription.placeholder = "Task description";
+  const taskDescriptionInput = document.createElement("input");
+  taskDescriptionInput.classList.add("taskDescriptionInput");
+  taskDescriptionInput.type = "text";
+  taskDescriptionInput.placeholder = "Task description";
 
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
@@ -97,38 +148,28 @@ function displayProjectDetails() {
   cancelTask.innerHTML = "Cancel";
   cancelTask.addEventListener("click", toggleForm);
 
-  taskForm.appendChild(taskTitle);
-  taskForm.appendChild(taskDescription);
+  const projectTasksContainer = document.createElement('div');
+  projectTasksContainer.classList.add('projectTasksContainer');
+
+  taskForm.appendChild(taskTitleInput);
+  taskForm.appendChild(taskDescriptionInput);
   taskForm.appendChild(createNewTask);
   taskForm.appendChild(cancelTask);
 
   mainDisplay.appendChild(taskButton);
   mainDisplay.appendChild(taskForm);
+  mainDisplay.appendChild(projectTasksContainer)
 }
 
-function createTasks() {
-  toggleForm();
-  const taskTitle = document.querySelector(".taskTitle");
-  const taskDescription = document.querySelector(".taskDescription");
-  const taskButton = document.querySelector(".taskButton");
 
-  if (taskTitle.value != "" && taskTitle.value.length != 0) {
-    const newTask = new Task(taskTitle.value, taskDescription.value);
-    console.log(generalTaskList);
-
-    console.log("creating task");
-
-    return newTask;
-  }
-}
 
 function toggleForm() {
   const taskForm = document.querySelector(".taskForm");
-  const taskTitle = document.querySelector(".taskTitle");
-  const taskDescription = document.querySelector(".taskDescription");
+  const taskTitleInput = document.querySelector(".taskTitleInput");
+  const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
 
-  taskTitle.value = "";
-  taskDescription.value = "";
+  taskTitleInput.value = "";
+  taskDescriptionInput.value = "";
 
   taskForm.classList.toggle("hidden");
 }
@@ -161,8 +202,8 @@ function toggleForm() {
 //     addNewTask.innerHTML = "Cancel";
 //     addNewTask.addEventListener("click", () => {
 //       addNewTask.innerHTML = "Add new task";
-//       taskTitle.value = "";
-//       taskDescription.value = "";
+//       taskTitleInput.value = "";
+//       taskDescriptionInput.value = "";
 //     });
 //   });
 //   mainDisplay.appendChild(addNewTask);
