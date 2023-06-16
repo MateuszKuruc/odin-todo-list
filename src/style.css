@@ -111,5 +111,15 @@ input {
   background-color: black;
   color: white;
   word-wrap: wrap;
-  width: min(80%, 125px)
+  /* width: min(80%, 125px) */
+}
+
+.projectsContainer {
+  display: flex;
+flex-direction: column;
+background-color: yellow;
+}
+
+.projectDelete {
+  width: 100px;
 }

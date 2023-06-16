@@ -1,4 +1,5 @@
 import { projectList } from "./createItems";
+import { currentProjectId } from "./createItems";
 import { generalTaskList } from "./createItems";
 import { Project } from "./createItems";
 import { Task } from "./createItems";
@@ -15,13 +16,15 @@ export function createProject() {
       console.log(projectList);
       displayProjects();
       inputProject.value = "";
-
+      currentProjectId = newProject.id;
+      console.log(currentProjectId);
       return newProject;
     }
   });
 }
 
 function displayProjects() {
+
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
 
@@ -33,9 +36,27 @@ function displayProjects() {
     projectName.classList.add("projectName");
     projectName.innerHTML = project.name;
 
-    projectName.addEventListener("click", displayProjectDetails);
+    const projectDelete = document.createElement("button");
+    projectDelete.classList.add("projectDelete");
+    projectDelete.innerHTML = "Delete";
+
+    projectName.addEventListener("click", () => {
+      currentProjectId = project.id;
+      console.log(currentProjectId);
+      displayProjectDetails();
+    });
+    projectDelete.addEventListener('click', () => {
+      currentProjectId = project.id;
+      const index = projectList.findIndex(project => project.id === currentProjectId);
+        if (index !== -1) {
+            projectList.splice(index, 1);
+            console.log(projectList);
+            displayProjects();
+        }
+    })
 
     projectElement.appendChild(projectName);
+    projectElement.appendChild(projectDelete);
     projectsContainer.appendChild(projectElement);
   });
 }
@@ -44,6 +65,8 @@ function displayProjectDetails() {
   console.log("test");
   const mainDisplay = document.querySelector(".mainDisplay");
   mainDisplay.innerHTML = "";
+
+
 
   // add code below to display all tasks within the project
 
@@ -64,46 +87,42 @@ function displayProjectDetails() {
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
   taskButton.innerHTML = "Add task";
-  taskButton.addEventListener("click", displayTasks);
+  taskButton.addEventListener("click", toggleForm);
 
-  const createNewTask = document.createElement('button');
-  createNewTask.classList.add('createNewTask');
-  createNewTask.innerHTML = 'Create task';
+  const createNewTask = document.createElement("button");
+  createNewTask.classList.add("createNewTask");
+  createNewTask.innerHTML = "Create task";
+  createNewTask.addEventListener("click", createTasks);
 
   const cancelTask = document.createElement("button");
   cancelTask.classList.add("cancelTask");
   cancelTask.innerHTML = "Cancel";
-  cancelTask.addEventListener('click', toggleForm);
+  cancelTask.addEventListener("click", toggleForm);
 
   taskForm.appendChild(taskTitle);
   taskForm.appendChild(taskDescription);
   taskForm.appendChild(createNewTask);
   taskForm.appendChild(cancelTask);
-  
 
   mainDisplay.appendChild(taskButton);
   mainDisplay.appendChild(taskForm);
 }
 
-function displayTasks() {
+function createTasks() {
   toggleForm();
-  // const taskTitle = document.querySelector(".taskTitle");
-  // const taskDescription = document.querySelector(".taskDescription");
-  // const taskButton = document.querySelector('.taskButton');
+  const taskTitle = document.querySelector(".taskTitle");
+  const taskDescription = document.querySelector(".taskDescription");
+  const taskButton = document.querySelector(".taskButton");
 
- 
+  if (taskTitle.value != "" && taskTitle.value.length != 0) {
+    const newTask = new Task(taskTitle.value, taskDescription.value);
+    console.log(generalTaskList);
 
-  
-  // if (taskTitle.value != '' && taskTitle.value.length != 0) {
-  //   const newTask = new Task(taskTitle.value, taskDescription.value);
-    // console.log(generalTaskList);
+    console.log("creating task");
 
-  console.log("creating task");
-  
-
-  // return newTask;
+    return newTask;
+  }
 }
-
 
 function toggleForm() {
   const taskForm = document.querySelector(".taskForm");
@@ -120,20 +139,19 @@ function toggleForm() {
 
 // const taskElement = document.createElement('div');
 //     taskElement.classList.add('taskElement');
-    
+
 //     const taskName = document.createElement("h3");
 //         taskName.classList.add("taskName");
 //         taskName.innerHTML = task.title;
-    
+
 //         const taskDesc = document.createElement("p");
 //         taskDesc.innerHTML = task.description;
-    
+
 //         const taskDelete = document.createElement("button");
 //         taskDelete.classList.add("taskDelete");
 //         taskDelete.innerHTML = "Delete";
 
 //   }
-
 
 //   // toggle form hidden + clear form +
 //   // change new task button to 'cancel' and back
