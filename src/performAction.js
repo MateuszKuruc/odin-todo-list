@@ -45,14 +45,12 @@ function displayProjects() {
       console.log(currentProjectId);
       displayProjectDetails();
     });
+
+
     projectDelete.addEventListener('click', () => {
-      currentProjectId = project.id;
-      const index = projectList.findIndex(project => project.id === currentProjectId);
-        if (index !== -1) {
-            projectList.splice(index, 1);
-            console.log(projectList);
-            displayProjects();
-        }
+      project.removeProject(projectList);
+      displayProjects();
+      console.log(projectList);
     })
 
     projectElement.appendChild(projectName);
@@ -62,7 +60,7 @@ function displayProjects() {
 }
 
 function displayProjectDetails() {
-  console.log("test");
+  console.log('displaying project details');
   const mainDisplay = document.querySelector(".mainDisplay");
   mainDisplay.innerHTML = "";
 

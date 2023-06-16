@@ -30,9 +30,11 @@ export class Project {
     // }
 
     removeProject(projectList) {
-        const index = projectList.findIndex(project => project.id === this.id);
+        currentProjectId = this.id;
+        const index = projectList.findIndex(project => project.id === currentProjectId);
         if (index !== -1) {
             projectList.splice(index, 1);
+            console.log(projectList);
         }
     }
 
