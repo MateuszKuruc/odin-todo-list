@@ -63,8 +63,12 @@ function displayProjectDetails() {
 
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
-  taskButton.innerHTML = "Create task";
-  taskButton.addEventListener("click", createTask);
+  taskButton.innerHTML = "Add task";
+  taskButton.addEventListener("click", displayTasks);
+
+  const createNewTask = document.createElement('button');
+  createNewTask.classList.add('createNewTask');
+  createNewTask.innerHTML = 'Create task';
 
   const cancelTask = document.createElement("button");
   cancelTask.classList.add("cancelTask");
@@ -73,16 +77,33 @@ function displayProjectDetails() {
 
   taskForm.appendChild(taskTitle);
   taskForm.appendChild(taskDescription);
+  taskForm.appendChild(createNewTask);
   taskForm.appendChild(cancelTask);
+  
 
   mainDisplay.appendChild(taskButton);
   mainDisplay.appendChild(taskForm);
 }
 
-function createTask() {
-  console.log("creating task");
+function displayTasks() {
   toggleForm();
+  // const taskTitle = document.querySelector(".taskTitle");
+  // const taskDescription = document.querySelector(".taskDescription");
+  // const taskButton = document.querySelector('.taskButton');
+
+ 
+
+  
+  // if (taskTitle.value != '' && taskTitle.value.length != 0) {
+  //   const newTask = new Task(taskTitle.value, taskDescription.value);
+    // console.log(generalTaskList);
+
+  console.log("creating task");
+  
+
+  // return newTask;
 }
+
 
 function toggleForm() {
   const taskForm = document.querySelector(".taskForm");
@@ -95,6 +116,23 @@ function toggleForm() {
   taskForm.classList.toggle("hidden");
 }
 
+// create task element
+
+// const taskElement = document.createElement('div');
+//     taskElement.classList.add('taskElement');
+    
+//     const taskName = document.createElement("h3");
+//         taskName.classList.add("taskName");
+//         taskName.innerHTML = task.title;
+    
+//         const taskDesc = document.createElement("p");
+//         taskDesc.innerHTML = task.description;
+    
+//         const taskDelete = document.createElement("button");
+//         taskDelete.classList.add("taskDelete");
+//         taskDelete.innerHTML = "Delete";
+
+//   }
 
 
 //   // toggle form hidden + clear form +
