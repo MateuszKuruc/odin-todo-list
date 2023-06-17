@@ -100,6 +100,7 @@ function displayAllTasks() {
 }
 
 function displayProjectTasks() {
+  
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -108,9 +109,11 @@ function displayProjectTasks() {
   const currentProject = Project.findProjectById(currentProjectId);
   if (currentProject) {
     const currentProjectTaskList = currentProject.taskList;
+    console.log('sprawdz aktualna liste', currentProjectTaskList);
 
     currentProjectTaskList.forEach((task) => {
-      console.log("bugati");
+      if (generalTaskList.includes(task)) {
+      
       const taskElement = document.createElement("div");
       taskElement.classList.add("taskElement");
 
@@ -130,6 +133,7 @@ function displayProjectTasks() {
       taskElement.appendChild(taskDescriptionDisplay);
       taskElement.appendChild(taskDelete);
       projectTasksContainer.appendChild(taskElement);
+      }
     });
   }
 }
