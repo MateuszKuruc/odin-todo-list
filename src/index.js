@@ -4,16 +4,16 @@ import { Task } from "./createItems";
 import { Project } from "./createItems";
 // import { projectList } from "./createItems";
 import { createProject } from "./performAction";
-import { displayProjects } from "./performAction";
+import { displayProjectList } from "./performAction";
 import { projectList } from "./createItems";
 import { controlTaskDisplay } from "./performAction";
 import { displayProjectDetails } from "./performAction";
 
 startWebsite();
 createProject();
-displayProjects();
+displayProjectList();
 controlTaskDisplay();
-displayProjectDetails();
+// displayProjectDetails();
 console.log(projectList);
 
 

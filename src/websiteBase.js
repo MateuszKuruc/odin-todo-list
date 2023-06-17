@@ -1,6 +1,7 @@
 export default startWebsite;
 import github from "./img/github.svg";
-import { createTasks } from "./performAction";
+import { createTask } from "./performAction";
+import { currentProjectId } from "./createItems";
 
 function createHeader() {
   const header = document.createElement("div");
@@ -55,6 +56,48 @@ export function createMain() {
 
   const projectsContainer = document.createElement("div");
   projectsContainer.classList.add("projectsContainer");
+
+  const taskForm = document.createElement("div");
+  taskForm.classList.add("taskForm");
+  taskForm.classList.add("hidden");
+
+  const taskTitleInput = document.createElement("input");
+  taskTitleInput.classList.add("taskTitleInput");
+  taskTitleInput.type = "text";
+  taskTitleInput.placeholder = "* Task name";
+
+  const taskDescriptionInput = document.createElement("input");
+  taskDescriptionInput.classList.add("taskDescriptionInput");
+  taskDescriptionInput.type = "text";
+  taskDescriptionInput.placeholder = "Task description";
+
+  const taskButton = document.createElement("button");
+  taskButton.classList.add("taskButton");
+  taskButton.innerHTML = "Add task";
+  taskButton.addEventListener("click", toggleForm);
+
+  const createNewTask = document.createElement("button");
+  createNewTask.classList.add("createNewTask");
+  createNewTask.innerHTML = "Create task";
+  createNewTask.addEventListener("click", createTask);
+
+  const cancelTask = document.createElement("button");
+  cancelTask.classList.add("cancelTask");
+  cancelTask.innerHTML = "Cancel";
+  cancelTask.addEventListener("click", toggleForm);
+
+  const projectTasksContainer = document.createElement("div");
+  projectTasksContainer.classList.add("projectTasksContainer");
+
+  taskForm.appendChild(taskTitleInput);
+  taskForm.appendChild(taskDescriptionInput);
+  taskForm.appendChild(createNewTask);
+  taskForm.appendChild(cancelTask);
+
+  mainDisplay.appendChild(taskButton);
+  mainDisplay.appendChild(taskForm);
+  mainDisplay.appendChild(projectTasksContainer);
+
   projects.appendChild(projectsContainer);
 
   projects.appendChild(projectsTitle);
@@ -70,7 +113,22 @@ export function createMain() {
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);
 
+  todayTasks.addEventListener("click", () => {
+    console.log(currentProjectId);
+  });
+
   return main;
+}
+
+export function toggleForm() {
+  const taskForm = document.querySelector(".taskForm");
+  const taskTitleInput = document.querySelector(".taskTitleInput");
+  const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+
+  taskTitleInput.value = "";
+  taskDescriptionInput.value = "";
+
+  taskForm.classList.toggle("hidden");
 }
 
 function createFooter() {
