@@ -97,8 +97,6 @@ function displayAllTasks() {
         }
       }
     
-      generalTaskList = generalTaskList.filter((item) => item !== task);
-      
       task.removeTask(generalTaskList);
       displayAllTasks();
     });
