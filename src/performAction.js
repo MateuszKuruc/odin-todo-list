@@ -99,13 +99,16 @@ function createTaskDisplay(task) {
   taskEdit.innerHTML = "Edit";
 
   taskEdit.addEventListener("click", () => {
-    if (taskEdit.innerHTML === 'Edit') {
-    taskDescriptionDisplay.removeAttribute("readOnly");
-    taskEdit.innerHTML = "Save";
-  } else if (taskEdit.innerHTML === "Save") {
-        taskDescriptionDisplay.setAttribute("readonly", "readonly");
-        task.description = taskDescriptionDisplay.value;
-        taskEdit.innerHTML = "Edit";
+    if (taskEdit.innerHTML === "Edit") {
+      taskTitleDisplay.removeAttribute("readOnly");
+      taskDescriptionDisplay.removeAttribute("readOnly");
+      taskEdit.innerHTML = "Save";
+    } else if (taskEdit.innerHTML === "Save") {
+      taskTitleDisplay.setAttribute("readonly", "readonly");
+      taskDescriptionDisplay.setAttribute("readonly", "readonly");
+      task.title = taskTitleDisplay.value;
+      task.description = taskDescriptionDisplay.value;
+      taskEdit.innerHTML = "Edit";
     }
   });
 
@@ -212,8 +215,8 @@ export function displayProjectList() {
         if (index !== -1) {
           generalTaskList.splice(index, 1);
         }
-      })
-      
+      });
+
       project.removeProject(projectList);
       displayProjectList();
       displayAllTasks();
