@@ -185,12 +185,6 @@ function displayProjectTasks() {
 }
 
 export function displayProjectList() {
-  // const taskTitleInput = document.querySelector(".taskTitleInput");
-  // const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
-  // const mainDisplay = document.querySelector(".mainDisplay");
-
-  // const taskButton = document.querySelector(".taskButton");
-
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
 
