@@ -1,70 +1,56 @@
-
-
-
 export let projectList = [];
 export let generalTaskList = [];
 export let currentProjectId = null;
 export let currentTaskId = null;
 export let taskPriorityInput = null;
 
-
 export class Project {
-    constructor(name) {
-        this.id = generateId();
-        this.name = name;
-        this.taskList = [];
-        projectList.push(this);
-    }
-
-    removeProject(projectList) {
-        currentProjectId = this.id;
-        const index = projectList.findIndex(project => project.id === currentProjectId);
-        if (index !== -1) {
-            projectList.splice(index, 1);
-            console.log(projectList);
-        }
-    }
-
-    addTask(task) {
-        this.taskList.push(task);
-    }
-
-    static findProjectById(id) {
-        console.log('finding project by id...');
-        return projectList.find((project) => project.id === id);
-    }
-    
-}
-
-
-
-
-export class Task {
-    constructor(title, description, priority) {
-        this.id = generateId();
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        generalTaskList.push(this);
-    }
-
-    removeTask(generalTaskList) {
-        currentTaskId = this.id;
-        const taskIndex = generalTaskList.findIndex((task) => task.id === currentTaskId);
-        console.log("usuwamy?");
-        if (taskIndex !== -1) {
-          generalTaskList.splice(taskIndex, 1);
-          console.log('wyswietlam general task list', generalTaskList);
-        //   loadAllTasks(); // Update the UI to reflect the changes
-        }
-      }
-
-  
-
-}
-
-
-function generateId() {
-    return Date.now().toString();
+  constructor(name) {
+    this.id = generateId();
+    this.name = name;
+    this.taskList = [];
+    projectList.push(this);
   }
 
+  removeProject(projectList) {
+    currentProjectId = this.id;
+    const index = projectList.findIndex(
+      (project) => project.id === currentProjectId
+    );
+    if (index !== -1) {
+      projectList.splice(index, 1);
+    }
+  }
+
+  addTask(task) {
+    this.taskList.push(task);
+  }
+
+  static findProjectById(id) {
+    return projectList.find((project) => project.id === id);
+  }
+}
+
+export class Task {
+  constructor(title, description, priority) {
+    this.id = generateId();
+    this.title = title;
+    this.description = description;
+    this.priority = priority;
+    generalTaskList.push(this);
+  }
+
+  removeTask(generalTaskList) {
+    currentTaskId = this.id;
+    const taskIndex = generalTaskList.findIndex(
+      (task) => task.id === currentTaskId
+    );
+    if (taskIndex !== -1) {
+      generalTaskList.splice(taskIndex, 1);
+    }
+  }
+}
+
+function generateId() {
+  return Date.now().toString();
+}

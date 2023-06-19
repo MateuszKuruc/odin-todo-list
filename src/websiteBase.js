@@ -2,7 +2,6 @@ export default startWebsite;
 import github from "./img/github.svg";
 import { createTask, getPriorityChoice } from "./performAction";
 import { currentProjectId } from "./createItems";
-// import { getPriorityChoice } from "./performAction";
 
 function createHeader() {
   const header = document.createElement("div");
@@ -60,7 +59,7 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  // taskForm.classList.add("hidden");
+  taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");
@@ -169,8 +168,7 @@ export function createMain() {
   main.appendChild(mainDisplay);
 
   todayTasks.addEventListener("click", () => {
-    console.log(radiobox);
-    // getPriorityChoice();
+    // console.log(radiobox);
   });
 
   return main;

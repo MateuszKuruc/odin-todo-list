@@ -11,8 +11,7 @@ const testTask = new Task("pranie", "osobno biale i czarne", "medium");
 const testTask2 = new Task("obiad", "pizza giuseppe", "high");
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
-// testProject.addTask(testTask2);
-// console.log(testProject);
+
 
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
@@ -21,12 +20,9 @@ export function createProject() {
   addProject.addEventListener("click", () => {
     if (inputProject.value != "" && inputProject.value.length != 0) {
       const newProject = new Project(inputProject.value);
-      // console.log(newProject);
-      // console.log(projectList);
       displayProjectList();
       inputProject.value = "";
       currentProjectId = newProject.id;
-      // console.log(currentProjectId);
       return newProject;
     }
   });
@@ -51,7 +47,6 @@ export function createTask() {
 
     displayAllTasks();
     toggleForm();
-    console.log(newTask);
 
     return newTask;
   } else if (currentProjectId != null) {
@@ -136,7 +131,6 @@ function displayProjectTasks() {
   const currentProject = Project.findProjectById(currentProjectId);
   if (currentProject) {
     const currentProjectTaskList = currentProject.taskList;
-    // console.log('sprawdz aktualna liste', currentProjectTaskList);
 
     currentProjectTaskList.forEach((task) => {
       const taskElement = document.createElement("div");
@@ -162,7 +156,6 @@ function displayProjectTasks() {
         task.removeTask(currentProjectTaskList);
         task.removeTask(generalTaskList);
         displayProjectTasks();
-        // console.log(currentProjectTaskList);
       });
 
       taskElement.appendChild(taskTitleDisplay);
@@ -198,15 +191,12 @@ export function displayProjectList() {
 
     projectName.addEventListener("click", () => {
       currentProjectId = project.id;
-      // console.log(currentProjectId);
-      // console.log(project.taskList);
       displayProjectTasks();
     });
 
     projectDelete.addEventListener("click", () => {
       project.removeProject(projectList);
       displayProjectList();
-      // console.log(projectList);
     });
 
     projectElement.appendChild(projectName);
