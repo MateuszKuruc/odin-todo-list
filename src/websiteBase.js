@@ -59,17 +59,40 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  taskForm.classList.add("hidden");
+  // taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");
   taskTitleInput.type = "text";
+  taskTitleInput.id = 'taskTtitleInput';
   taskTitleInput.placeholder = "* Task name";
+
+  const labelTitle = document.createElement('label');
+  labelTitle.htmlFor = 'taskTtitleInput';
+  labelTitle.innerHTML = 'Name';
 
   const taskDescriptionInput = document.createElement("input");
   taskDescriptionInput.classList.add("taskDescriptionInput");
   taskDescriptionInput.type = "text";
+  taskDescriptionInput.id = 'taskDescriptionInput';
   taskDescriptionInput.placeholder = "Task description";
+
+  const labelDescription = document.createElement('label');
+  labelDescription.htmlFor = 'taskDescriptionInput';
+  labelDescription.innerHTML = 'Description';
+
+  const dueDateInput = document.createElement('input');
+  dueDateInput.classList.add('dueDateInput');
+  dueDateInput.type = 'date';
+  dueDateInput.name = 'dueDate';
+  dueDateInput.id = 'dueDate';
+  dueDateInput.value = new Date();
+  dueDateInput.min = new Date();
+  // dueDateInput.max = '2023-06-30';
+
+  const labelDate = document.createElement('label');
+  labelDate.htmlFor = 'dueDate';
+  labelDate.innerHTML = 'Due date';
 
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
@@ -90,9 +113,10 @@ export function createMain() {
   projectTasksContainer.classList.add("projectTasksContainer");
 
   const radiobox = document.createElement("div");
+  // radiobox.id = 'radiobox';
 
-  const radioDescription = document.createElement("h3");
-  radioDescription.classList.add("radioDescription");
+  const radioDescription = document.createElement("label");
+  // radioDescription.htmlFor = 'radiobox';
   radioDescription.innerHTML = "Priority";
 
   const radio1 = document.createElement("input");
@@ -129,7 +153,7 @@ export function createMain() {
   label3.htmlFor = "radio3";
   label3.innerHTML = "High";
 
-  radiobox.appendChild(radioDescription);
+  // radiobox.appendChild(radioDescription);
 
   radiobox.appendChild(radio1);
   radiobox.appendChild(label1);
@@ -140,8 +164,13 @@ export function createMain() {
   radiobox.appendChild(radio3);
   radiobox.appendChild(label3);
 
+  taskForm.appendChild(labelTitle);
   taskForm.appendChild(taskTitleInput);
+  taskForm.appendChild(labelDescription);
   taskForm.appendChild(taskDescriptionInput);
+  taskForm.appendChild(labelDate);
+  taskForm.appendChild(dueDateInput);
+  taskForm.appendChild(radioDescription);
 
   taskForm.appendChild(radiobox);
 

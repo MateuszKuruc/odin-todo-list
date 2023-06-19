@@ -7,6 +7,9 @@ import { Task } from "./createItems";
 import { createMain, toggleForm } from "./websiteBase";
 import { taskPriorityInput } from "./createItems";
 
+import { addDays, format } from 'date-fns'
+
+
 const testTask = new Task("pranie", "osobno biale i czarne", "medium");
 const testTask2 = new Task("obiad", "pizza giuseppe", "high");
 const testProject = new Project("mati bambati");
@@ -31,6 +34,8 @@ export function createProject() {
 export function createTask() {
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+  const dueDateInput = document.querySelector('.dueDateInput');
+  console.log(dueDateInput.value);
 
   getPriorityChoice();
 
@@ -42,7 +47,8 @@ export function createTask() {
     const newTask = new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
-      taskPriorityInput
+      taskPriorityInput,
+      dueDateInput.value
     );
 
     displayAllTasks();
@@ -53,7 +59,8 @@ export function createTask() {
     const newTask = new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
-      taskPriorityInput
+      taskPriorityInput,
+      dueDateInput.value
     );
     const project = Project.findProjectById(currentProjectId);
 
@@ -63,11 +70,15 @@ export function createTask() {
   }
 }
 
+
 export function controlTaskDisplay() {
   const allTasks = document.querySelector(".allTasks");
   allTasks.addEventListener("click", displayAllTasks);
 
   const todayTasks = document.querySelector(".todayTasks");
+  todayTasks.addEventListener('click', () => {
+    console.log(date2);
+  })
 }
 
 function createTaskDisplay(task) {
@@ -89,6 +100,12 @@ function createTaskDisplay(task) {
   taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
   taskDescriptionDisplay.value = task.description;
   taskDescriptionDisplay.readOnly = true;
+
+  const taskDueDateDisplay = document.createElement('input');
+  taskDueDateDisplay.type = 'text';
+  taskDueDateDisplay.classList.add('taskDueDateDisplay');
+  taskDueDateDisplay.value = task.dueDate;
+  taskDueDateDisplay.readOnly = true;
 
   const taskPriorityDisplay = document.createElement("h3");
   taskPriorityDisplay.classList.add("taskPriorityInput");
@@ -135,6 +152,7 @@ function createTaskDisplay(task) {
     });
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
+    taskElement.appendChild(taskDueDateDisplay);
     taskElement.appendChild(taskPriorityDisplay);
     taskElement.appendChild(taskEdit);
     taskElement.appendChild(taskDelete);
@@ -154,6 +172,7 @@ function createTaskDisplay(task) {
     });
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
+    taskElement.appendChild(taskDueDateDisplay);
     taskElement.appendChild(taskPriorityDisplay);
     taskElement.appendChild(taskEdit);
     taskElement.appendChild(taskDelete);
