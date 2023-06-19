@@ -59,7 +59,7 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  taskForm.classList.add("hidden");
+  // taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");
@@ -89,8 +89,59 @@ export function createMain() {
   const projectTasksContainer = document.createElement("div");
   projectTasksContainer.classList.add("projectTasksContainer");
 
+  const radiobox = document.createElement('div');
+
+  const radioDescription = document.createElement('h3');
+  radioDescription.classList.add('radioDescription');
+  radioDescription.innerHTML = 'Priority';
+
+  const radio1 = document.createElement('input');
+  radio1.type = 'radio';
+  radio1.id = 'radio1'
+  radio1.name = 'priority';
+  radio1.value = 'low';
+  const label1 = document.createElement('label');
+  label1.htmlFor = 'radio1';
+  label1.innerHTML = 'Low';
+
+  const radio2 = document.createElement('input');
+  radio2.type = 'radio';
+  radio2.id = 'radio2'
+  radio2.name = 'priority';
+  radio2.value = 'medium';
+  radio2.checked = 'true';
+
+  const label2 = document.createElement('label');
+  label2.htmlFor = 'radio2';
+  label2.innerHTML = 'Medium';
+
+  const radio3 = document.createElement('input');
+  radio3.type = 'radio';
+  radio3.id = 'radio3'
+  radio3.name = 'priority';
+  radio3.value = 'high';
+  const label3 = document.createElement('label');
+  label3.htmlFor = 'radio3';
+  label3.innerHTML = 'High';
+
+  radiobox.appendChild(radioDescription);
+
+  radiobox.appendChild(radio1);
+  radiobox.appendChild(label1);
+
+  radiobox.appendChild(radio2);
+  radiobox.appendChild(label2);
+
+  radiobox.appendChild(radio3);
+  radiobox.appendChild(label3);
+  
+  
+
   taskForm.appendChild(taskTitleInput);
   taskForm.appendChild(taskDescriptionInput);
+
+  taskForm.appendChild(radiobox);
+
   taskForm.appendChild(createNewTask);
   taskForm.appendChild(cancelTask);
 

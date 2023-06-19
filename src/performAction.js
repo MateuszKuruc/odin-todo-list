@@ -6,9 +6,10 @@ import { Project } from "./createItems";
 import { Task } from "./createItems";
 import { createMain, toggleForm } from "./websiteBase";
 
-// const testTask = new Task("pranie", "osobno biale i czarne");
-// const testTask2 = new Task("obiad", "pizza giuseppe");
-// const testProject = new Project("mati bambati");
+const testTask = new Task("pranie", "osobno biale i czarne");
+const testTask2 = new Task("obiad", "pizza giuseppe");
+const testProject = new Project("mati bambati");
+testTask2.id = testTask.id + 1;
 // testProject.addTask(testTask2);
 // console.log(testProject);
 
