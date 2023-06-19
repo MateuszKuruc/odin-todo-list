@@ -129,7 +129,6 @@ function createTaskDisplay(task) {
 
       task.removeTask(generalTaskList);
       displayAllTasks();
-      // taskElement.appendChild(taskDelete);
     });
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
@@ -186,11 +185,11 @@ function displayProjectTasks() {
 }
 
 export function displayProjectList() {
-  const taskTitleInput = document.querySelector(".taskTitleInput");
-  const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
-  const mainDisplay = document.querySelector(".mainDisplay");
+  // const taskTitleInput = document.querySelector(".taskTitleInput");
+  // const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+  // const mainDisplay = document.querySelector(".mainDisplay");
 
-  const taskButton = document.querySelector(".taskButton");
+  // const taskButton = document.querySelector(".taskButton");
 
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
@@ -213,8 +212,17 @@ export function displayProjectList() {
     });
 
     projectDelete.addEventListener("click", () => {
+      const currentTaskList = project.taskList;
+      currentTaskList.forEach((task) => {
+        const index = generalTaskList.findIndex((item) => item.id === task.id);
+        if (index !== -1) {
+          generalTaskList.splice(index, 1);
+        }
+      })
+      
       project.removeProject(projectList);
       displayProjectList();
+      displayAllTasks();
     });
 
     projectElement.appendChild(projectName);
