@@ -5,9 +5,10 @@ import { generalTaskList } from "./createItems";
 import { Project } from "./createItems";
 import { Task } from "./createItems";
 import { createMain, toggleForm } from "./websiteBase";
+import { taskPriorityInput } from "./createItems";
 
-const testTask = new Task("pranie", "osobno biale i czarne");
-const testTask2 = new Task("obiad", "pizza giuseppe");
+const testTask = new Task("pranie", "osobno biale i czarne", "medium");
+const testTask2 = new Task("obiad", "pizza giuseppe", "high");
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
 // testProject.addTask(testTask2);
@@ -34,21 +35,31 @@ export function createProject() {
 export function createTask() {
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
-  // const taskButton = document.querySelector(".taskButton");
+
+  getPriorityChoice();
 
   if (
     taskTitleInput.value != "" &&
     taskTitleInput.value.length != 0 &&
     currentProjectId === null
   ) {
-    const newTask = new Task(taskTitleInput.value, taskDescriptionInput.value);
+    const newTask = new Task(
+      taskTitleInput.value,
+      taskDescriptionInput.value,
+      taskPriorityInput
+    );
 
     displayAllTasks();
     toggleForm();
+    console.log(newTask);
 
     return newTask;
   } else if (currentProjectId != null) {
-    const newTask = new Task(taskTitleInput.value, taskDescriptionInput.value);
+    const newTask = new Task(
+      taskTitleInput.value,
+      taskDescriptionInput.value,
+      taskPriorityInput
+    );
     const project = Project.findProjectById(currentProjectId);
 
     project.addTask(newTask);
@@ -83,37 +94,40 @@ function displayAllTasks() {
     taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
     taskDescriptionDisplay.innerHTML = task.description;
 
+    const taskPriorityDisplay = document.createElement("h3");
+    taskPriorityDisplay.classList.add("taskPriorityInput");
+    taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
+
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
     taskDelete.innerHTML = "Delete task";
 
     taskDelete.addEventListener("click", () => {
       const projectContainingTask = findProjectContainingTask(task);
-      
+
       if (projectContainingTask !== null) {
-        const index = projectContainingTask.taskList.findIndex((item) => item.id === task.id);
-        
+        const index = projectContainingTask.taskList.findIndex(
+          (item) => item.id === task.id
+        );
+
         if (index !== -1) {
           projectContainingTask.taskList.splice(index, 1);
         }
       }
-    
+
       task.removeTask(generalTaskList);
       displayAllTasks();
     });
 
-      
-
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
+    taskElement.appendChild(taskPriorityDisplay);
     taskElement.appendChild(taskDelete);
     projectTasksContainer.appendChild(taskElement);
   });
 }
 
-
 function displayProjectTasks() {
-  
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -125,8 +139,6 @@ function displayProjectTasks() {
     // console.log('sprawdz aktualna liste', currentProjectTaskList);
 
     currentProjectTaskList.forEach((task) => {
-      
-      
       const taskElement = document.createElement("div");
       taskElement.classList.add("taskElement");
 
@@ -138,22 +150,26 @@ function displayProjectTasks() {
       taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
       taskDescriptionDisplay.innerHTML = task.description;
 
+      const taskPriorityDisplay = document.createElement("h3");
+      taskPriorityDisplay.classList.add("taskPriorityInput");
+      taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
+
       const taskDelete = document.createElement("button");
       taskDelete.classList.add("taskDelete");
       taskDelete.innerHTML = "Delete task";
 
-      taskDelete.addEventListener('click', () => {
+      taskDelete.addEventListener("click", () => {
         task.removeTask(currentProjectTaskList);
         task.removeTask(generalTaskList);
         displayProjectTasks();
         // console.log(currentProjectTaskList);
-      })
+      });
 
       taskElement.appendChild(taskTitleDisplay);
       taskElement.appendChild(taskDescriptionDisplay);
+      taskElement.appendChild(taskPriorityDisplay);
       taskElement.appendChild(taskDelete);
       projectTasksContainer.appendChild(taskElement);
-      
     });
   }
 }
@@ -199,15 +215,14 @@ export function displayProjectList() {
   });
 }
 
-// function findProjectContainingTask(task) {
-//   for (const project of projectList) {
-//     if (project.taskList.includes(task)) {
-//       return project;
-//     }
-//   }
-//   return null;
-// }
-
 function findProjectContainingTask(task) {
   return projectList.find((project) => project.taskList.includes(task)) || null;
+}
+
+export function getPriorityChoice() {
+  document.getElementsByName("priority").forEach((radio) => {
+    if (radio.checked) {
+      taskPriorityInput = radio.value;
+    }
+  });
 }

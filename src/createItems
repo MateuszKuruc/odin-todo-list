@@ -5,6 +5,7 @@ export let projectList = [];
 export let generalTaskList = [];
 export let currentProjectId = null;
 export let currentTaskId = null;
+export let taskPriorityInput = null;
 
 
 export class Project {
@@ -39,10 +40,11 @@ export class Project {
 
 
 export class Task {
-    constructor(title, description) {
+    constructor(title, description, priority) {
         this.id = generateId();
         this.title = title;
         this.description = description;
+        this.priority = priority;
         generalTaskList.push(this);
     }
 

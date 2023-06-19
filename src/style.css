@@ -127,3 +127,8 @@ background-color: yellow;
 .projectTasksContainer {
   border: 3px solid red;
 }
+
+.taskForm {
+  border: 2px solid black;
+  padding: 1rem;
+}
