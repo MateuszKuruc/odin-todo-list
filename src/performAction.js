@@ -99,15 +99,13 @@ function createTaskDisplay(task) {
   taskEdit.innerHTML = "Edit";
 
   taskEdit.addEventListener("click", () => {
+    if (taskEdit.innerHTML === 'Edit') {
     taskDescriptionDisplay.removeAttribute("readOnly");
     taskEdit.innerHTML = "Save";
-    if (taskEdit.innerHTML === "Save") {
-      taskEdit.addEventListener("click", () => {
+  } else if (taskEdit.innerHTML === "Save") {
         taskDescriptionDisplay.setAttribute("readonly", "readonly");
         task.description = taskDescriptionDisplay.value;
         taskEdit.innerHTML = "Edit";
-        return;
-      });
     }
   });
 
