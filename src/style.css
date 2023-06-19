@@ -125,10 +125,19 @@ background-color: yellow;
 }
 
 .projectTasksContainer {
-  border: 3px solid red;
+  /* border: 3px solid red; */
 }
 
 .taskForm {
   border: 2px solid black;
   padding: 1rem;
+}
+
+.taskElement > input {
+  background-color: lightblue;
+  border: none;
+}
+
+.taskElement > input:hover {
+  background-color: rgba(138, 29, 138, 0.5);
 }

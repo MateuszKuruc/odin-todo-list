@@ -11,7 +11,7 @@ const testTask = new Task("pranie", "osobno biale i czarne", "medium");
 const testTask2 = new Task("obiad", "pizza giuseppe", "high");
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
-
+testProject.taskList.push(testTask2);
 
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
@@ -70,29 +70,48 @@ export function controlTaskDisplay() {
   const todayTasks = document.querySelector(".todayTasks");
 }
 
-function displayAllTasks() {
+function createTaskDisplay(task) {
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
-  projectTasksContainer.innerHTML = "";
-  currentProjectId = null;
 
-  generalTaskList.forEach((task) => {
-    const taskElement = document.createElement("div");
-    taskElement.classList.add("taskElement");
+  const taskElement = document.createElement("div");
+  taskElement.classList.add("taskElement");
 
-    const taskTitleDisplay = document.createElement("h2");
-    taskTitleDisplay.classList.add("taskTitleDisplay");
-    taskTitleDisplay.innerHTML = task.title;
+  const taskTitleDisplay = document.createElement("input");
+  taskTitleDisplay.type = "text";
+  taskTitleDisplay.classList.add("taskTitleDisplay");
+  taskTitleDisplay.value = task.title;
+  taskTitleDisplay.readOnly = true;
 
-    const taskDescriptionDisplay = document.createElement("p");
-    taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
-    taskDescriptionDisplay.innerHTML = task.description;
+  const taskDescriptionDisplay = document.createElement("input");
+  taskDescriptionDisplay.type = "text";
+  taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
+  taskDescriptionDisplay.value = task.description;
+  taskDescriptionDisplay.readOnly = true;
 
-    const taskPriorityDisplay = document.createElement("h3");
-    taskPriorityDisplay.classList.add("taskPriorityInput");
-    taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
+  const taskPriorityDisplay = document.createElement("h3");
+  taskPriorityDisplay.classList.add("taskPriorityInput");
+  taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
 
+  const taskEdit = document.createElement("button");
+  taskEdit.classList.add("taskEdit");
+  taskEdit.innerHTML = "Edit";
+
+  taskEdit.addEventListener("click", () => {
+    taskDescriptionDisplay.removeAttribute("readOnly");
+    taskEdit.innerHTML = "Save";
+    if (taskEdit.innerHTML === "Save") {
+      taskEdit.addEventListener("click", () => {
+        taskDescriptionDisplay.setAttribute("readonly", "readonly");
+        task.description = taskDescriptionDisplay.value;
+        taskEdit.innerHTML = "Edit";
+        return;
+      });
+    }
+  });
+
+  if (currentProjectId === null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
     taskDelete.innerHTML = "Delete task";
@@ -112,13 +131,45 @@ function displayAllTasks() {
 
       task.removeTask(generalTaskList);
       displayAllTasks();
+      // taskElement.appendChild(taskDelete);
     });
-
     taskElement.appendChild(taskTitleDisplay);
     taskElement.appendChild(taskDescriptionDisplay);
     taskElement.appendChild(taskPriorityDisplay);
+    taskElement.appendChild(taskEdit);
     taskElement.appendChild(taskDelete);
     projectTasksContainer.appendChild(taskElement);
+  } else if (currentProjectId !== null) {
+    const taskDelete = document.createElement("button");
+    taskDelete.classList.add("taskDelete");
+    taskDelete.innerHTML = "Delete task";
+
+    taskDelete.addEventListener("click", () => {
+      const currentProject = Project.findProjectById(currentProjectId);
+      const currentProjectTaskList = currentProject.taskList;
+
+      task.removeTask(currentProjectTaskList);
+      task.removeTask(generalTaskList);
+      displayProjectTasks();
+    });
+    taskElement.appendChild(taskTitleDisplay);
+    taskElement.appendChild(taskDescriptionDisplay);
+    taskElement.appendChild(taskPriorityDisplay);
+    taskElement.appendChild(taskEdit);
+    taskElement.appendChild(taskDelete);
+    projectTasksContainer.appendChild(taskElement);
+  }
+}
+
+function displayAllTasks() {
+  const projectTasksContainer = document.querySelector(
+    ".projectTasksContainer"
+  );
+  projectTasksContainer.innerHTML = "";
+  currentProjectId = null;
+
+  generalTaskList.forEach((task) => {
+    createTaskDisplay(task);
   });
 }
 
@@ -129,42 +180,11 @@ function displayProjectTasks() {
   projectTasksContainer.innerHTML = "";
 
   const currentProject = Project.findProjectById(currentProjectId);
-  if (currentProject) {
-    const currentProjectTaskList = currentProject.taskList;
+  const currentProjectTaskList = currentProject.taskList;
 
-    currentProjectTaskList.forEach((task) => {
-      const taskElement = document.createElement("div");
-      taskElement.classList.add("taskElement");
-
-      const taskTitleDisplay = document.createElement("h2");
-      taskTitleDisplay.classList.add("taskTitleDisplay");
-      taskTitleDisplay.innerHTML = task.title;
-
-      const taskDescriptionDisplay = document.createElement("p");
-      taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
-      taskDescriptionDisplay.innerHTML = task.description;
-
-      const taskPriorityDisplay = document.createElement("h3");
-      taskPriorityDisplay.classList.add("taskPriorityInput");
-      taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
-
-      const taskDelete = document.createElement("button");
-      taskDelete.classList.add("taskDelete");
-      taskDelete.innerHTML = "Delete task";
-
-      taskDelete.addEventListener("click", () => {
-        task.removeTask(currentProjectTaskList);
-        task.removeTask(generalTaskList);
-        displayProjectTasks();
-      });
-
-      taskElement.appendChild(taskTitleDisplay);
-      taskElement.appendChild(taskDescriptionDisplay);
-      taskElement.appendChild(taskPriorityDisplay);
-      taskElement.appendChild(taskDelete);
-      projectTasksContainer.appendChild(taskElement);
-    });
-  }
+  currentProjectTaskList.forEach((task) => {
+    createTaskDisplay(task);
+  });
 }
 
 export function displayProjectList() {
