@@ -39,9 +39,6 @@ export function createTask() {
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
   const dueDateInput = document.querySelector(".dueDateInput");
-  const allTasks = document.querySelector(".allTasks");
-  const todayTasks = document.querySelector('.todayTasks')
-  const weekTasks = document.querySelector(".weekTasks");
 
   getPriorityChoice();
 
@@ -57,16 +54,9 @@ export function createTask() {
       dueDateInput.value
     );
 
-    
     toggleForm();
-
-      if(allTasks.classList.contains('activeButton')) {
-    displayAllTasks();
-      } else if (weekTasks.classList.contains('activeButton')) {
-        displayWeekTasks();
-      } else if (todayTasks.classList.contains('activeButton')) {
-        displayTodayTasks();
-      }
+    checkButtonClassList();
+   
     return newTask;
   } else if (currentProjectId != null) {
     const newTask = new Task(
@@ -94,7 +84,7 @@ export function controlTaskDisplay() {
   todayTasks.addEventListener("click", () => {
     toggleActiveButton(todayTasks);
     displayTodayTasks();
-  })
+  });
 
   const weekTasks = document.querySelector(".weekTasks");
   weekTasks.addEventListener("click", () => {
@@ -104,6 +94,7 @@ export function controlTaskDisplay() {
 }
 
 function createTaskDisplay(task) {
+  
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -185,7 +176,8 @@ function createTaskDisplay(task) {
       }
 
       task.removeTask(generalTaskList);
-      displayAllTasks();
+      checkButtonClassList();
+
     });
 
     const childrenToAppend = [
@@ -275,7 +267,9 @@ export function displayTodayTasks() {
   const today = startOfToday();
   const formattedTodayDate = format(new Date(today), "yyyy-MM-dd");
 
-    const sortedTasks = generalTaskList.filter((task) => task.dueDate === formattedTodayDate).sort((a, b) => {
+  const sortedTasks = generalTaskList
+    .filter((task) => task.dueDate === formattedTodayDate)
+    .sort((a, b) => {
       const dateA = new Date(a.dueDate);
       const dateB = new Date(b.dueDate);
       return dateA.getTime() - dateB.getTime();
@@ -283,10 +277,6 @@ export function displayTodayTasks() {
 
   sortedTasks.forEach((task) => {
     if (task.dueDate === formattedTodayDate) {
-      console.log(task.dueDate);
-
-      console.log(task.dueDate, formattedTodayDate);
-
       createTaskDisplay(task);
     }
   });
@@ -301,18 +291,21 @@ function displayWeekTasks() {
 
   const today = startOfToday();
   const weekFromToday = addDays(new Date(today), 7);
-  
+
   generalTaskList.forEach((task) => {
-    const checkingInterval = isWithinInterval(new Date(task.dueDate), { start: today, end: weekFromToday});
+    const checkingInterval = isWithinInterval(new Date(task.dueDate), {
+      start: today,
+      end: weekFromToday,
+    });
     if (checkingInterval) {
-  createTaskDisplay(task);
-}
-})
+      createTaskDisplay(task);
+    }
+  });
 }
 
 export function displayProjectList() {
   const allTasks = document.querySelector(".allTasks");
-  const todayTasks = document.querySelector('.todayTasks');
+  const todayTasks = document.querySelector(".todayTasks");
   const weekTasks = document.querySelector(".weekTasks");
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
@@ -332,9 +325,9 @@ export function displayProjectList() {
     projectName.addEventListener("click", () => {
       currentProjectId = project.id;
       displayProjectTasks();
-      allTasks.classList.remove('activeButton');
-      todayTasks.classList.remove('activeButton');
-      weekTasks.classList.remove('activeButton');
+      allTasks.classList.remove("activeButton");
+      todayTasks.classList.remove("activeButton");
+      weekTasks.classList.remove("activeButton");
     });
 
     projectDelete.addEventListener("click", () => {
@@ -376,8 +369,21 @@ function toggleActiveButton(button) {
 
   const buttons = [allTasks, todayTasks, weekTasks];
   buttons.forEach((btn) => {
-    btn.classList.remove('activeButton');
+    btn.classList.remove("activeButton");
   });
 
-  button.classList.add('activeButton');
+  button.classList.add("activeButton");
+}
+
+function checkButtonClassList() {
+  const allTasks = document.querySelector(".allTasks");
+  const todayTasks = document.querySelector(".todayTasks");
+  const weekTasks = document.querySelector(".weekTasks");
+      if (allTasks.classList.contains("activeButton")) {
+        displayAllTasks();
+      } else if (weekTasks.classList.contains("activeButton")) {
+        displayWeekTasks();
+      } else if (todayTasks.classList.contains("activeButton")) {
+        displayTodayTasks();
+      }
 }
