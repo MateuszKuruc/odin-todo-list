@@ -292,7 +292,15 @@ function displayWeekTasks() {
   const today = startOfToday();
   const weekFromToday = addDays(new Date(today), 7);
 
-  generalTaskList.forEach((task) => {
+  const sortedTasks = generalTaskList
+    .filter((task) => isWithinInterval(new Date(task.dueDate), { start: today, end: weekFromToday }))
+    .sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  sortedTasks.forEach((task) => {
     const checkingInterval = isWithinInterval(new Date(task.dueDate), {
       start: today,
       end: weekFromToday,
