@@ -7,7 +7,7 @@ import { Task } from "./createItems";
 import { createMain, toggleForm } from "./websiteBase";
 import { taskPriorityInput } from "./createItems";
 
-import { addDays, format } from 'date-fns'
+import { format } from 'date-fns';
 
 
 const testTask = new Task("pranie", "osobno biale i czarne", "medium");
@@ -36,6 +36,9 @@ export function createTask() {
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
   const dueDateInput = document.querySelector('.dueDateInput');
   console.log(dueDateInput.value);
+  const formattedDueDateInput = format(new Date(dueDateInput.value), 'MM/dd/yyyy');
+  
+  console.log(formattedDueDateInput);
 
   getPriorityChoice();
 
@@ -48,7 +51,7 @@ export function createTask() {
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      dueDateInput.value
+      formattedDueDateInput
     );
 
     displayAllTasks();
@@ -60,7 +63,7 @@ export function createTask() {
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      dueDateInput.value
+      formattedDueDateInput
     );
     const project = Project.findProjectById(currentProjectId);
 
