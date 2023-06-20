@@ -56,7 +56,7 @@ export function createTask() {
 
     toggleForm();
     checkButtonClassList();
-   
+
     return newTask;
   } else if (currentProjectId != null) {
     const newTask = new Task(
@@ -94,7 +94,6 @@ export function controlTaskDisplay() {
 }
 
 function createTaskDisplay(task) {
-  
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -177,7 +176,6 @@ function createTaskDisplay(task) {
 
       task.removeTask(generalTaskList);
       checkButtonClassList();
-
     });
 
     const childrenToAppend = [
@@ -252,7 +250,13 @@ function displayProjectTasks() {
   const currentProject = Project.findProjectById(currentProjectId);
   const currentProjectTaskList = currentProject.taskList;
 
-  currentProjectTaskList.forEach((task) => {
+  const sortedTasks = currentProject.taskList.sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return dateA.getTime() - dateB.getTime();
+  });
+
+  sortedTasks.forEach((task) => {
     createTaskDisplay(task);
   });
 }
@@ -293,7 +297,12 @@ function displayWeekTasks() {
   const weekFromToday = addDays(new Date(today), 7);
 
   const sortedTasks = generalTaskList
-    .filter((task) => isWithinInterval(new Date(task.dueDate), { start: today, end: weekFromToday }))
+    .filter((task) =>
+      isWithinInterval(new Date(task.dueDate), {
+        start: today,
+        end: weekFromToday,
+      })
+    )
     .sort((a, b) => {
       const dateA = new Date(a.dueDate);
       const dateB = new Date(b.dueDate);
@@ -387,11 +396,11 @@ function checkButtonClassList() {
   const allTasks = document.querySelector(".allTasks");
   const todayTasks = document.querySelector(".todayTasks");
   const weekTasks = document.querySelector(".weekTasks");
-      if (allTasks.classList.contains("activeButton")) {
-        displayAllTasks();
-      } else if (weekTasks.classList.contains("activeButton")) {
-        displayWeekTasks();
-      } else if (todayTasks.classList.contains("activeButton")) {
-        displayTodayTasks();
-      }
+  if (allTasks.classList.contains("activeButton")) {
+    displayAllTasks();
+  } else if (weekTasks.classList.contains("activeButton")) {
+    displayWeekTasks();
+  } else if (todayTasks.classList.contains("activeButton")) {
+    displayTodayTasks();
+  }
 }
