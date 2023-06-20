@@ -10,8 +10,8 @@ import { taskPriorityInput } from "./createItems";
 import { format } from 'date-fns';
 
 
-const testTask = new Task("pranie", "osobno biale i czarne", "medium");
-const testTask2 = new Task("obiad", "pizza giuseppe", "high");
+const testTask = new Task("pranie", "osobno biale i czarne", "medium", '2023/06/30');
+const testTask2 = new Task("obiad", "pizza giuseppe", "high", '1994/10/02');
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
 testProject.taskList.push(testTask2);
@@ -36,9 +36,9 @@ export function createTask() {
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
   const dueDateInput = document.querySelector('.dueDateInput');
   console.log(dueDateInput.value);
-  const formattedDueDateInput = format(new Date(dueDateInput.value), 'MM/dd/yyyy');
+  // const formattedDueDateInput = format(new Date(dueDateInput.value), 'MM/dd/yyyy');
   
-  console.log(formattedDueDateInput);
+  // console.log(formattedDueDateInput);
 
   getPriorityChoice();
 
@@ -51,7 +51,8 @@ export function createTask() {
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      formattedDueDateInput
+      dueDateInput.value
+      // formattedDueDateInput
     );
 
     displayAllTasks();
@@ -63,7 +64,8 @@ export function createTask() {
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      formattedDueDateInput
+      dueDateInput.value
+      // formattedDueDateInput
     );
     const project = Project.findProjectById(currentProjectId);
 
@@ -107,7 +109,8 @@ function createTaskDisplay(task) {
   const taskDueDateDisplay = document.createElement('input');
   taskDueDateDisplay.type = 'text';
   taskDueDateDisplay.classList.add('taskDueDateDisplay');
-  taskDueDateDisplay.value = task.dueDate;
+  // taskDueDateDisplay.value = task.dueDate;
+  taskDueDateDisplay.value = format(new Date(task.dueDate), 'dd/MM/yyyy');
   taskDueDateDisplay.readOnly = true;
 
   const taskPriorityDisplay = document.createElement("h3");
@@ -122,10 +125,26 @@ function createTaskDisplay(task) {
     if (taskEdit.innerHTML === "Edit") {
       taskTitleDisplay.removeAttribute("readOnly");
       taskDescriptionDisplay.removeAttribute("readOnly");
+
+      // testing data edit
+      taskDueDateDisplay.removeAttribute('readonly');
+      taskDueDateDisplay.type = 'date';
+      taskDueDateDisplay.value = task.dueDate;
+      console.log('task dueDate', task.dueDate);
+     
+
+      //
       taskEdit.innerHTML = "Save";
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
+
+      taskDueDateDisplay.setAttribute('readonly', 'readonly');
+      taskDueDateDisplay.type = 'text';
+      
+      task.dueDate = taskDueDateDisplay.value;
+      taskDueDateDisplay.value = format(new Date(task.dueDate), 'dd/MM/yyyy');
+
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
