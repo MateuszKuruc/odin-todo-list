@@ -364,6 +364,9 @@ export function displayProjectList() {
       project.removeProject(projectList);
       displayProjectList();
       displayAllTasks();
+      allTasks.classList.add('activeButton');
+      todayTasks.classList.remove('activeButton');
+      weekTasks.classList.remove('activeButton');
     });
 
     projectElement.appendChild(projectName);
