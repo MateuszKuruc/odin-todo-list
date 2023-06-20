@@ -3,6 +3,8 @@ import github from "./img/github.svg";
 import { createTask, getPriorityChoice } from "./performAction";
 import { currentProjectId } from "./createItems";
 
+import { format } from 'date-fns';
+
 function createHeader() {
   const header = document.createElement("div");
   header.classList.add("header");
@@ -68,6 +70,7 @@ export function createMain() {
   taskTitleInput.placeholder = "* Task name";
 
   const labelTitle = document.createElement('label');
+  labelTitle.classList.add('labelTitle');
   labelTitle.htmlFor = 'taskTtitleInput';
   labelTitle.innerHTML = 'Name';
 
@@ -86,9 +89,6 @@ export function createMain() {
   dueDateInput.type = 'date';
   dueDateInput.name = 'dueDate';
   dueDateInput.id = 'dueDate';
-  dueDateInput.value = new Date();
-  dueDateInput.min = new Date();
-  // dueDateInput.max = '2023-06-30';
 
   const labelDate = document.createElement('label');
   labelDate.htmlFor = 'dueDate';
@@ -113,10 +113,8 @@ export function createMain() {
   projectTasksContainer.classList.add("projectTasksContainer");
 
   const radiobox = document.createElement("div");
-  // radiobox.id = 'radiobox';
 
   const radioDescription = document.createElement("label");
-  // radioDescription.htmlFor = 'radiobox';
   radioDescription.innerHTML = "Priority";
 
   const radio1 = document.createElement("input");
@@ -152,8 +150,6 @@ export function createMain() {
   const label3 = document.createElement("label");
   label3.htmlFor = "radio3";
   label3.innerHTML = "High";
-
-  // radiobox.appendChild(radioDescription);
 
   radiobox.appendChild(radio1);
   radiobox.appendChild(label1);
@@ -207,6 +203,7 @@ export function toggleForm() {
   const taskForm = document.querySelector(".taskForm");
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
+  const dueDateInput = document.querySelector('.dueDateInput');
 
   const radioButtons = document.getElementsByName('priority');
   radioButtons.forEach(radio => {
@@ -214,9 +211,9 @@ export function toggleForm() {
     radioButtons[1].checked = true;
     })
   
-
   taskTitleInput.value = "";
   taskDescriptionInput.value = "";
+  dueDateInput.value = '';
 
   taskForm.classList.toggle("hidden");
 }

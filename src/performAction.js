@@ -36,9 +36,8 @@ export function createTask() {
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
   const dueDateInput = document.querySelector('.dueDateInput');
   console.log(dueDateInput.value);
-  // const formattedDueDateInput = format(new Date(dueDateInput.value), 'MM/dd/yyyy');
   
-  // console.log(formattedDueDateInput);
+ 
 
   getPriorityChoice();
 
@@ -91,6 +90,8 @@ function createTaskDisplay(task) {
     ".projectTasksContainer"
   );
 
+  
+
   const taskElement = document.createElement("div");
   taskElement.classList.add("taskElement");
 
@@ -99,6 +100,10 @@ function createTaskDisplay(task) {
   taskTitleDisplay.classList.add("taskTitleDisplay");
   taskTitleDisplay.value = task.title;
   taskTitleDisplay.readOnly = true;
+
+  const titleLabel = document.createElement('h3');
+  titleLabel.innerHTML = 'Name';
+  // taskTitleDisplay.appendChild(titleLabel);
 
   const taskDescriptionDisplay = document.createElement("input");
   taskDescriptionDisplay.type = "text";
@@ -172,13 +177,32 @@ function createTaskDisplay(task) {
       task.removeTask(generalTaskList);
       displayAllTasks();
     });
-    taskElement.appendChild(taskTitleDisplay);
-    taskElement.appendChild(taskDescriptionDisplay);
-    taskElement.appendChild(taskDueDateDisplay);
-    taskElement.appendChild(taskPriorityDisplay);
-    taskElement.appendChild(taskEdit);
-    taskElement.appendChild(taskDelete);
-    projectTasksContainer.appendChild(taskElement);
+    
+    
+    
+    const childrenToAppend = [
+      titleLabel,
+      taskTitleDisplay,
+      taskDescriptionDisplay,
+      taskDueDateDisplay,
+      taskPriorityDisplay,
+      taskEdit,
+      taskDelete,
+    ]
+
+    childrenToAppend.forEach((child) => {
+      taskElement.appendChild(child);
+      projectTasksContainer.appendChild(taskElement);
+    })
+
+    // taskElement.appendChild(titleLabel);
+    // taskElement.appendChild(taskTitleDisplay);
+    // taskElement.appendChild(taskDescriptionDisplay);
+    // taskElement.appendChild(taskDueDateDisplay);
+    // taskElement.appendChild(taskPriorityDisplay);
+    // taskElement.appendChild(taskEdit);
+    // taskElement.appendChild(taskDelete);
+    // projectTasksContainer.appendChild(taskElement);
   } else if (currentProjectId !== null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
@@ -192,14 +216,40 @@ function createTaskDisplay(task) {
       task.removeTask(generalTaskList);
       displayProjectTasks();
     });
-    taskElement.appendChild(taskTitleDisplay);
-    taskElement.appendChild(taskDescriptionDisplay);
-    taskElement.appendChild(taskDueDateDisplay);
-    taskElement.appendChild(taskPriorityDisplay);
-    taskElement.appendChild(taskEdit);
-    taskElement.appendChild(taskDelete);
-    projectTasksContainer.appendChild(taskElement);
+
+    const childrenToAppend = [
+      titleLabel,
+      taskTitleDisplay,
+      taskDescriptionDisplay,
+      taskDueDateDisplay,
+      taskPriorityDisplay,
+      taskEdit,
+      taskDelete,
+    ]
+
+    childrenToAppend.forEach((child) => {
+      taskElement.appendChild(child);
+      projectTasksContainer.appendChild(taskElement);
+    })
+
+    // taskElement.appendChild(taskTitleDisplay);
+    // taskElement.appendChild(taskDescriptionDisplay);
+    // taskElement.appendChild(taskDueDateDisplay);
+    // taskElement.appendChild(taskPriorityDisplay);
+    // taskElement.appendChild(taskEdit);
+    // taskElement.appendChild(taskDelete);
+    // projectTasksContainer.appendChild(taskElement);
   }
+
+
+  // const childrenToAppend = {
+  //   taskTitleDisplay,
+  //   taskDescriptionDisplay,
+  //   taskDueDateDisplay,
+  //   taskEdit
+  // }
+
+  // console.log(childrenToAppend);
 }
 
 function displayAllTasks() {
