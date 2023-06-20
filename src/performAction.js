@@ -7,11 +7,15 @@ import { Task } from "./createItems";
 import { createMain, toggleForm } from "./websiteBase";
 import { taskPriorityInput } from "./createItems";
 
-import { format } from 'date-fns';
+import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
 
-
-const testTask = new Task("pranie", "osobno biale i czarne", "medium", '2023/06/30');
-const testTask2 = new Task("obiad", "pizza giuseppe", "high", '1994/10/02');
+const testTask = new Task(
+  "pranie",
+  "osobno biale i czarne",
+  "medium",
+  "2023/06/23"
+);
+const testTask2 = new Task("obiad", "pizza giuseppe", "high", "1994/10/02");
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
 testProject.taskList.push(testTask2);
@@ -34,10 +38,10 @@ export function createProject() {
 export function createTask() {
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
-  const dueDateInput = document.querySelector('.dueDateInput');
-  console.log(dueDateInput.value);
-  
- 
+  const dueDateInput = document.querySelector(".dueDateInput");
+  const allTasks = document.querySelector(".allTasks");
+  const todayTasks = document.querySelector('.todayTasks')
+  const weekTasks = document.querySelector(".weekTasks");
 
   getPriorityChoice();
 
@@ -51,12 +55,18 @@ export function createTask() {
       taskDescriptionInput.value,
       taskPriorityInput,
       dueDateInput.value
-      // formattedDueDateInput
     );
 
-    displayAllTasks();
+    
     toggleForm();
 
+      if(allTasks.classList.contains('activeButton')) {
+    displayAllTasks();
+      } else if (weekTasks.classList.contains('activeButton')) {
+        displayWeekTasks();
+      } else if (todayTasks.classList.contains('activeButton')) {
+        displayTodayTasks();
+      }
     return newTask;
   } else if (currentProjectId != null) {
     const newTask = new Task(
@@ -64,7 +74,6 @@ export function createTask() {
       taskDescriptionInput.value,
       taskPriorityInput,
       dueDateInput.value
-      // formattedDueDateInput
     );
     const project = Project.findProjectById(currentProjectId);
 
@@ -74,15 +83,24 @@ export function createTask() {
   }
 }
 
-
 export function controlTaskDisplay() {
   const allTasks = document.querySelector(".allTasks");
-  allTasks.addEventListener("click", displayAllTasks);
+  allTasks.addEventListener("click", () => {
+    toggleActiveButton(allTasks);
+    displayAllTasks();
+  });
 
   const todayTasks = document.querySelector(".todayTasks");
-  todayTasks.addEventListener('click', () => {
+  todayTasks.addEventListener("click", () => {
+    toggleActiveButton(todayTasks);
     displayTodayTasks();
   })
+
+  const weekTasks = document.querySelector(".weekTasks");
+  weekTasks.addEventListener("click", () => {
+    toggleActiveButton(weekTasks);
+    displayWeekTasks();
+  });
 }
 
 function createTaskDisplay(task) {
@@ -99,8 +117,8 @@ function createTaskDisplay(task) {
   taskTitleDisplay.value = task.title;
   taskTitleDisplay.readOnly = true;
 
-  const titleLabel = document.createElement('h3');
-  titleLabel.innerHTML = 'Name';
+  const titleLabel = document.createElement("h3");
+  titleLabel.innerHTML = "Name";
 
   const taskDescriptionDisplay = document.createElement("input");
   taskDescriptionDisplay.type = "text";
@@ -108,10 +126,10 @@ function createTaskDisplay(task) {
   taskDescriptionDisplay.value = task.description;
   taskDescriptionDisplay.readOnly = true;
 
-  const taskDueDateDisplay = document.createElement('input');
-  taskDueDateDisplay.type = 'text';
-  taskDueDateDisplay.classList.add('taskDueDateDisplay');
-  taskDueDateDisplay.value = format(new Date(task.dueDate), 'dd/MM/yyyy');
+  const taskDueDateDisplay = document.createElement("input");
+  taskDueDateDisplay.type = "text";
+  taskDueDateDisplay.classList.add("taskDueDateDisplay");
+  taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
   taskDueDateDisplay.readOnly = true;
 
   const taskPriorityDisplay = document.createElement("h3");
@@ -127,20 +145,20 @@ function createTaskDisplay(task) {
       taskTitleDisplay.removeAttribute("readOnly");
       taskDescriptionDisplay.removeAttribute("readOnly");
 
-      taskDueDateDisplay.removeAttribute('readonly');
-      taskDueDateDisplay.type = 'date';
+      taskDueDateDisplay.removeAttribute("readonly");
+      taskDueDateDisplay.type = "date";
       taskDueDateDisplay.value = task.dueDate;
- 
+
       taskEdit.innerHTML = "Save";
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
 
-      taskDueDateDisplay.setAttribute('readonly', 'readonly');
-      taskDueDateDisplay.type = 'text';
-      
+      taskDueDateDisplay.setAttribute("readonly", "readonly");
+      taskDueDateDisplay.type = "text";
+
       task.dueDate = taskDueDateDisplay.value;
-      taskDueDateDisplay.value = format(new Date(task.dueDate), 'dd/MM/yyyy');
+      taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
 
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
@@ -169,9 +187,7 @@ function createTaskDisplay(task) {
       task.removeTask(generalTaskList);
       displayAllTasks();
     });
-    
-    
-    
+
     const childrenToAppend = [
       titleLabel,
       taskTitleDisplay,
@@ -180,13 +196,12 @@ function createTaskDisplay(task) {
       taskPriorityDisplay,
       taskEdit,
       taskDelete,
-    ]
+    ];
 
     childrenToAppend.forEach((child) => {
       taskElement.appendChild(child);
       projectTasksContainer.appendChild(taskElement);
-    })
-
+    });
   } else if (currentProjectId !== null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
@@ -209,14 +224,13 @@ function createTaskDisplay(task) {
       taskPriorityDisplay,
       taskEdit,
       taskDelete,
-    ]
+    ];
 
     childrenToAppend.forEach((child) => {
       taskElement.appendChild(child);
       projectTasksContainer.appendChild(taskElement);
-    })
+    });
   }
-
 }
 
 function displayAllTasks() {
@@ -226,7 +240,13 @@ function displayAllTasks() {
   projectTasksContainer.innerHTML = "";
   currentProjectId = null;
 
-  generalTaskList.forEach((task) => {
+  const sortedTasks = generalTaskList.sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return dateA.getTime() - dateB.getTime();
+  });
+
+  sortedTasks.forEach((task) => {
     createTaskDisplay(task);
   });
 }
@@ -252,20 +272,42 @@ export function displayTodayTasks() {
   projectTasksContainer.innerHTML = "";
   currentProjectId = null;
 
-  const today = new Date();
-  const formattedTodayDate = format(new Date(today), 'yyyy-MM-dd');
+  const today = startOfToday();
+  const formattedTodayDate = format(new Date(today), "yyyy-MM-dd");
 
   generalTaskList.forEach((task) => {
     if (task.dueDate === formattedTodayDate) {
       console.log(task.dueDate);
 
-console.log(task.dueDate, formattedTodayDate);
-   
-    createTaskDisplay(task);
-}});
+      console.log(task.dueDate, formattedTodayDate);
+
+      createTaskDisplay(task);
+    }
+  });
+}
+
+function displayWeekTasks() {
+  const projectTasksContainer = document.querySelector(
+    ".projectTasksContainer"
+  );
+  projectTasksContainer.innerHTML = "";
+  currentProjectId = null;
+
+  const today = startOfToday();
+  const weekFromToday = addDays(new Date(today), 7);
+  
+  generalTaskList.forEach((task) => {
+    const checkingInterval = isWithinInterval(new Date(task.dueDate), { start: today, end: weekFromToday});
+    if (checkingInterval) {
+  createTaskDisplay(task);
+}
+})
 }
 
 export function displayProjectList() {
+  const allTasks = document.querySelector(".allTasks");
+  const todayTasks = document.querySelector('.todayTasks');
+  const weekTasks = document.querySelector(".weekTasks");
   const projectsContainer = document.querySelector(".projectsContainer");
   projectsContainer.innerHTML = "";
 
@@ -284,6 +326,9 @@ export function displayProjectList() {
     projectName.addEventListener("click", () => {
       currentProjectId = project.id;
       displayProjectTasks();
+      allTasks.classList.remove('activeButton');
+      todayTasks.classList.remove('activeButton');
+      weekTasks.classList.remove('activeButton');
     });
 
     projectDelete.addEventListener("click", () => {
@@ -316,4 +361,17 @@ export function getPriorityChoice() {
       taskPriorityInput = radio.value;
     }
   });
+}
+
+function toggleActiveButton(button) {
+  const allTasks = document.querySelector(".allTasks");
+  const todayTasks = document.querySelector(".todayTasks");
+  const weekTasks = document.querySelector(".weekTasks");
+
+  const buttons = [allTasks, todayTasks, weekTasks];
+  buttons.forEach((btn) => {
+    btn.classList.remove('activeButton');
+  });
+
+  button.classList.add('activeButton');
 }

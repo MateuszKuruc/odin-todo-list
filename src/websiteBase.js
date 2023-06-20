@@ -1,6 +1,6 @@
 export default startWebsite;
 import github from "./img/github.svg";
-import { createTask, getPriorityChoice, displayTodayTasks } from "./performAction";
+import { createTask, getPriorityChoice, displayTodayTasks, toggleActiveButton } from "./performAction";
 import { currentProjectId } from "./createItems";
 
 import { format } from 'date-fns';
@@ -41,8 +41,10 @@ export function createMain() {
   todayTasks.classList.add("todayTasks");
   todayTasks.innerHTML = "Today";
 
-  
-
+  const weekTasks = document.createElement('button');
+  weekTasks.classList.add('weekTasks');
+  weekTasks.innerHTML = 'This week';
+ 
   const projects = document.createElement("div");
   projects.classList.add("projects");
 
@@ -190,6 +192,7 @@ export function createMain() {
   home.appendChild(homeTitle);
   home.appendChild(allTasks);
   home.appendChild(todayTasks);
+  home.appendChild(weekTasks);
 
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);

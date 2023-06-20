@@ -141,3 +141,7 @@ background-color: yellow;
 .taskElement > input:hover {
   background-color: rgba(138, 29, 138, 0.5);
 }
+
+.activeButton {
+  background-color: red;
+}
