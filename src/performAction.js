@@ -81,7 +81,7 @@ export function controlTaskDisplay() {
 
   const todayTasks = document.querySelector(".todayTasks");
   todayTasks.addEventListener('click', () => {
-    console.log(date2);
+    displayTodayTasks();
   })
 }
 
@@ -89,8 +89,6 @@ function createTaskDisplay(task) {
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
-
-  
 
   const taskElement = document.createElement("div");
   taskElement.classList.add("taskElement");
@@ -103,7 +101,6 @@ function createTaskDisplay(task) {
 
   const titleLabel = document.createElement('h3');
   titleLabel.innerHTML = 'Name';
-  // taskTitleDisplay.appendChild(titleLabel);
 
   const taskDescriptionDisplay = document.createElement("input");
   taskDescriptionDisplay.type = "text";
@@ -114,7 +111,6 @@ function createTaskDisplay(task) {
   const taskDueDateDisplay = document.createElement('input');
   taskDueDateDisplay.type = 'text';
   taskDueDateDisplay.classList.add('taskDueDateDisplay');
-  // taskDueDateDisplay.value = task.dueDate;
   taskDueDateDisplay.value = format(new Date(task.dueDate), 'dd/MM/yyyy');
   taskDueDateDisplay.readOnly = true;
 
@@ -131,14 +127,10 @@ function createTaskDisplay(task) {
       taskTitleDisplay.removeAttribute("readOnly");
       taskDescriptionDisplay.removeAttribute("readOnly");
 
-      // testing data edit
       taskDueDateDisplay.removeAttribute('readonly');
       taskDueDateDisplay.type = 'date';
       taskDueDateDisplay.value = task.dueDate;
-      console.log('task dueDate', task.dueDate);
-     
-
-      //
+ 
       taskEdit.innerHTML = "Save";
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
@@ -195,14 +187,6 @@ function createTaskDisplay(task) {
       projectTasksContainer.appendChild(taskElement);
     })
 
-    // taskElement.appendChild(titleLabel);
-    // taskElement.appendChild(taskTitleDisplay);
-    // taskElement.appendChild(taskDescriptionDisplay);
-    // taskElement.appendChild(taskDueDateDisplay);
-    // taskElement.appendChild(taskPriorityDisplay);
-    // taskElement.appendChild(taskEdit);
-    // taskElement.appendChild(taskDelete);
-    // projectTasksContainer.appendChild(taskElement);
   } else if (currentProjectId !== null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
@@ -231,25 +215,8 @@ function createTaskDisplay(task) {
       taskElement.appendChild(child);
       projectTasksContainer.appendChild(taskElement);
     })
-
-    // taskElement.appendChild(taskTitleDisplay);
-    // taskElement.appendChild(taskDescriptionDisplay);
-    // taskElement.appendChild(taskDueDateDisplay);
-    // taskElement.appendChild(taskPriorityDisplay);
-    // taskElement.appendChild(taskEdit);
-    // taskElement.appendChild(taskDelete);
-    // projectTasksContainer.appendChild(taskElement);
   }
 
-
-  // const childrenToAppend = {
-  //   taskTitleDisplay,
-  //   taskDescriptionDisplay,
-  //   taskDueDateDisplay,
-  //   taskEdit
-  // }
-
-  // console.log(childrenToAppend);
 }
 
 function displayAllTasks() {
@@ -276,6 +243,26 @@ function displayProjectTasks() {
   currentProjectTaskList.forEach((task) => {
     createTaskDisplay(task);
   });
+}
+
+export function displayTodayTasks() {
+  const projectTasksContainer = document.querySelector(
+    ".projectTasksContainer"
+  );
+  projectTasksContainer.innerHTML = "";
+  currentProjectId = null;
+
+  const today = new Date();
+  const formattedTodayDate = format(new Date(today), 'yyyy-MM-dd');
+
+  generalTaskList.forEach((task) => {
+    if (task.dueDate === formattedTodayDate) {
+      console.log(task.dueDate);
+
+console.log(task.dueDate, formattedTodayDate);
+   
+    createTaskDisplay(task);
+}});
 }
 
 export function displayProjectList() {

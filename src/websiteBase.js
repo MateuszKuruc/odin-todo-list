@@ -1,6 +1,6 @@
 export default startWebsite;
 import github from "./img/github.svg";
-import { createTask, getPriorityChoice } from "./performAction";
+import { createTask, getPriorityChoice, displayTodayTasks } from "./performAction";
 import { currentProjectId } from "./createItems";
 
 import { format } from 'date-fns';
@@ -40,6 +40,8 @@ export function createMain() {
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
   todayTasks.innerHTML = "Today";
+
+  
 
   const projects = document.createElement("div");
   projects.classList.add("projects");
@@ -192,9 +194,9 @@ export function createMain() {
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);
 
-  todayTasks.addEventListener("click", () => {
-    // console.log(radiobox);
-  });
+  // todayTasks.addEventListener("click", () => {
+  //   displayTodayTasks();
+  // });
 
   return main;
 }
