@@ -275,7 +275,13 @@ export function displayTodayTasks() {
   const today = startOfToday();
   const formattedTodayDate = format(new Date(today), "yyyy-MM-dd");
 
-  generalTaskList.forEach((task) => {
+    const sortedTasks = generalTaskList.filter((task) => task.dueDate === formattedTodayDate).sort((a, b) => {
+      const dateA = new Date(a.dueDate);
+      const dateB = new Date(b.dueDate);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  sortedTasks.forEach((task) => {
     if (task.dueDate === formattedTodayDate) {
       console.log(task.dueDate);
 
