@@ -159,11 +159,8 @@ function createTaskDisplay(task) {
       taskDueDateDisplay.type = "date";
       taskDueDateDisplay.value = task.dueDate;
 
-      // test priority
       taskPriorityDisplay.classList.add('hidden');
       prioritySelect.classList.remove('hidden');
-
-      // test priority
 
       taskEdit.innerHTML = "Save";
     } else if (taskEdit.innerHTML === "Save") {
@@ -173,17 +170,11 @@ function createTaskDisplay(task) {
       taskDueDateDisplay.setAttribute("readonly", "readonly");
       taskDueDateDisplay.type = "text";
 
-    
       prioritySelect.classList.add('hidden');
       taskPriorityDisplay.classList.remove('hidden');
         task.priority = prioritySelect.value;
         console.log(prioritySelect.value);
         
-        
-      
-
-
-
       task.dueDate = taskDueDateDisplay.value;
       taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
 
@@ -221,7 +212,7 @@ function createTaskDisplay(task) {
       checkButtonClassList();
     });
 
-    const childrenToAppend = [
+    const childrenTaskElement = [
       titleLabel,
       taskTitleDisplay,
       descriptionLabel,
@@ -235,7 +226,7 @@ function createTaskDisplay(task) {
       taskDelete,
     ];
 
-    childrenToAppend.forEach((child) => {
+    childrenTaskElement.forEach((child) => {
       taskElement.appendChild(child);
       projectTasksContainer.appendChild(taskElement);
     });
@@ -253,18 +244,21 @@ function createTaskDisplay(task) {
       displayProjectTasks();
     });
 
-    const childrenToAppend = [
+    const childrenTaskElement = [
       titleLabel,
       taskTitleDisplay,
+      descriptionLabel,
       taskDescriptionDisplay,
+      dueDateLabel,
       taskDueDateDisplay,
+      priorityLabel,
       taskPriorityDisplay,
       prioritySelect,
       taskEdit,
       taskDelete,
     ];
 
-    childrenToAppend.forEach((child) => {
+    childrenTaskElement.forEach((child) => {
       taskElement.appendChild(child);
       projectTasksContainer.appendChild(taskElement);
     });

@@ -155,14 +155,28 @@ export function createMain() {
   label3.htmlFor = "radio3";
   label3.innerHTML = "High";
 
-  radiobox.appendChild(radio1);
-  radiobox.appendChild(label1);
+  const childrenRadiobox = [
+    radio1,
+    label1,
+    radio2,
+    label2,
+    radio3,
+    label3
+  ]
+  childrenRadiobox.forEach((item) => {
+    radiobox.appendChild(item);
+  })
 
-  radiobox.appendChild(radio2);
-  radiobox.appendChild(label2);
+  // const childrenToAppendToT
 
-  radiobox.appendChild(radio3);
-  radiobox.appendChild(label3);
+  // radiobox.appendChild(radio1);
+  // radiobox.appendChild(label1);
+
+  // radiobox.appendChild(radio2);
+  // radiobox.appendChild(label2);
+
+  // radiobox.appendChild(radio3);
+  // radiobox.appendChild(label3);
 
   taskForm.appendChild(labelTitle);
   taskForm.appendChild(taskTitleInput);

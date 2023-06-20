@@ -13,7 +13,6 @@ startWebsite();
 createProject();
 displayProjectList();
 controlTaskDisplay();
-// displayProjectDetails();
 console.log(projectList);
 
 
