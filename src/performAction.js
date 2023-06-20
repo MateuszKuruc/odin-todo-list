@@ -153,6 +153,12 @@ function createTaskDisplay(task) {
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
+
+      if (currentProjectId !== null) {
+        displayProjectTasks();
+      } else if (currentProjectId === null) {
+        checkButtonClassList();
+      }
     }
   });
 
@@ -248,7 +254,6 @@ function displayProjectTasks() {
   projectTasksContainer.innerHTML = "";
 
   const currentProject = Project.findProjectById(currentProjectId);
-  const currentProjectTaskList = currentProject.taskList;
 
   const sortedTasks = currentProject.taskList.sort((a, b) => {
     const dateA = new Date(a.dueDate);
