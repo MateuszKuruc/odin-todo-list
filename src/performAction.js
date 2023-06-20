@@ -1,10 +1,9 @@
 import { projectList } from "./createItems";
 import { currentProjectId } from "./createItems";
-import { currentTaskId } from "./createItems";
 import { generalTaskList } from "./createItems";
 import { Project } from "./createItems";
 import { Task } from "./createItems";
-import { createMain, toggleForm } from "./websiteBase";
+import { toggleForm } from "./websiteBase";
 import { taskPriorityInput } from "./createItems";
 
 import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
@@ -212,7 +211,7 @@ function createTaskDisplay(task) {
       checkButtonClassList();
     });
 
-    const childrenTaskElement = [
+    [
       titleLabel,
       taskTitleDisplay,
       descriptionLabel,
@@ -224,12 +223,9 @@ function createTaskDisplay(task) {
       prioritySelect,
       taskEdit,
       taskDelete,
-    ];
+    ].forEach((item) => taskElement.appendChild(item));
 
-    childrenTaskElement.forEach((child) => {
-      taskElement.appendChild(child);
-      projectTasksContainer.appendChild(taskElement);
-    });
+    projectTasksContainer.appendChild(taskElement);
   } else if (currentProjectId !== null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
@@ -244,7 +240,7 @@ function createTaskDisplay(task) {
       displayProjectTasks();
     });
 
-    const childrenTaskElement = [
+    [
       titleLabel,
       taskTitleDisplay,
       descriptionLabel,
@@ -256,12 +252,9 @@ function createTaskDisplay(task) {
       prioritySelect,
       taskEdit,
       taskDelete,
-    ];
+    ].forEach((item) => taskElement.appendChild(item));
 
-    childrenTaskElement.forEach((child) => {
-      taskElement.appendChild(child);
-      projectTasksContainer.appendChild(taskElement);
-    });
+    projectTasksContainer.appendChild(taskElement);
   }
 }
 

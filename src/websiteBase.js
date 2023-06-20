@@ -1,9 +1,7 @@
 export default startWebsite;
 import github from "./img/github.svg";
-import { createTask, getPriorityChoice, displayTodayTasks, toggleActiveButton } from "./performAction";
-import { currentProjectId } from "./createItems";
+import { createTask } from "./performAction";
 
-import { format } from 'date-fns';
 
 function createHeader() {
   const header = document.createElement("div");
@@ -41,10 +39,10 @@ export function createMain() {
   todayTasks.classList.add("todayTasks");
   todayTasks.innerHTML = "Today";
 
-  const weekTasks = document.createElement('button');
-  weekTasks.classList.add('weekTasks');
-  weekTasks.innerHTML = 'This week';
- 
+  const weekTasks = document.createElement("button");
+  weekTasks.classList.add("weekTasks");
+  weekTasks.innerHTML = "This week";
+
   const projects = document.createElement("div");
   projects.classList.add("projects");
 
@@ -65,38 +63,38 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  // taskForm.classList.add("hidden");
+  taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");
   taskTitleInput.type = "text";
-  taskTitleInput.id = 'taskTtitleInput';
+  taskTitleInput.id = "taskTtitleInput";
   taskTitleInput.placeholder = "* Task name";
 
-  const labelTitle = document.createElement('label');
-  labelTitle.classList.add('labelTitle');
-  labelTitle.htmlFor = 'taskTtitleInput';
-  labelTitle.innerHTML = 'Name';
+  const labelTitle = document.createElement("label");
+  labelTitle.classList.add("labelTitle");
+  labelTitle.htmlFor = "taskTtitleInput";
+  labelTitle.innerHTML = "Name";
 
   const taskDescriptionInput = document.createElement("input");
   taskDescriptionInput.classList.add("taskDescriptionInput");
   taskDescriptionInput.type = "text";
-  taskDescriptionInput.id = 'taskDescriptionInput';
+  taskDescriptionInput.id = "taskDescriptionInput";
   taskDescriptionInput.placeholder = "Task description";
 
-  const labelDescription = document.createElement('label');
-  labelDescription.htmlFor = 'taskDescriptionInput';
-  labelDescription.innerHTML = 'Description';
+  const labelDescription = document.createElement("label");
+  labelDescription.htmlFor = "taskDescriptionInput";
+  labelDescription.innerHTML = "Description";
 
-  const dueDateInput = document.createElement('input');
-  dueDateInput.classList.add('dueDateInput');
-  dueDateInput.type = 'date';
-  dueDateInput.name = 'dueDate';
-  dueDateInput.id = 'dueDate';
+  const dueDateInput = document.createElement("input");
+  dueDateInput.classList.add("dueDateInput");
+  dueDateInput.type = "date";
+  dueDateInput.name = "dueDate";
+  dueDateInput.id = "dueDate";
 
-  const labelDate = document.createElement('label');
-  labelDate.htmlFor = 'dueDate';
-  labelDate.innerHTML = 'Due date';
+  const labelDate = document.createElement("label");
+  labelDate.htmlFor = "dueDate";
+  labelDate.innerHTML = "Due date";
 
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
@@ -126,7 +124,7 @@ export function createMain() {
   radio1.id = "radio1";
   radio1.name = "priority";
   radio1.value = "low";
-  radio1.classList.add('radioButtons');
+  radio1.classList.add("radioButtons");
 
   const label1 = document.createElement("label");
   label1.htmlFor = "radio1";
@@ -138,7 +136,7 @@ export function createMain() {
   radio2.name = "priority";
   radio2.value = "medium";
   radio2.checked = "true";
-  radio2.classList.add('radioButtons');
+  radio2.classList.add("radioButtons");
 
   const label2 = document.createElement("label");
   label2.htmlFor = "radio2";
@@ -149,71 +147,56 @@ export function createMain() {
   radio3.id = "radio3";
   radio3.name = "priority";
   radio3.value = "high";
-  radio3.classList.add('radioButtons');
+  radio3.classList.add("radioButtons");
 
   const label3 = document.createElement("label");
   label3.htmlFor = "radio3";
   label3.innerHTML = "High";
 
-  const childrenRadiobox = [
-    radio1,
-    label1,
-    radio2,
-    label2,
-    radio3,
-    label3
-  ]
+  const childrenRadiobox = [radio1, label1, radio2, label2, radio3, label3];
+
   childrenRadiobox.forEach((item) => {
     radiobox.appendChild(item);
-  })
+  });
 
-  // const childrenToAppendToT
+  [
+    labelTitle,
+    taskTitleInput,
+    labelDescription,
+    taskDescriptionInput,
+    labelDate,
+    dueDateInput,
+    radioDescription,
+    radiobox,
+    createNewTask,
+    cancelTask,
+  ].forEach((item) => taskForm.appendChild(item));
 
-  // radiobox.appendChild(radio1);
-  // radiobox.appendChild(label1);
+  [
+    taskButton,
+    taskForm,
+    projectTasksContainer,
+  ].forEach((item) => mainDisplay.appendChild(item));
 
-  // radiobox.appendChild(radio2);
-  // radiobox.appendChild(label2);
-
-  // radiobox.appendChild(radio3);
-  // radiobox.appendChild(label3);
-
-  taskForm.appendChild(labelTitle);
-  taskForm.appendChild(taskTitleInput);
-  taskForm.appendChild(labelDescription);
-  taskForm.appendChild(taskDescriptionInput);
-  taskForm.appendChild(labelDate);
-  taskForm.appendChild(dueDateInput);
-  taskForm.appendChild(radioDescription);
-
-  taskForm.appendChild(radiobox);
-
-  taskForm.appendChild(createNewTask);
-  taskForm.appendChild(cancelTask);
-
-  mainDisplay.appendChild(taskButton);
-  mainDisplay.appendChild(taskForm);
-  mainDisplay.appendChild(projectTasksContainer);
-
-  projects.appendChild(projectsContainer);
-
-  projects.appendChild(projectsTitle);
-  projects.appendChild(inputProject);
-  projects.appendChild(addProject);
+  [
+    projectsContainer,
+    projectsTitle,
+    inputProject,
+    addProject,
+  ].forEach((item) => projects.appendChild(item));
 
   sidebar.appendChild(home);
   sidebar.appendChild(projects);
-  home.appendChild(homeTitle);
-  home.appendChild(allTasks);
-  home.appendChild(todayTasks);
-  home.appendChild(weekTasks);
+
+  [
+    homeTitle,
+    allTasks,
+    todayTasks,
+    weekTasks
+  ].forEach((item) => home.appendChild(item));
 
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);
-
-  // todayTasks.addEventListener("click", () => {
-  //   displayTodayTasks();
-  // });
 
   return main;
 }
@@ -222,17 +205,17 @@ export function toggleForm() {
   const taskForm = document.querySelector(".taskForm");
   const taskTitleInput = document.querySelector(".taskTitleInput");
   const taskDescriptionInput = document.querySelector(".taskDescriptionInput");
-  const dueDateInput = document.querySelector('.dueDateInput');
+  const dueDateInput = document.querySelector(".dueDateInput");
 
-  const radioButtons = document.getElementsByName('priority');
-  radioButtons.forEach(radio => {
+  const radioButtons = document.getElementsByName("priority");
+  radioButtons.forEach((radio) => {
     radio.checked = false;
     radioButtons[1].checked = true;
-    })
-  
+  });
+
   taskTitleInput.value = "";
   taskDescriptionInput.value = "";
-  dueDateInput.value = '';
+  dueDateInput.value = "";
 
   taskForm.classList.toggle("hidden");
 }
