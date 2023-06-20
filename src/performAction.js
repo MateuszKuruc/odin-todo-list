@@ -104,17 +104,20 @@ function createTaskDisplay(task) {
   const taskTitleDisplay = document.createElement("input");
   taskTitleDisplay.type = "text";
   taskTitleDisplay.classList.add("taskTitleDisplay");
-  taskTitleDisplay.value = task.title;
+  taskTitleDisplay.value = task.title.charAt(0).toUpperCase() + task.title.slice(1);
   taskTitleDisplay.readOnly = true;
 
-  const titleLabel = document.createElement("h3");
+  const titleLabel = document.createElement("h4");
   titleLabel.innerHTML = "Name";
 
   const taskDescriptionDisplay = document.createElement("input");
   taskDescriptionDisplay.type = "text";
   taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
-  taskDescriptionDisplay.value = task.description;
+  taskDescriptionDisplay.value = task.description.charAt(0).toUpperCase() + task.description.slice(1);
   taskDescriptionDisplay.readOnly = true;
+
+  const descriptionLabel = document.createElement("h4");
+  descriptionLabel.innerHTML = "Description";
 
   const taskDueDateDisplay = document.createElement("input");
   taskDueDateDisplay.type = "text";
@@ -122,9 +125,26 @@ function createTaskDisplay(task) {
   taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
   taskDueDateDisplay.readOnly = true;
 
-  const taskPriorityDisplay = document.createElement("h3");
+  const dueDateLabel = document.createElement("h4");
+  dueDateLabel.innerHTML = "Due date";
+
+  const taskPriorityDisplay = document.createElement("input");
+  taskPriorityDisplay.type = 'text';
   taskPriorityDisplay.classList.add("taskPriorityInput");
-  taskPriorityDisplay.innerHTML = `Priority: ${task.priority}`;
+  taskPriorityDisplay.value = task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
+  taskPriorityDisplay.readOnly = true;
+
+  const prioritySelect = document.createElement('select');
+  prioritySelect.classList.add('prioritySelect');
+  prioritySelect.classList.add('hidden');
+ 
+  prioritySelect.options[prioritySelect.options.length] = new Option('Low', 'low');
+  prioritySelect.options[prioritySelect.options.length] = new Option('Medium', 'medium');
+  prioritySelect.options[prioritySelect.options.length] = new Option('High', 'high');
+  prioritySelect.selectedIndex = 1;
+
+  const priorityLabel = document.createElement("h4");
+  priorityLabel.innerHTML = "Priority";
 
   const taskEdit = document.createElement("button");
   taskEdit.classList.add("taskEdit");
@@ -139,6 +159,12 @@ function createTaskDisplay(task) {
       taskDueDateDisplay.type = "date";
       taskDueDateDisplay.value = task.dueDate;
 
+      // test priority
+      taskPriorityDisplay.classList.add('hidden');
+      prioritySelect.classList.remove('hidden');
+
+      // test priority
+
       taskEdit.innerHTML = "Save";
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
@@ -146,6 +172,17 @@ function createTaskDisplay(task) {
 
       taskDueDateDisplay.setAttribute("readonly", "readonly");
       taskDueDateDisplay.type = "text";
+
+    
+      prioritySelect.classList.add('hidden');
+      taskPriorityDisplay.classList.remove('hidden');
+        task.priority = prioritySelect.value;
+        console.log(prioritySelect.value);
+        
+        
+      
+
+
 
       task.dueDate = taskDueDateDisplay.value;
       taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
@@ -187,9 +224,13 @@ function createTaskDisplay(task) {
     const childrenToAppend = [
       titleLabel,
       taskTitleDisplay,
+      descriptionLabel,
       taskDescriptionDisplay,
+      dueDateLabel,
       taskDueDateDisplay,
+      priorityLabel,
       taskPriorityDisplay,
+      prioritySelect,
       taskEdit,
       taskDelete,
     ];
@@ -218,6 +259,7 @@ function createTaskDisplay(task) {
       taskDescriptionDisplay,
       taskDueDateDisplay,
       taskPriorityDisplay,
+      prioritySelect,
       taskEdit,
       taskDelete,
     ];
@@ -364,9 +406,9 @@ export function displayProjectList() {
       project.removeProject(projectList);
       displayProjectList();
       displayAllTasks();
-      allTasks.classList.add('activeButton');
-      todayTasks.classList.remove('activeButton');
-      weekTasks.classList.remove('activeButton');
+      allTasks.classList.add("activeButton");
+      todayTasks.classList.remove("activeButton");
+      weekTasks.classList.remove("activeButton");
     });
 
     projectElement.appendChild(projectName);
@@ -412,3 +454,4 @@ function checkButtonClassList() {
     displayTodayTasks();
   }
 }
+
