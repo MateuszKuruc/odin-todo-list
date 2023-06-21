@@ -1,6 +1,6 @@
 export default startWebsite;
 import github from "./img/github.svg";
-import { createTask } from "./performAction";
+import { createTask, createProject, displayProjectList, controlTaskDisplay, controlTaskDisplay } from "./performAction";
 
 
 function createHeader() {
@@ -248,4 +248,8 @@ function startWebsite() {
   content.appendChild(createHeader());
   content.appendChild(createMain());
   content.appendChild(createFooter());
+
+  createProject();
+  displayProjectList();
+  controlTaskDisplay();
 }

@@ -1,11 +1,5 @@
-import { projectList } from "./createItems";
-import { currentProjectId } from "./createItems";
-import { generalTaskList } from "./createItems";
-import { Project } from "./createItems";
-import { Task } from "./createItems";
+import { projectList, currentProjectId, generalTaskList, Project, Task, taskPriorityInput } from "./createItems";
 import { toggleForm } from "./websiteBase";
-import { taskPriorityInput } from "./createItems";
-
 import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
 
 const testTask = new Task(
