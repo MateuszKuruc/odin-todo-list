@@ -8,7 +8,7 @@ const testTask = new Task(
   "medium",
   "2023/06/23"
 );
-const testTask2 = new Task("obiad", "pizza giuseppe", "high", "1994/10/02");
+const testTask2 = new Task("obiad", "pizza giuseppe", "high", "02/10/1994");
 const testProject = new Project("mati bambati");
 testTask2.id = testTask.id + 1;
 testProject.taskList.push(testTask2);
