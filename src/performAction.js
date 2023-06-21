@@ -2,16 +2,19 @@ import { projectList, currentProjectId, generalTaskList, Project, Task, taskPrio
 import { toggleForm } from "./websiteBase";
 import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
 
-const testTask = new Task(
-  "pranie",
-  "osobno biale i czarne",
-  "medium",
-  "2023/06/23"
-);
-const testTask2 = new Task("obiad", "pizza giuseppe", "high", "02/10/1994");
-const testProject = new Project("mati bambati");
-testTask2.id = testTask.id + 1;
-testProject.taskList.push(testTask2);
+
+// const testTask = new Task(
+//   "pranie",
+//   "osobno biale i czarne",
+//   "medium",
+//   "2023/06/23"
+// );
+// const testTask2 = new Task("obiad", "pizza giuseppe", "high", "02/10/1994");
+// const testProject = new Project("mati bambati");
+// testTask2.id = testTask.id + 1;
+// testProject.taskList.push(testTask2);
+
+
 
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
@@ -23,6 +26,8 @@ export function createProject() {
       displayProjectList();
       inputProject.value = "";
       currentProjectId = newProject.id;
+     updateLocalStorage();
+
       return newProject;
     }
   });
@@ -49,6 +54,7 @@ export function createTask() {
 
     toggleForm();
     checkButtonClassList();
+    updateLocalStorage();
 
     return newTask;
   } else if (currentProjectId != null) {
@@ -63,7 +69,10 @@ export function createTask() {
     project.addTask(newTask);
     displayProjectTasks();
     toggleForm();
+    updateLocalStorage();
   }
+  // updateLocalStorage();
+ 
 }
 
 export function controlTaskDisplay() {
@@ -144,6 +153,8 @@ function createTaskDisplay(task) {
   taskEdit.innerHTML = "Edit";
 
   taskEdit.addEventListener("click", () => {
+    console.log(generalTaskList);
+    console.log();
     if (taskEdit.innerHTML === "Edit") {
       taskTitleDisplay.removeAttribute("readOnly");
       taskDescriptionDisplay.removeAttribute("readOnly");
@@ -156,6 +167,7 @@ function createTaskDisplay(task) {
       prioritySelect.classList.remove('hidden');
 
       taskEdit.innerHTML = "Save";
+      updateLocalStorage();
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
@@ -166,7 +178,6 @@ function createTaskDisplay(task) {
       prioritySelect.classList.add('hidden');
       taskPriorityDisplay.classList.remove('hidden');
         task.priority = prioritySelect.value;
-        console.log(prioritySelect.value);
         
       task.dueDate = taskDueDateDisplay.value;
       taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
@@ -174,13 +185,16 @@ function createTaskDisplay(task) {
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
-
+updateLocalStorage();
       if (currentProjectId !== null) {
         displayProjectTasks();
+        updateLocalStorage();
       } else if (currentProjectId === null) {
         checkButtonClassList();
+        updateLocalStorage();
       }
     }
+    updateLocalStorage();
   });
 
   if (currentProjectId === null) {
@@ -203,6 +217,7 @@ function createTaskDisplay(task) {
 
       task.removeTask(generalTaskList);
       checkButtonClassList();
+      updateLocalStorage();
     });
 
     [
@@ -232,6 +247,7 @@ function createTaskDisplay(task) {
       task.removeTask(currentProjectTaskList);
       task.removeTask(generalTaskList);
       displayProjectTasks();
+      updateLocalStorage();
     });
 
     [
@@ -381,6 +397,7 @@ export function displayProjectList() {
         const index = generalTaskList.findIndex((item) => item.id === task.id);
         if (index !== -1) {
           generalTaskList.splice(index, 1);
+          // updateLocalStorage();
         }
       });
 
@@ -390,6 +407,7 @@ export function displayProjectList() {
       allTasks.classList.add("activeButton");
       todayTasks.classList.remove("activeButton");
       weekTasks.classList.remove("activeButton");
+      updateLocalStorage();
     });
 
     projectElement.appendChild(projectName);
@@ -436,3 +454,11 @@ function checkButtonClassList() {
   }
 }
 
+function updateLocalStorage() {
+  localStorage.setItem('generalTaskList', JSON.stringify(generalTaskList));
+  localStorage.setItem('projectList', JSON.stringify(projectList));
+  console.log('updated:', projectList);
+  console.log('updated:', generalTaskList);
+  console.log('updated:', localStorage);
+
+}

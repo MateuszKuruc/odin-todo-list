@@ -1,7 +1,12 @@
-export default startWebsite;
+import { generalTaskList } from "./createItems";
+import { projectList } from "./createItems";
 import github from "./img/github.svg";
-import { createTask, createProject, displayProjectList, controlTaskDisplay, controlTaskDisplay } from "./performAction";
-
+import {
+  createTask,
+  createProject,
+  displayProjectList,
+  controlTaskDisplay,
+} from "./performAction";
 
 function createHeader() {
   const header = document.createElement("div");
@@ -172,28 +177,20 @@ export function createMain() {
     cancelTask,
   ].forEach((item) => taskForm.appendChild(item));
 
-  [
-    taskButton,
-    taskForm,
-    projectTasksContainer,
-  ].forEach((item) => mainDisplay.appendChild(item));
+  [taskButton, taskForm, projectTasksContainer].forEach((item) =>
+    mainDisplay.appendChild(item)
+  );
 
-  [
-    projectsContainer,
-    projectsTitle,
-    inputProject,
-    addProject,
-  ].forEach((item) => projects.appendChild(item));
+  [projectsContainer, projectsTitle, inputProject, addProject].forEach((item) =>
+    projects.appendChild(item)
+  );
 
   sidebar.appendChild(home);
   sidebar.appendChild(projects);
 
-  [
-    homeTitle,
-    allTasks,
-    todayTasks,
-    weekTasks
-  ].forEach((item) => home.appendChild(item));
+  [homeTitle, allTasks, todayTasks, weekTasks].forEach((item) =>
+    home.appendChild(item)
+  );
 
   main.appendChild(sidebar);
   main.appendChild(mainDisplay);
@@ -236,13 +233,26 @@ function createFooter() {
 
   githubLink.appendChild(githubImg);
 
+  const testButton = document.createElement('button');
+  testButton.innerHTML = 'test button';
+  footer.appendChild(testButton);
+
+  testButton.addEventListener('click', () => {
+    console.log('projectList:', projectList);
+    console.log('generalTaskList:', generalTaskList);
+    // console.log('projectList.taskList:', projectList.taskList);
+  })
+
+
   footer.appendChild(signature);
   footer.appendChild(githubLink);
 
+
+  
   return footer;
 }
 
-function startWebsite() {
+export function startWebsite() {
   const content = document.getElementById("content");
 
   content.appendChild(createHeader());
