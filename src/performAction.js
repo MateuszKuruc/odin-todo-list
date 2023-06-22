@@ -1,35 +1,33 @@
-import { projectList, currentProjectId, generalTaskList, Project, Task, taskPriorityInput } from "./createItems";
+import {
+  projectList,
+  currentProjectId,
+  generalTaskList,
+  Project,
+  Task,
+  taskPriorityInput,
+} from "./createItems";
 import { toggleForm } from "./websiteBase";
 import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
-import bin from './img/bin.svg';
-
-// const testTask = new Task(
-//   "pranie",
-//   "osobno biale i czarne",
-//   "medium",
-//   "2023/06/23"
-// );
-// const testTask2 = new Task("obiad", "pizza giuseppe", "high", "02/10/1994");
-// const testProject = new Project("mati bambati");
-// testTask2.id = testTask.id + 1;
-// testProject.taskList.push(testTask2);
-
-
+import bin from "./img/bin.svg";
 
 export function createProject() {
   const inputProject = document.querySelector(".inputProject");
   const addProject = document.querySelector(".addProject");
 
   addProject.addEventListener("click", () => {
-    if (inputProject.value != "" && inputProject.value.length != 0 && inputProject.value.length < 16) {
+    if (
+      inputProject.value != "" &&
+      inputProject.value.length != 0 &&
+      inputProject.value.length < 16
+    ) {
       const newProject = new Project(inputProject.value);
       displayProjectList();
       inputProject.value = "";
       currentProjectId = newProject.id;
-     updateLocalStorage();
+      updateLocalStorage();
       return newProject;
     } else if (inputProject.value.length > 16) {
-      alert('Enter project name below 16 characters!')
+      alert("Enter project name below 16 characters!");
     }
   });
 }
@@ -53,12 +51,6 @@ export function createTask() {
       dueDateInput.value,
       null
     );
-
-    // toggleForm();
-    // displayCurrentTab();
-    // updateLocalStorage();
-
-    // return newTask;
   } else if (currentProjectId != null) {
     const newTask = new Task(
       taskTitleInput.value,
@@ -70,14 +62,10 @@ export function createTask() {
     const project = Project.findProjectById(currentProjectId);
 
     project.addTask(newTask);
-    // displayProjectTasks();
-    // toggleForm();
-    // updateLocalStorage();
   }
   toggleForm();
   displayCurrentTab();
   updateLocalStorage();
- 
 }
 
 export function controlTaskDisplay() {
@@ -111,7 +99,8 @@ function createTaskDisplay(task) {
   const taskTitleDisplay = document.createElement("input");
   taskTitleDisplay.type = "text";
   taskTitleDisplay.classList.add("taskTitleDisplay");
-  taskTitleDisplay.value = task.title.charAt(0).toUpperCase() + task.title.slice(1);
+  taskTitleDisplay.value =
+    task.title.charAt(0).toUpperCase() + task.title.slice(1);
   taskTitleDisplay.readOnly = true;
 
   const titleLabel = document.createElement("h4");
@@ -120,7 +109,8 @@ function createTaskDisplay(task) {
   const taskDescriptionDisplay = document.createElement("input");
   taskDescriptionDisplay.type = "text";
   taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
-  taskDescriptionDisplay.value = task.description.charAt(0).toUpperCase() + task.description.slice(1);
+  taskDescriptionDisplay.value =
+    task.description.charAt(0).toUpperCase() + task.description.slice(1);
   taskDescriptionDisplay.readOnly = true;
 
   const descriptionLabel = document.createElement("h4");
@@ -136,18 +126,28 @@ function createTaskDisplay(task) {
   dueDateLabel.innerHTML = "Due date";
 
   const taskPriorityDisplay = document.createElement("input");
-  taskPriorityDisplay.type = 'text';
+  taskPriorityDisplay.type = "text";
   taskPriorityDisplay.classList.add("taskPriorityInput");
-  taskPriorityDisplay.value = task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
+  taskPriorityDisplay.value =
+    task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
   taskPriorityDisplay.readOnly = true;
 
-  const prioritySelect = document.createElement('select');
-  prioritySelect.classList.add('prioritySelect');
-  prioritySelect.classList.add('hidden');
- 
-  prioritySelect.options[prioritySelect.options.length] = new Option('Low', 'low');
-  prioritySelect.options[prioritySelect.options.length] = new Option('Medium', 'medium');
-  prioritySelect.options[prioritySelect.options.length] = new Option('High', 'high');
+  const prioritySelect = document.createElement("select");
+  prioritySelect.classList.add("prioritySelect");
+  prioritySelect.classList.add("hidden");
+
+  prioritySelect.options[prioritySelect.options.length] = new Option(
+    "Low",
+    "low"
+  );
+  prioritySelect.options[prioritySelect.options.length] = new Option(
+    "Medium",
+    "medium"
+  );
+  prioritySelect.options[prioritySelect.options.length] = new Option(
+    "High",
+    "high"
+  );
   prioritySelect.selectedIndex = 1;
 
   const priorityLabel = document.createElement("h4");
@@ -166,12 +166,10 @@ function createTaskDisplay(task) {
       taskDueDateDisplay.type = "date";
       taskDueDateDisplay.value = task.dueDate;
 
-      taskPriorityDisplay.classList.add('hidden');
-      prioritySelect.classList.remove('hidden');
+      taskPriorityDisplay.classList.add("hidden");
+      prioritySelect.classList.remove("hidden");
 
       taskEdit.innerHTML = "Save";
-      // updateLocalStorage();
-      // displayCurrentTab();
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
@@ -179,10 +177,10 @@ function createTaskDisplay(task) {
       taskDueDateDisplay.setAttribute("readonly", "readonly");
       taskDueDateDisplay.type = "text";
 
-      prioritySelect.classList.add('hidden');
-      taskPriorityDisplay.classList.remove('hidden');
-        task.priority = prioritySelect.value;
-        
+      prioritySelect.classList.add("hidden");
+      taskPriorityDisplay.classList.remove("hidden");
+      task.priority = prioritySelect.value;
+
       task.dueDate = taskDueDateDisplay.value;
       taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
 
@@ -190,90 +188,41 @@ function createTaskDisplay(task) {
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
       displayCurrentTab();
-// updateLocalStorage();
-      // if (currentProjectId !== null) {
-      //   displayProjectTasks();
-      //   updateLocalStorage();
-      // } else if (currentProjectId === null) {
-      //   displayCurrentTab();
-      //   updateLocalStorage();
-      // }
     }
-    // displayCurrentTab();
+
     updateLocalStorage();
   });
 
-  // if (currentProjectId === null) {
-    const taskDelete = document.createElement("button");
-    taskDelete.classList.add("taskDelete");
-    taskDelete.innerHTML = "Delete task";
-    
+  const taskDelete = document.createElement("button");
+  taskDelete.classList.add("taskDelete");
+  taskDelete.innerHTML = "Delete task";
 
-    taskDelete.addEventListener("click", () => {
-      // const projectContainingTask = findProjectContainingTask(task);
+  taskDelete.addEventListener("click", () => {
+    task.removeTask(generalTaskList);
+    displayCurrentTab();
+    updateLocalStorage();
+  });
 
-      // if (projectContainingTask !== null) {
-      //   const index = projectContainingTask.taskList.findIndex(
-      //     (item) => item.id === task.id
-      //   );
+  [
+    titleLabel,
+    taskTitleDisplay,
+    descriptionLabel,
+    taskDescriptionDisplay,
+    dueDateLabel,
+    taskDueDateDisplay,
+    priorityLabel,
+    taskPriorityDisplay,
+    prioritySelect,
+    taskEdit,
+    taskDelete,
+  ].forEach((item) => taskElement.appendChild(item));
 
-      //   if (index !== -1) {
-      //     projectContainingTask.taskList.splice(index, 1);
-      //   }
-      // }
-
-      task.removeTask(generalTaskList);
-      displayCurrentTab();
-      updateLocalStorage();
-    });
-
-    [
-      titleLabel,
-      taskTitleDisplay,
-      descriptionLabel,
-      taskDescriptionDisplay,
-      dueDateLabel,
-      taskDueDateDisplay,
-      priorityLabel,
-      taskPriorityDisplay,
-      prioritySelect,
-      taskEdit,
-      taskDelete,
-    ].forEach((item) => taskElement.appendChild(item));
-
-    projectTasksContainer.appendChild(taskElement);
-  // } else if (currentProjectId !== null) {
-  //   const taskDelete = document.createElement("button");
-  //   taskDelete.classList.add("taskDelete");
-  //   taskDelete.innerHTML = "Delete task";
-
-  //   taskDelete.addEventListener("click", () => {
-  //     task.removeTask(generalTaskList);
-  //     displayProjectTasks();
-  //     updateLocalStorage();
-  //   });
-
-  //   [
-  //     titleLabel,
-  //     taskTitleDisplay,
-  //     descriptionLabel,
-  //     taskDescriptionDisplay,
-  //     dueDateLabel,
-  //     taskDueDateDisplay,
-  //     priorityLabel,
-  //     taskPriorityDisplay,
-  //     prioritySelect,
-  //     taskEdit,
-  //     taskDelete,
-  //   ].forEach((item) => taskElement.appendChild(item));
-
-    // projectTasksContainer.appendChild(taskElement);
-  
+  projectTasksContainer.appendChild(taskElement);
 }
 
 export function displayAllTasks() {
   const allTasks = document.querySelector(".allTasks");
-  allTasks.classList.add('activeButton');
+  allTasks.classList.add("activeButton");
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -297,9 +246,9 @@ function displayProjectTasks() {
   );
   projectTasksContainer.innerHTML = "";
 
-  // const currentProject = Project.findProjectById(currentProjectId);
-
-  const projectTasks = generalTaskList.filter((task) => task.projectId === currentProjectId);
+  const projectTasks = generalTaskList.filter(
+    (task) => task.projectId === currentProjectId
+  );
 
   const sortedProjectTasks = projectTasks.sort((a, b) => {
     const dateA = new Date(a.dueDate);
@@ -309,15 +258,7 @@ function displayProjectTasks() {
 
   sortedProjectTasks.forEach((task) => {
     createTaskDisplay(task);
-  })
-
-  // previous complete code:
-
-
-
-  // sortedTasks.forEach((task) => {
-  //   createTaskDisplay(task);
-  // });
+  });
 }
 
 export function displayTodayTasks() {
@@ -393,12 +334,10 @@ export function displayProjectList() {
     const projectName = document.createElement("button");
     projectName.classList.add("projectName");
     projectName.innerHTML = project.name;
-    
-    // projectElement.appendChild(projectNameImg);
 
     const projectDelete = document.createElement("div");
     projectDelete.classList.add("projectDelete");
-    const projectDeleteImg = document.createElement('img');
+    const projectDeleteImg = document.createElement("img");
     projectDeleteImg.src = bin;
     projectDelete.appendChild(projectDeleteImg);
 
@@ -416,7 +355,6 @@ export function displayProjectList() {
         const index = generalTaskList.findIndex((item) => item.id === task.id);
         if (index !== -1) {
           generalTaskList.splice(index, 1);
-          // updateLocalStorage();
         }
       });
 
@@ -434,10 +372,6 @@ export function displayProjectList() {
     projectsContainer.appendChild(projectElement);
   });
 }
-
-// function findProjectContainingTask(task) {
-//   return projectList.find((project) => project.taskList.includes(task)) || null;
-// }
 
 export function getPriorityChoice() {
   document.getElementsByName("priority").forEach((radio) => {
@@ -478,10 +412,6 @@ function displayCurrentTab() {
 }
 
 function updateLocalStorage() {
-  localStorage.setItem('generalTaskList', JSON.stringify(generalTaskList));
-  localStorage.setItem('projectList', JSON.stringify(projectList));
-  // console.log('updated:', projectList);
-  // console.log('updated:', generalTaskList);
-  // console.log('updated:', localStorage);
-
+  localStorage.setItem("generalTaskList", JSON.stringify(generalTaskList));
+  localStorage.setItem("projectList", JSON.stringify(projectList));
 }

@@ -1,18 +1,16 @@
-// import { generalTaskList } from "./createItems";
-// import { projectList } from "./createItems";
-import addproject from './img/addproject.svg';
-import calendar from './img/calendar.svg';
-import inbox from './img/inbox1.svg';
-import listofprojects from './img/listofprojects.svg';
-import project from './img/project.svg';
-import today from './img/star.svg';
+import addproject from "./img/addproject.svg";
+import calendar from "./img/calendar.svg";
+import inbox from "./img/inbox1.svg";
+import listofprojects from "./img/listofprojects.svg";
+import project from "./img/project.svg";
+import today from "./img/star.svg";
 import github from "./img/github.svg";
 import {
   createTask,
   createProject,
   displayProjectList,
   controlTaskDisplay,
-  displayAllTasks
+  displayAllTasks,
 } from "./performAction";
 
 function createHeader() {
@@ -46,10 +44,10 @@ export function createMain() {
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
 
-  const allTasksText = document.createElement('h2');
-  allTasksText.innerHTML = 'Inbox'
+  const allTasksText = document.createElement("h2");
+  allTasksText.innerHTML = "Inbox";
 
-  const allTasksImg = document.createElement('img');
+  const allTasksImg = document.createElement("img");
   allTasksImg.src = inbox;
   allTasks.appendChild(allTasksImg);
   allTasks.appendChild(allTasksText);
@@ -57,22 +55,21 @@ export function createMain() {
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
 
-  const todayTasksText = document.createElement('h2');
-  todayTasksText.innerHTML = 'Today';
+  const todayTasksText = document.createElement("h2");
+  todayTasksText.innerHTML = "Today";
 
-  const todayTasksImg = document.createElement('img');
+  const todayTasksImg = document.createElement("img");
   todayTasksImg.src = today;
   todayTasks.appendChild(todayTasksImg);
   todayTasks.appendChild(todayTasksText);
 
   const weekTasks = document.createElement("button");
   weekTasks.classList.add("weekTasks");
-  // weekTasks.innerHTML = "This week";
 
-  const weekTasksText = document.createElement('h2');
-  weekTasksText.innerHTML = 'Week';
+  const weekTasksText = document.createElement("h2");
+  weekTasksText.innerHTML = "Week";
 
-  const weekTasksImg = document.createElement('img');
+  const weekTasksImg = document.createElement("img");
   weekTasksImg.src = calendar;
   weekTasks.appendChild(weekTasksImg);
   weekTasks.appendChild(weekTasksText);
@@ -80,15 +77,15 @@ export function createMain() {
   const projects = document.createElement("div");
   projects.classList.add("projects");
 
-  const projectsImg = document.createElement('img');
+  const projectsImg = document.createElement("img");
   projectsImg.src = listofprojects;
 
-  const projectHead = document.createElement('div');
-  projectHead.classList.add('projectHead');
+  const projectHead = document.createElement("div");
+  projectHead.classList.add("projectHead");
 
   const projectsTitle = document.createElement("h2");
   projectsTitle.innerHTML = "Projects";
-  
+
   projectHead.appendChild(projectsImg);
   projectHead.appendChild(projectsTitle);
 
@@ -101,7 +98,7 @@ export function createMain() {
   addProject.classList.add("addProject");
   addProject.innerHTML = "Add Project";
 
-  const addProjectImg = document.createElement('img');
+  const addProjectImg = document.createElement("img");
   addProjectImg.src = addproject;
   addProject.appendChild(addProjectImg);
 
@@ -152,7 +149,6 @@ export function createMain() {
   createNewTask.classList.add("createNewTask");
   createNewTask.innerHTML = "Create task";
   createNewTask.addEventListener("click", createTask);
-  
 
   const cancelTask = document.createElement("button");
   cancelTask.classList.add("cancelTask");
