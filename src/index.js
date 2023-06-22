@@ -7,8 +7,7 @@ import { Project, Task } from "./createItems";
 
 window.onload = () => {
     // localStorage.clear();
-    // console.log('projectList:', projectList);
-    // console.log(generalTaskList);
+   
     const testButton = document.createElement('button');
     testButton.innerHTML = 'test button';
 
@@ -19,19 +18,20 @@ if (storedProjectList) {
         const newProject = new Project(project.name);
         newProject.id = project.id;
         newProject.taskList = project.taskList;
-
-        console.log(projectList);
-        console.log(newProject);
+        console.log('newProject:', newProject);
     })
 }
 if (storedGeneralTaskList) {
     storedGeneralTaskList.forEach((task) => {
-        const newTask = new Task(task.title, task.description, task.priority, task.dueDate);
+        const newTask = new Task(task.title, task.description, task.priority, task.dueDate, task.projectId);
         newTask.id = task.id;
-        console.log(generalTaskList);
+        console.log('newTask:', newTask);
     })
 }
-
+console.log('generalTaskList:', generalTaskList);
+console.log('projectList:', projectList);
+        
+        
 startWebsite();
 }
 

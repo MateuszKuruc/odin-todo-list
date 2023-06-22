@@ -49,29 +49,33 @@ export function createTask() {
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      dueDateInput.value
+      dueDateInput.value,
+      null
     );
 
-    toggleForm();
-    checkButtonClassList();
-    updateLocalStorage();
+    // toggleForm();
+    // checkButtonClassList();
+    // updateLocalStorage();
 
-    return newTask;
+    // return newTask;
   } else if (currentProjectId != null) {
     const newTask = new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
-      dueDateInput.value
+      dueDateInput.value,
+      currentProjectId
     );
     const project = Project.findProjectById(currentProjectId);
 
     project.addTask(newTask);
-    displayProjectTasks();
-    toggleForm();
-    updateLocalStorage();
+    // displayProjectTasks();
+    // toggleForm();
+    // updateLocalStorage();
   }
-  // updateLocalStorage();
+  toggleForm();
+  checkButtonClassList();
+  updateLocalStorage();
  
 }
 
@@ -153,8 +157,6 @@ function createTaskDisplay(task) {
   taskEdit.innerHTML = "Edit";
 
   taskEdit.addEventListener("click", () => {
-    console.log(generalTaskList);
-    console.log();
     if (taskEdit.innerHTML === "Edit") {
       taskTitleDisplay.removeAttribute("readOnly");
       taskDescriptionDisplay.removeAttribute("readOnly");
@@ -167,7 +169,7 @@ function createTaskDisplay(task) {
       prioritySelect.classList.remove('hidden');
 
       taskEdit.innerHTML = "Save";
-      updateLocalStorage();
+      // updateLocalStorage();
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
@@ -185,7 +187,7 @@ function createTaskDisplay(task) {
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
-updateLocalStorage();
+// updateLocalStorage();
       if (currentProjectId !== null) {
         displayProjectTasks();
         updateLocalStorage();
@@ -203,17 +205,17 @@ updateLocalStorage();
     taskDelete.innerHTML = "Delete task";
 
     taskDelete.addEventListener("click", () => {
-      const projectContainingTask = findProjectContainingTask(task);
+      // const projectContainingTask = findProjectContainingTask(task);
 
-      if (projectContainingTask !== null) {
-        const index = projectContainingTask.taskList.findIndex(
-          (item) => item.id === task.id
-        );
+      // if (projectContainingTask !== null) {
+      //   const index = projectContainingTask.taskList.findIndex(
+      //     (item) => item.id === task.id
+      //   );
 
-        if (index !== -1) {
-          projectContainingTask.taskList.splice(index, 1);
-        }
-      }
+      //   if (index !== -1) {
+      //     projectContainingTask.taskList.splice(index, 1);
+      //   }
+      // }
 
       task.removeTask(generalTaskList);
       checkButtonClassList();
@@ -241,10 +243,6 @@ updateLocalStorage();
     taskDelete.innerHTML = "Delete task";
 
     taskDelete.addEventListener("click", () => {
-      const currentProject = Project.findProjectById(currentProjectId);
-      const currentProjectTaskList = currentProject.taskList;
-
-      task.removeTask(currentProjectTaskList);
       task.removeTask(generalTaskList);
       displayProjectTasks();
       updateLocalStorage();
@@ -292,17 +290,24 @@ function displayProjectTasks() {
   );
   projectTasksContainer.innerHTML = "";
 
-  const currentProject = Project.findProjectById(currentProjectId);
+  // const currentProject = Project.findProjectById(currentProjectId);
 
-  const sortedTasks = currentProject.taskList.sort((a, b) => {
-    const dateA = new Date(a.dueDate);
-    const dateB = new Date(b.dueDate);
-    return dateA.getTime() - dateB.getTime();
-  });
-
-  sortedTasks.forEach((task) => {
+  const projectTasks = generalTaskList.filter((task) => task.projectId === currentProjectId);
+  projectTasks.forEach((task) => {
     createTaskDisplay(task);
-  });
+  })
+
+  // previous complete code:
+
+  // const sortedTasks = currentProject.taskList.sort((a, b) => {
+  //   const dateA = new Date(a.dueDate);
+  //   const dateB = new Date(b.dueDate);
+  //   return dateA.getTime() - dateB.getTime();
+  // });
+
+  // sortedTasks.forEach((task) => {
+  //   createTaskDisplay(task);
+  // });
 }
 
 export function displayTodayTasks() {
@@ -416,9 +421,9 @@ export function displayProjectList() {
   });
 }
 
-function findProjectContainingTask(task) {
-  return projectList.find((project) => project.taskList.includes(task)) || null;
-}
+// function findProjectContainingTask(task) {
+//   return projectList.find((project) => project.taskList.includes(task)) || null;
+// }
 
 export function getPriorityChoice() {
   document.getElementsByName("priority").forEach((radio) => {
@@ -451,6 +456,8 @@ function checkButtonClassList() {
     displayWeekTasks();
   } else if (todayTasks.classList.contains("activeButton")) {
     displayTodayTasks();
+  } else if (currentProjectId !== null) {
+    displayProjectTasks();
   }
 }
 
