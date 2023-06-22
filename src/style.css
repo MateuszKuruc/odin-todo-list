@@ -8,6 +8,26 @@
   display: grid;
 }
 
+img {
+  /* height: 2rem; */
+  min-width: 1rem;
+  max-width: 4rem;
+}
+
+.allTasks, .todayTasks, .weekTasks {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+  /* align-content: center; */
+  
+ gap: 0.5rem;
+}
+
+.allTasks > img {
+  /* border: 2px solid yellow; */
+}
+
 .header {
   height: 10vh;
   display: flex;

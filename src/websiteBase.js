@@ -44,15 +44,37 @@ export function createMain() {
 
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
-  allTasks.innerHTML = "Inbox";
+
+  const allTasksText = document.createElement('h2');
+  allTasksText.innerHTML = 'Inbox'
+
+  const allTasksImg = document.createElement('img');
+  allTasksImg.src = inbox;
+  allTasks.appendChild(allTasksImg);
+  allTasks.appendChild(allTasksText);
 
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
-  todayTasks.innerHTML = "Today";
+
+  const todayTasksText = document.createElement('h2');
+  todayTasksText.innerHTML = 'Today';
+
+  const todayTasksImg = document.createElement('img');
+  todayTasksImg.src = calendar;
+  todayTasks.appendChild(todayTasksImg);
+  todayTasks.appendChild(todayTasksText);
 
   const weekTasks = document.createElement("button");
   weekTasks.classList.add("weekTasks");
-  weekTasks.innerHTML = "This week";
+  // weekTasks.innerHTML = "This week";
+
+  const weekTasksText = document.createElement('h2');
+  weekTasksText.innerHTML = 'This week';
+
+  const weekTasksImg = document.createElement('img');
+  weekTasksImg.src = listofprojects;
+  weekTasks.appendChild(weekTasksImg);
+  weekTasks.appendChild(weekTasksText);
 
   const projects = document.createElement("div");
   projects.classList.add("projects");
