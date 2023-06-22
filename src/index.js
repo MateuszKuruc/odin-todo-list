@@ -8,8 +8,8 @@ import { Project, Task } from "./createItems";
 window.onload = () => {
     // localStorage.clear();
    
-    const testButton = document.createElement('button');
-    testButton.innerHTML = 'test button';
+    // const testButton = document.createElement('button');
+    // testButton.innerHTML = 'test button';
 
 const storedProjectList = JSON.parse(localStorage.getItem('projectList'));
 const storedGeneralTaskList = JSON.parse(localStorage.getItem('generalTaskList'));

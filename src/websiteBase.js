@@ -6,6 +6,7 @@ import {
   createProject,
   displayProjectList,
   controlTaskDisplay,
+  displayAllTasks
 } from "./performAction";
 
 function createHeader() {
@@ -233,15 +234,15 @@ function createFooter() {
 
   githubLink.appendChild(githubImg);
 
-  const testButton = document.createElement('button');
-  testButton.innerHTML = 'test button';
-  footer.appendChild(testButton);
+  // const testButton = document.createElement('button');
+  // testButton.innerHTML = 'test button';
+  // footer.appendChild(testButton);
 
-  testButton.addEventListener('click', () => {
-    console.log('projectList:', projectList);
-    console.log('generalTaskList:', generalTaskList);
-    // console.log('projectList.taskList:', projectList.taskList);
-  })
+  // testButton.addEventListener('click', () => {
+  //   console.log('projectList:', projectList);
+  //   console.log('generalTaskList:', generalTaskList);
+  //   // console.log('projectList.taskList:', projectList.taskList);
+  // })
 
 
   footer.appendChild(signature);
@@ -262,4 +263,5 @@ export function startWebsite() {
   createProject();
   displayProjectList();
   controlTaskDisplay();
+  displayAllTasks();
 }

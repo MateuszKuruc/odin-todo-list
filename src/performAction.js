@@ -45,7 +45,7 @@ export function createTask() {
     taskTitleInput.value.length != 0 &&
     currentProjectId === null
   ) {
-    const newTask = new Task(
+    new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
       taskPriorityInput,
@@ -54,7 +54,7 @@ export function createTask() {
     );
 
     // toggleForm();
-    // checkButtonClassList();
+    // displayCurrentTab();
     // updateLocalStorage();
 
     // return newTask;
@@ -74,7 +74,7 @@ export function createTask() {
     // updateLocalStorage();
   }
   toggleForm();
-  checkButtonClassList();
+  displayCurrentTab();
   updateLocalStorage();
  
 }
@@ -170,7 +170,7 @@ function createTaskDisplay(task) {
 
       taskEdit.innerHTML = "Save";
       // updateLocalStorage();
-      // checkButtonClassList();
+      // displayCurrentTab();
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
@@ -188,21 +188,21 @@ function createTaskDisplay(task) {
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
-      checkButtonClassList();
+      displayCurrentTab();
 // updateLocalStorage();
       // if (currentProjectId !== null) {
       //   displayProjectTasks();
       //   updateLocalStorage();
       // } else if (currentProjectId === null) {
-      //   checkButtonClassList();
+      //   displayCurrentTab();
       //   updateLocalStorage();
       // }
     }
-    // checkButtonClassList();
+    // displayCurrentTab();
     updateLocalStorage();
   });
 
-  if (currentProjectId === null) {
+  // if (currentProjectId === null) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
     taskDelete.innerHTML = "Delete task";
@@ -221,7 +221,7 @@ function createTaskDisplay(task) {
       // }
 
       task.removeTask(generalTaskList);
-      checkButtonClassList();
+      displayCurrentTab();
       updateLocalStorage();
     });
 
@@ -240,36 +240,38 @@ function createTaskDisplay(task) {
     ].forEach((item) => taskElement.appendChild(item));
 
     projectTasksContainer.appendChild(taskElement);
-  } else if (currentProjectId !== null) {
-    const taskDelete = document.createElement("button");
-    taskDelete.classList.add("taskDelete");
-    taskDelete.innerHTML = "Delete task";
+  // } else if (currentProjectId !== null) {
+  //   const taskDelete = document.createElement("button");
+  //   taskDelete.classList.add("taskDelete");
+  //   taskDelete.innerHTML = "Delete task";
 
-    taskDelete.addEventListener("click", () => {
-      task.removeTask(generalTaskList);
-      displayProjectTasks();
-      updateLocalStorage();
-    });
+  //   taskDelete.addEventListener("click", () => {
+  //     task.removeTask(generalTaskList);
+  //     displayProjectTasks();
+  //     updateLocalStorage();
+  //   });
 
-    [
-      titleLabel,
-      taskTitleDisplay,
-      descriptionLabel,
-      taskDescriptionDisplay,
-      dueDateLabel,
-      taskDueDateDisplay,
-      priorityLabel,
-      taskPriorityDisplay,
-      prioritySelect,
-      taskEdit,
-      taskDelete,
-    ].forEach((item) => taskElement.appendChild(item));
+  //   [
+  //     titleLabel,
+  //     taskTitleDisplay,
+  //     descriptionLabel,
+  //     taskDescriptionDisplay,
+  //     dueDateLabel,
+  //     taskDueDateDisplay,
+  //     priorityLabel,
+  //     taskPriorityDisplay,
+  //     prioritySelect,
+  //     taskEdit,
+  //     taskDelete,
+  //   ].forEach((item) => taskElement.appendChild(item));
 
-    projectTasksContainer.appendChild(taskElement);
-  }
+    // projectTasksContainer.appendChild(taskElement);
+  
 }
 
-function displayAllTasks() {
+export function displayAllTasks() {
+  const allTasks = document.querySelector(".allTasks");
+  allTasks.classList.add('activeButton');
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
@@ -296,17 +298,20 @@ function displayProjectTasks() {
   // const currentProject = Project.findProjectById(currentProjectId);
 
   const projectTasks = generalTaskList.filter((task) => task.projectId === currentProjectId);
-  projectTasks.forEach((task) => {
+
+  const sortedProjectTasks = projectTasks.sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return dateA.getTime() - dateB.getTime();
+  });
+
+  sortedProjectTasks.forEach((task) => {
     createTaskDisplay(task);
   })
 
   // previous complete code:
 
-  // const sortedTasks = currentProject.taskList.sort((a, b) => {
-  //   const dateA = new Date(a.dueDate);
-  //   const dateB = new Date(b.dueDate);
-  //   return dateA.getTime() - dateB.getTime();
-  // });
+
 
   // sortedTasks.forEach((task) => {
   //   createTaskDisplay(task);
@@ -449,7 +454,7 @@ function toggleActiveButton(button) {
   button.classList.add("activeButton");
 }
 
-function checkButtonClassList() {
+function displayCurrentTab() {
   const allTasks = document.querySelector(".allTasks");
   const todayTasks = document.querySelector(".todayTasks");
   const weekTasks = document.querySelector(".weekTasks");
@@ -461,14 +466,16 @@ function checkButtonClassList() {
     displayTodayTasks();
   } else if (currentProjectId !== null) {
     displayProjectTasks();
+  } else {
+    displayAllTasks();
   }
 }
 
 function updateLocalStorage() {
   localStorage.setItem('generalTaskList', JSON.stringify(generalTaskList));
   localStorage.setItem('projectList', JSON.stringify(projectList));
-  console.log('updated:', projectList);
-  console.log('updated:', generalTaskList);
-  console.log('updated:', localStorage);
+  // console.log('updated:', projectList);
+  // console.log('updated:', generalTaskList);
+  // console.log('updated:', localStorage);
 
 }
