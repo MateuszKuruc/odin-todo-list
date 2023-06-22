@@ -8,19 +8,36 @@
   display: grid;
 }
 
+button {
+  /* width: 150px; */
+  padding: 0.75rem;
+  font-weight: 900;
+  font-size: 14px;
+  border-radius: 0.75rem;
+  margin: 0.25rem;
+}
+
+button:hover {
+  transform: scale(1.01);
+  background-color: silver;
+}
+
 img {
   /* height: 2rem; */
-  min-width: 1rem;
-  max-width: 4rem;
+  /* min-width: 1rem;
+  max-width: 4rem; */
+  width: 2rem;
+  height: 3.2rem;
+  /* viewport-fit: cover; */
 }
 
 .allTasks, .todayTasks, .weekTasks {
   display: flex;
-  flex-direction: row-reverse;
+  /* flex-direction: row-reverse; */
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   /* align-content: center; */
-  
  gap: 0.5rem;
 }
 
@@ -34,6 +51,20 @@ img {
   background-color: chocolate;
   justify-content: center;
   align-items: center;
+}
+
+.addProject {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 2.5rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  margin: 0;
+  margin-top: 0.25rem;
+  /* height: 0.5rem; */
 }
 
 .footer {
@@ -58,8 +89,10 @@ img {
   flex-direction: column;
   background-color: lightblue;
   /* border: 1px solid black; */
-  padding: 1rem;
+  padding: 0.75rem;
   gap: 1rem;
+  width: min(100%, 250px);
+  /* max-width: 50%; */
 }
 
 .home {
@@ -74,28 +107,34 @@ img {
   /* border: 5px solid red; */
 }
 
-button {
-  width: 150px;
-  padding: 0.75rem;
-  font-weight: 900;
-  font-size: 14px;
-  border-radius: 0.75rem;
-  margin: 0.25rem;
-}
-
-button:hover {
-  transform: scale(1.1);
-  background-color: silver;
-}
-
 .tasksContainer {
   display: grid;
   background-color: blue;
   border: 5px solid yellow;
 }
 
+input {
+  height: 2rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+.addNewTask {
+  align-self: center;
+}
+
+.taskForm {
+  display: flex;
+  flex-direction: column;
+  /* width: max(40%, 200px); */
+  align-self: center;
+  border: 2px solid black;
+  padding: 1rem;
+}
+
 .taskElement {
-  width: max(80%, 500px);
+  /* width: max(80%, 500px); */
   display: flex;
   flex-direction: column;
   border: 3px solid black;
@@ -104,58 +143,13 @@ button:hover {
   justify-content: center;
   align-items: center;
   align-self: center;
-}
-
-input {
-  height: 2rem;
-  padding: 0.5rem;
-  border-radius: 0.5rem;
-}
-
-.taskForm {
-  display: flex;
-  flex-direction: column;
-  width: max(40%, 200px);
-  align-self: center;
-}
-
-.hidden {
-  display: none;
-}
-
-.addNewTask {
-  align-self: center;
-}
-
-.projectName {
-  background-color: black;
-  color: white;
-  word-wrap: wrap;
-  /* width: min(80%, 125px) */
-}
-
-.projectsContainer {
-  display: flex;
-flex-direction: column;
-background-color: yellow;
-}
-
-.projectDelete {
-  width: 100px;
-}
-
-.projectTasksContainer {
-  /* border: 3px solid red; */
-}
-
-.taskForm {
-  border: 2px solid black;
-  padding: 1rem;
+  margin: 0.25rem;
 }
 
 .taskElement > input {
   background-color: lightblue;
   border: none;
+  /* margin: 2rem; */
 }
 
 .taskElement > input:hover {
@@ -164,4 +158,62 @@ background-color: yellow;
 
 .activeButton {
   background-color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+.projectElement {
+  /* border: 1px solid blue; */
+
+}
+
+.projectsContainer {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  margin-top: 0.5rem;
+  /* max-width: */
+}
+
+.projectHead {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.projectName {
+  display: flex;
+  /* width: min(95%, 200px); */
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  background-color:darkgoldenrod;
+  color: white;
+  /* word-wrap: wrap; */
+  gap: 0.5rem;
+  margin: 0;
+  
+  /* max-width: 100%; */
+  /* width: min(80%, 125px) */
+}
+
+.projectDelete {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* width: 2rem; */
+  height: 1rem;
+ /* background-color: silver; */
+
+}
+
+.projects {
+  /* border: 1px solid red; */
+  display: flex;
+  flex-direction: column;
 }

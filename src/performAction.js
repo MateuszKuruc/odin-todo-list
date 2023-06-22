@@ -1,7 +1,7 @@
 import { projectList, currentProjectId, generalTaskList, Project, Task, taskPriorityInput } from "./createItems";
 import { toggleForm } from "./websiteBase";
 import { format, addDays, isWithinInterval, startOfToday } from "date-fns";
-
+import bin from './img/bin.svg';
 
 // const testTask = new Task(
 //   "pranie",
@@ -21,14 +21,15 @@ export function createProject() {
   const addProject = document.querySelector(".addProject");
 
   addProject.addEventListener("click", () => {
-    if (inputProject.value != "" && inputProject.value.length != 0) {
+    if (inputProject.value != "" && inputProject.value.length != 0 && inputProject.value.length < 16) {
       const newProject = new Project(inputProject.value);
       displayProjectList();
       inputProject.value = "";
       currentProjectId = newProject.id;
      updateLocalStorage();
-
       return newProject;
+    } else if (inputProject.value.length > 16) {
+      alert('Enter project name below 16 characters!')
     }
   });
 }
@@ -206,6 +207,7 @@ function createTaskDisplay(task) {
     const taskDelete = document.createElement("button");
     taskDelete.classList.add("taskDelete");
     taskDelete.innerHTML = "Delete task";
+    
 
     taskDelete.addEventListener("click", () => {
       // const projectContainingTask = findProjectContainingTask(task);
@@ -386,15 +388,19 @@ export function displayProjectList() {
 
   projectList.forEach((project) => {
     const projectElement = document.createElement("div");
-    projectElement.classList.add("project");
+    projectElement.classList.add("projectElement");
 
     const projectName = document.createElement("button");
     projectName.classList.add("projectName");
     projectName.innerHTML = project.name;
+    
+    // projectElement.appendChild(projectNameImg);
 
-    const projectDelete = document.createElement("button");
+    const projectDelete = document.createElement("div");
     projectDelete.classList.add("projectDelete");
-    projectDelete.innerHTML = "Delete";
+    const projectDeleteImg = document.createElement('img');
+    projectDeleteImg.src = bin;
+    projectDelete.appendChild(projectDeleteImg);
 
     projectName.addEventListener("click", () => {
       currentProjectId = project.id;
@@ -424,7 +430,7 @@ export function displayProjectList() {
     });
 
     projectElement.appendChild(projectName);
-    projectElement.appendChild(projectDelete);
+    projectName.appendChild(projectDelete);
     projectsContainer.appendChild(projectElement);
   });
 }

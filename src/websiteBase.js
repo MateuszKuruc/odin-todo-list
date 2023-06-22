@@ -2,9 +2,10 @@
 // import { projectList } from "./createItems";
 import addproject from './img/addproject.svg';
 import calendar from './img/calendar.svg';
-import inbox from './img/inbox.svg';
+import inbox from './img/inbox1.svg';
 import listofprojects from './img/listofprojects.svg';
 import project from './img/project.svg';
+import today from './img/star.svg';
 import github from "./img/github.svg";
 import {
   createTask,
@@ -60,7 +61,7 @@ export function createMain() {
   todayTasksText.innerHTML = 'Today';
 
   const todayTasksImg = document.createElement('img');
-  todayTasksImg.src = calendar;
+  todayTasksImg.src = today;
   todayTasks.appendChild(todayTasksImg);
   todayTasks.appendChild(todayTasksText);
 
@@ -69,18 +70,27 @@ export function createMain() {
   // weekTasks.innerHTML = "This week";
 
   const weekTasksText = document.createElement('h2');
-  weekTasksText.innerHTML = 'This week';
+  weekTasksText.innerHTML = 'Week';
 
   const weekTasksImg = document.createElement('img');
-  weekTasksImg.src = listofprojects;
+  weekTasksImg.src = calendar;
   weekTasks.appendChild(weekTasksImg);
   weekTasks.appendChild(weekTasksText);
 
   const projects = document.createElement("div");
   projects.classList.add("projects");
 
+  const projectsImg = document.createElement('img');
+  projectsImg.src = listofprojects;
+
+  const projectHead = document.createElement('div');
+  projectHead.classList.add('projectHead');
+
   const projectsTitle = document.createElement("h2");
   projectsTitle.innerHTML = "Projects";
+  
+  projectHead.appendChild(projectsImg);
+  projectHead.appendChild(projectsTitle);
 
   const inputProject = document.createElement("input");
   inputProject.classList.add("inputProject");
@@ -90,6 +100,10 @@ export function createMain() {
   const addProject = document.createElement("button");
   addProject.classList.add("addProject");
   addProject.innerHTML = "Add Project";
+
+  const addProjectImg = document.createElement('img');
+  addProjectImg.src = addproject;
+  addProject.appendChild(addProjectImg);
 
   const projectsContainer = document.createElement("div");
   projectsContainer.classList.add("projectsContainer");
@@ -138,6 +152,7 @@ export function createMain() {
   createNewTask.classList.add("createNewTask");
   createNewTask.innerHTML = "Create task";
   createNewTask.addEventListener("click", createTask);
+  
 
   const cancelTask = document.createElement("button");
   cancelTask.classList.add("cancelTask");
@@ -209,7 +224,7 @@ export function createMain() {
     mainDisplay.appendChild(item)
   );
 
-  [projectsContainer, projectsTitle, inputProject, addProject].forEach((item) =>
+  [projectHead, projectsContainer, inputProject, addProject].forEach((item) =>
     projects.appendChild(item)
   );
 
@@ -264,8 +279,6 @@ function createFooter() {
   footer.appendChild(signature);
   footer.appendChild(githubLink);
 
-
-  
   return footer;
 }
 
