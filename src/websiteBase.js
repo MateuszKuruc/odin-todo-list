@@ -1,5 +1,10 @@
-import { generalTaskList } from "./createItems";
-import { projectList } from "./createItems";
+// import { generalTaskList } from "./createItems";
+// import { projectList } from "./createItems";
+import addproject from './img/addproject.svg';
+import calendar from './img/calendar.svg';
+import inbox from './img/inbox.svg';
+import listofprojects from './img/listofprojects.svg';
+import project from './img/project.svg';
 import github from "./img/github.svg";
 import {
   createTask,
@@ -39,7 +44,7 @@ export function createMain() {
 
   const allTasks = document.createElement("button");
   allTasks.classList.add("allTasks");
-  allTasks.innerHTML = "All Tasks";
+  allTasks.innerHTML = "Inbox";
 
   const todayTasks = document.createElement("button");
   todayTasks.classList.add("todayTasks");
@@ -233,17 +238,6 @@ function createFooter() {
   githubLink.target = "blank";
 
   githubLink.appendChild(githubImg);
-
-  // const testButton = document.createElement('button');
-  // testButton.innerHTML = 'test button';
-  // footer.appendChild(testButton);
-
-  // testButton.addEventListener('click', () => {
-  //   console.log('projectList:', projectList);
-  //   console.log('generalTaskList:', generalTaskList);
-  //   // console.log('projectList.taskList:', projectList.taskList);
-  // })
-
 
   footer.appendChild(signature);
   footer.appendChild(githubLink);
