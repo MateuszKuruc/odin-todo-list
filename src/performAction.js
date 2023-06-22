@@ -170,6 +170,7 @@ function createTaskDisplay(task) {
 
       taskEdit.innerHTML = "Save";
       // updateLocalStorage();
+      // checkButtonClassList();
     } else if (taskEdit.innerHTML === "Save") {
       taskTitleDisplay.setAttribute("readonly", "readonly");
       taskDescriptionDisplay.setAttribute("readonly", "readonly");
@@ -187,15 +188,17 @@ function createTaskDisplay(task) {
       task.title = taskTitleDisplay.value;
       task.description = taskDescriptionDisplay.value;
       taskEdit.innerHTML = "Edit";
+      checkButtonClassList();
 // updateLocalStorage();
-      if (currentProjectId !== null) {
-        displayProjectTasks();
-        updateLocalStorage();
-      } else if (currentProjectId === null) {
-        checkButtonClassList();
-        updateLocalStorage();
-      }
+      // if (currentProjectId !== null) {
+      //   displayProjectTasks();
+      //   updateLocalStorage();
+      // } else if (currentProjectId === null) {
+      //   checkButtonClassList();
+      //   updateLocalStorage();
+      // }
     }
+    // checkButtonClassList();
     updateLocalStorage();
   });
 
