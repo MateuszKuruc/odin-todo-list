@@ -98,7 +98,7 @@ function createTaskDisplay(task) {
 
   const taskElement = document.createElement("div");
   taskElement.classList.add("taskElement");
-  // taskElement.classList.add("hidden");
+  taskElement.classList.add("hidden");
 
   const titleLabel = document.createElement("h5");
   titleLabel.innerHTML = "Name";
@@ -165,10 +165,10 @@ function createTaskDisplay(task) {
   taskTeaserDetails.addEventListener("click", () => {
     if (taskElement.classList.contains("hidden")) {
       taskElement.classList.remove("hidden");
-      taskTeaserDetails.innerHTML = 'LESS';
+      taskTeaserDetails.innerHTML = "LESS";
     } else if (!taskElement.classList.contains("hidden")) {
       taskElement.classList.add("hidden");
-      taskTeaserDetails.innerHTML = 'MORE';
+      taskTeaserDetails.innerHTML = "MORE";
     }
   });
   // taskTeaser.appendChild(taskTeaserDetails);
@@ -388,7 +388,7 @@ function displayWeekTasks() {
   projectTasksContainer.innerHTML = "";
   currentProjectId = null;
 
-toggleProjectNameInfo();
+  toggleProjectNameInfo();
 
   const today = startOfToday();
   const weekFromToday = addDays(new Date(today), 7);
@@ -495,21 +495,16 @@ function displayCurrentTab() {
   const allTasks = document.querySelector(".allTasks");
   const todayTasks = document.querySelector(".todayTasks");
   const weekTasks = document.querySelector(".weekTasks");
- 
-  
+  const taskElement = document.querySelector(".taskElement");
 
   if (allTasks.classList.contains("activeButton")) {
-
     displayAllTasks();
-
   } else if (weekTasks.classList.contains("activeButton")) {
     displayWeekTasks();
-
   } else if (todayTasks.classList.contains("activeButton")) {
     displayTodayTasks();
   } else if (currentProjectId !== null) {
     displayProjectTasks();
-    
   } else {
     displayAllTasks();
   }
@@ -526,16 +521,15 @@ function deleteTask(task) {
   updateLocalStorage();
 }
 
-
 function toggleProjectNameInfo() {
-const projectNameInfo = document.querySelector('.projectNameInfo');
-    
-if (currentProjectId !== null) {
-const currentProject = Project.findProjectById(currentProjectId);
-const currentProjectName = currentProject.name;
-projectNameInfo.innerHTML = `Current project: '${currentProjectName}'`;
-projectNameInfo.classList.remove('hidden');
-} else if (currentProjectId === null) {
-projectNameInfo.classList.add('hidden');
-}
+  const projectNameInfo = document.querySelector(".projectNameInfo");
+
+  if (currentProjectId !== null) {
+    const currentProject = Project.findProjectById(currentProjectId);
+    const currentProjectName = currentProject.name;
+    projectNameInfo.innerHTML = `Current project: '${currentProjectName}'`;
+    projectNameInfo.classList.remove("hidden");
+  } else if (currentProjectId === null) {
+    projectNameInfo.classList.add("hidden");
+  }
 }

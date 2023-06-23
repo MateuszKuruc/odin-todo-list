@@ -107,7 +107,7 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  taskForm.classList.add("hidden");
+  // taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");

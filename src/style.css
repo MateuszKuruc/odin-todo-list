@@ -196,6 +196,10 @@ input {
   
 } */
 
+.radioButtons {
+  width: 1.5rem;
+}
+
 .radioElements {
   display: flex;
   /* flex-direction: row; */
@@ -207,7 +211,8 @@ input {
 
 .taskElement {
   /* width: max(100%, 500px); */
-  max-width: 100%;
+  /* max-width: 100%; */
+  width: min(80%, 600px);
   display: flex;
   /* flex: 1 1 auto; */
   flex-direction: column;
@@ -359,6 +364,14 @@ input {
   padding: 0.5rem;
 }
 
+.taskDescriptionDisplay:read-only {
+  background-color: cadetblue;
+}
+
+.taskDescriptionDisplay:not(:read-only) {
+  background-color: rgb(112, 128, 144);
+}
+
 .taskEdit:hover {
   background-color: green;
 }
@@ -394,6 +407,8 @@ input {
 }
 
 .completeTaskElement {
+  display: flex;
+  flex-direction: column;
 }
 
 .taskTeaserRight {
