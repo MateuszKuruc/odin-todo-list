@@ -98,7 +98,7 @@ function createTaskDisplay(task) {
 
   const taskElement = document.createElement("div");
   taskElement.classList.add("taskElement");
-  taskElement.classList.add("hidden");
+  // taskElement.classList.add("hidden");
 
   const titleLabel = document.createElement("h5");
   titleLabel.innerHTML = "Name";
@@ -165,8 +165,10 @@ function createTaskDisplay(task) {
   taskTeaserDetails.addEventListener("click", () => {
     if (taskElement.classList.contains("hidden")) {
       taskElement.classList.remove("hidden");
+      taskTeaserDetails.innerHTML = 'LESS';
     } else if (!taskElement.classList.contains("hidden")) {
       taskElement.classList.add("hidden");
+      taskTeaserDetails.innerHTML = 'MORE';
     }
   });
   // taskTeaser.appendChild(taskTeaserDetails);
@@ -217,6 +219,7 @@ function createTaskDisplay(task) {
   taskEdit.addEventListener("click", () => {
     if (taskEdit.innerHTML === "Edit") {
       taskTitleDisplay.removeAttribute("readOnly");
+      taskTitleDisplay.focus();
       taskDescriptionDisplay.removeAttribute("readOnly");
 
       taskDueDateDisplay.removeAttribute("readonly");

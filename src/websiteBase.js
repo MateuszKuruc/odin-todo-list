@@ -107,7 +107,7 @@ export function createMain() {
 
   const taskForm = document.createElement("div");
   taskForm.classList.add("taskForm");
-  // taskForm.classList.add("hidden");
+  taskForm.classList.add("hidden");
 
   const taskTitleInput = document.createElement("input");
   taskTitleInput.classList.add("taskTitleInput");
@@ -140,9 +140,9 @@ export function createMain() {
   labelDate.htmlFor = "dueDate";
   labelDate.innerHTML = "Due date";
 
-const projectNameInfo = document.createElement('div');
-projectNameInfo.classList.add('projectNameInfo');
-projectNameInfo.classList.add('hidden');
+  const projectNameInfo = document.createElement("div");
+  projectNameInfo.classList.add("projectNameInfo");
+  projectNameInfo.classList.add("hidden");
 
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
@@ -163,9 +163,13 @@ projectNameInfo.classList.add('hidden');
   projectTasksContainer.classList.add("projectTasksContainer");
 
   const radiobox = document.createElement("div");
+  radiobox.classList.add("radiobox");
 
   const radioDescription = document.createElement("label");
   radioDescription.innerHTML = "Priority";
+
+  const radio1El = document.createElement("div");
+  radio1El.classList.add("radioElements");
 
   const radio1 = document.createElement("input");
   radio1.type = "radio";
@@ -177,6 +181,9 @@ projectNameInfo.classList.add('hidden');
   const label1 = document.createElement("label");
   label1.htmlFor = "radio1";
   label1.innerHTML = "Low";
+
+  const radio2El = document.createElement("div");
+  radio2El.classList.add("radioElements");
 
   const radio2 = document.createElement("input");
   radio2.type = "radio";
@@ -190,6 +197,9 @@ projectNameInfo.classList.add('hidden');
   label2.htmlFor = "radio2";
   label2.innerHTML = "Medium";
 
+  const radio3El = document.createElement("div");
+  radio3El.classList.add("radioElements");
+
   const radio3 = document.createElement("input");
   radio3.type = "radio";
   radio3.id = "radio3";
@@ -201,7 +211,14 @@ projectNameInfo.classList.add('hidden');
   label3.htmlFor = "radio3";
   label3.innerHTML = "High";
 
-  const childrenRadiobox = [radio1, label1, radio2, label2, radio3, label3];
+  radio1El.appendChild(radio1);
+  radio1El.appendChild(label1);
+  radio2El.appendChild(radio2);
+  radio2El.appendChild(label2);
+  radio3El.appendChild(radio3);
+  radio3El.appendChild(label3);
+
+  const childrenRadiobox = [radio1El, radio2El, radio3El];
 
   childrenRadiobox.forEach((item) => {
     radiobox.appendChild(item);
@@ -220,8 +237,8 @@ projectNameInfo.classList.add('hidden');
     cancelTask,
   ].forEach((item) => taskForm.appendChild(item));
 
-  [projectNameInfo, taskButton, taskForm, projectTasksContainer].forEach((item) =>
-    mainDisplay.appendChild(item)
+  [projectNameInfo, taskButton, taskForm, projectTasksContainer].forEach(
+    (item) => mainDisplay.appendChild(item)
   );
 
   [projectHead, projectsContainer, inputProject, addProject].forEach((item) =>
