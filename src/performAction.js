@@ -190,6 +190,22 @@ function createTaskDisplay(task) {
   taskTeaserRight.appendChild(taskTeaserDetails);
   taskTeaserRight.appendChild(taskTeaserDelete);
 
+  function setPrioritySelectIndex(prioritySelect, taskPriority) {
+    switch (taskPriority) {
+      case "low":
+        prioritySelect.selectedIndex = 0;
+        break;
+      case "medium":
+        prioritySelect.selectedIndex = 1;
+        break;
+      case "high":
+        prioritySelect.selectedIndex = 2;
+        break;
+      default:
+        prioritySelect.selectedIndex = -1; // Default index if priority is not found
+    }
+  }
+
   prioritySelect.options[prioritySelect.options.length] = new Option(
     "Low",
     "low"
@@ -202,7 +218,8 @@ function createTaskDisplay(task) {
     "High",
     "high"
   );
-  prioritySelect.selectedIndex = 1;
+  // prioritySelect.selectedIndex = 1;
+  setPrioritySelectIndex(prioritySelect, task.priority);
 
   const taskEdit = document.createElement("button");
   taskEdit.classList.add("taskEdit");
