@@ -505,19 +505,6 @@ function updateLocalStorage() {
   localStorage.setItem("projectList", JSON.stringify(projectList));
 }
 
-// function toggleTaskDetails() {
-//   const taskTeaserName = document.querySelector('.taskTeaserName');
-//   const taskElement = document.querySelector('.taskElement');
-//   const projectTasksContainer = document.querySelector('.projectTasksContainer');
-
-//   // projectTasksContainer.innerHTML = '';
-//   if (taskElement.classList.contains('hidden')) {
-//     taskElement.classList.remove('hidden');
-//   } else if (!taskElement.classList.contains('hidden')) {
-//     taskElement.classList.add('hidden'); 
-//   }
-// }
-
 function deleteTask(task) {
   task.removeTask(generalTaskList);
   displayCurrentTab();

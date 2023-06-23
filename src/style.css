@@ -9,6 +9,10 @@
   display: grid;
 }
 
+.taskButton {
+  background-color: rgb(112, 128, 144);
+}
+
 button {
   /* width: 150px; */
   padding: 0.75rem;
@@ -33,18 +37,29 @@ img {
   /* viewport-fit: cover; */
 }
 
-.allTasks, .todayTasks, .weekTasks {
+.allTasks,
+.todayTasks,
+.weekTasks {
   display: flex;
   /* flex-direction: row-reverse; */
   flex-direction: row;
   justify-content: center;
   align-items: center;
   /* align-content: center; */
- gap: 0.5rem;
-/* background-color: rgb(218, 165, 32); */
-background-color: rgb(112, 128, 144);
-/* background-color: silver; */
+  gap: 0.5rem;
+  /* background-color: rgb(218, 165, 32); */
+  background-color: rgb(112, 128, 144);
+  /* background-color: rgb(144, 112, 96); */
+  /* background-color: silver; */
 }
+
+.allTasks:hover,
+.todayTasks:hover,
+.weekTasks:hover {
+cursor: pointer;
+/* background-color: rgb(144, 112, 96); */
+}
+
 
 .allTasks > img {
   /* border: 2px solid yellow; */
@@ -56,8 +71,12 @@ background-color: rgb(112, 128, 144);
   /* background-color: chocolate; */
   justify-content: center;
   align-items: center;
-  background: rgb(245,203,134);
-  background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%);
+  background: rgb(245, 203, 134);
+  background: linear-gradient(
+    34deg,
+    rgba(245, 203, 134, 1) 8%,
+    rgba(126, 89, 54, 1) 92%
+  );
 }
 
 .addProject {
@@ -75,6 +94,10 @@ background-color: rgb(112, 128, 144);
   /* height: 0.5rem; */
 }
 
+.addProject:hover {
+  cursor: pointer;
+}
+
 .footer {
   display: flex;
   height: 10vh;
@@ -82,8 +105,12 @@ background-color: rgb(112, 128, 144);
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-  background: rgb(245,203,134);
-background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%);
+  background: rgb(245, 203, 134);
+  background: linear-gradient(
+    34deg,
+    rgba(245, 203, 134, 1) 8%,
+    rgba(126, 89, 54, 1) 92%
+  );
 }
 
 .main {
@@ -100,13 +127,12 @@ background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%
   background-color: lightblue;
   background-color: rgb(165, 42, 42);
   background-color: cadetblue;
-  
+
   /* border: 1px solid black; */
   padding: 0.75rem;
   gap: 1rem;
   width: min(100%, 250px);
   /* max-width: 50%; */
-  
 }
 
 .home {
@@ -157,8 +183,12 @@ input {
   border: 3px solid black;
   border-radius: 0.75rem;
   background-color: lightblue;
-  background: rgb(245,203,134);
-background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%);
+  background: rgb(245, 203, 134);
+  background: linear-gradient(
+    34deg,
+    rgba(245, 203, 134, 1) 8%,
+    rgba(126, 89, 54, 1) 92%
+  );
   /* justify-content: start; */
   /* background-color: cadetblue; */
   align-items: start;
@@ -184,15 +214,17 @@ background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%
 
 .activeButton {
   background-color: red;
+  background-color: rgb(144, 112, 96);
+  background-color: darkgoldenrod;
 }
 
 .hidden {
   display: none;
 }
 
-.projectElement {
+.projectElement:hover {
   /* border: 1px solid blue; */
-
+  
 }
 
 .projectsContainer {
@@ -218,15 +250,19 @@ background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%
   width: 100%;
   align-items: center;
   justify-content: space-between;
-  background-color:darkgoldenrod;
+  background-color: darkgoldenrod;
   /* background-color: rgb(218, 165, 32); */
   color: white;
   /* word-wrap: wrap; */
   gap: 0.5rem;
   margin: 0;
-  
+
   /* max-width: 100%; */
   /* width: min(80%, 125px) */
+}
+
+.projectName:hover {
+  cursor: pointer;
 }
 
 .projectDelete {
@@ -235,8 +271,7 @@ background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%
   align-items: center;
   /* width: 2rem; */
   height: 1rem;
- /* background-color: silver; */
-
+  /* background-color: silver; */
 }
 
 .projects {
@@ -270,7 +305,7 @@ background: linear-gradient(34deg, rgba(245,203,134,1) 8%, rgba(126,89,54,1) 92%
 }
 
 .taskEdit:hover {
-background-color: green;
+  background-color: green;
 }
 
 .taskDelete:hover {
@@ -279,11 +314,9 @@ background-color: green;
 
 .projectTasksContainer {
   /* border: 2px solid red; */
-  
 }
 
 .mainDisplay {
-  
 }
 
 .taskTeaser {
@@ -297,7 +330,6 @@ background-color: green;
 }
 
 .completeTaskElement {
-
 }
 
 .taskTeaserRight {
@@ -310,10 +342,16 @@ background-color: green;
 .taskTeaserDelete {
   color: white;
   color: black;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Apply a soft shadow to the text */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
+
 }
 
 .taskTeaserDetails {
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Apply a soft shadow to the text */
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.7), 0 0 30px rgba(255, 255, 255, 0.5), 0 0 40px rgba(255, 255, 255, 0.3);
 
+}
+
+.taskTeaserDelete:hover,
+.taskTeaserDetails:hover {
+  cursor: pointer;
 }
