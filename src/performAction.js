@@ -96,6 +96,18 @@ function createTaskDisplay(task) {
   const taskElement = document.createElement("div");
   taskElement.classList.add("taskElement");
 
+  const titleLabel = document.createElement("h5");
+  titleLabel.innerHTML = "Name";
+
+  const descriptionLabel = document.createElement("h5");
+  descriptionLabel.innerHTML = "Notes";
+
+  const dueDateLabel = document.createElement("h5");
+  dueDateLabel.innerHTML = "Due date";
+
+  const priorityLabel = document.createElement("h5");
+  priorityLabel.innerHTML = "Priority";
+
   const taskTitleDisplay = document.createElement("input");
   taskTitleDisplay.type = "text";
   taskTitleDisplay.classList.add("taskTitleDisplay");
@@ -103,18 +115,13 @@ function createTaskDisplay(task) {
     task.title.charAt(0).toUpperCase() + task.title.slice(1);
   taskTitleDisplay.readOnly = true;
 
-  const titleLabel = document.createElement("h4");
-  titleLabel.innerHTML = "Name";
-
-  const taskDescriptionDisplay = document.createElement("input");
-  taskDescriptionDisplay.type = "text";
+  const taskDescriptionDisplay = document.createElement("textarea");
+  // taskDescriptionDisplay.type = "text";
   taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
   taskDescriptionDisplay.value =
     task.description.charAt(0).toUpperCase() + task.description.slice(1);
   taskDescriptionDisplay.readOnly = true;
-
-  const descriptionLabel = document.createElement("h4");
-  descriptionLabel.innerHTML = "Description";
+  taskDescriptionDisplay.rows = 6;
 
   const taskDueDateDisplay = document.createElement("input");
   taskDueDateDisplay.type = "text";
@@ -122,15 +129,15 @@ function createTaskDisplay(task) {
   taskDueDateDisplay.value = format(new Date(task.dueDate), "dd/MM/yyyy");
   taskDueDateDisplay.readOnly = true;
 
-  const dueDateLabel = document.createElement("h4");
-  dueDateLabel.innerHTML = "Due date";
+  
 
   const taskPriorityDisplay = document.createElement("input");
   taskPriorityDisplay.type = "text";
-  taskPriorityDisplay.classList.add("taskPriorityInput");
+  taskPriorityDisplay.classList.add("taskPriorityDisplay");
   taskPriorityDisplay.value =
     task.priority.charAt(0).toUpperCase() + task.priority.slice(1);
   taskPriorityDisplay.readOnly = true;
+
 
   const prioritySelect = document.createElement("select");
   prioritySelect.classList.add("prioritySelect");
@@ -150,8 +157,7 @@ function createTaskDisplay(task) {
   );
   prioritySelect.selectedIndex = 1;
 
-  const priorityLabel = document.createElement("h4");
-  priorityLabel.innerHTML = "Priority";
+  
 
   const taskEdit = document.createElement("button");
   taskEdit.classList.add("taskEdit");
@@ -414,4 +420,15 @@ function displayCurrentTab() {
 function updateLocalStorage() {
   localStorage.setItem("generalTaskList", JSON.stringify(generalTaskList));
   localStorage.setItem("projectList", JSON.stringify(projectList));
+}
+
+function setPriorityColor(task) {
+  const taskPriorityDisplay = document.querySelector('.taskPriorityDisplay');
+  if (task.priority === 'low') {
+    taskPriorityDisplay.style.color = 'green';
+  } else if (task.priority === 'medium') {
+    taskPriorityDisplay.style.color = 'yellow';
+  } else if (task.priority === 'high') {
+    taskPriorityDisplay.style.color = 'red';
+  }
 }

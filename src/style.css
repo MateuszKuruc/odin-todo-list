@@ -2,6 +2,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #content {
@@ -134,16 +135,20 @@ input {
 }
 
 .taskElement {
-  /* width: max(80%, 500px); */
+  /* width: max(100%, 500px); */
+  max-width: 100%;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   border: 3px solid black;
   border-radius: 0.75rem;
   background-color: lightblue;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: start; */
+  align-items: start;
   align-self: center;
   margin: 0.25rem;
+  padding: 1rem;
+  gap: 0.5rem;
 }
 
 .taskElement > input {
@@ -153,7 +158,9 @@ input {
 }
 
 .taskElement > input:hover {
-  background-color: rgba(138, 29, 138, 0.5);
+  /* background-color: rgba(138, 29, 138, 0.1); */
+  background-color: rgba(118, 206, 236, 0.9);
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
 .activeButton {
@@ -216,4 +223,36 @@ input {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
+}
+
+.taskDescriptionDisplay,
+.taskTitleDisplay,
+.taskPriorityDisplay,
+.taskDueDateDisplay {
+  /* width: 90%; */
+  width: 80%;
+  height: auto;
+  font-size: 24px;
+  font-weight: 900;
+  /* padding: 2rem; */
+  /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
+}
+
+.taskDescriptionDisplay:not(:read-only),
+.taskTitleDisplay:not(:read-only),
+.taskDueDateDisplay:not(:read-only) {
+  color: darkgoldenrod;
+  /* color: white; */
+}
+
+.taskEdit:hover {
+background-color: green;
+}
+
+.taskDelete:hover {
+  background-color: red;
+}
+
+.projectTasksContainer {
+  border: 2px solid red;
 }
