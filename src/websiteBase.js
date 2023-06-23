@@ -140,6 +140,10 @@ export function createMain() {
   labelDate.htmlFor = "dueDate";
   labelDate.innerHTML = "Due date";
 
+const projectNameInfo = document.createElement('div');
+projectNameInfo.classList.add('projectNameInfo');
+projectNameInfo.classList.add('hidden');
+
   const taskButton = document.createElement("button");
   taskButton.classList.add("taskButton");
   taskButton.innerHTML = "Add task";
@@ -216,7 +220,7 @@ export function createMain() {
     cancelTask,
   ].forEach((item) => taskForm.appendChild(item));
 
-  [taskButton, taskForm, projectTasksContainer].forEach((item) =>
+  [projectNameInfo, taskButton, taskForm, projectTasksContainer].forEach((item) =>
     mainDisplay.appendChild(item)
   );
 
