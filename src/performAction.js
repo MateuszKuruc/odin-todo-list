@@ -158,12 +158,13 @@ function createTaskDisplay(task) {
   // taskTeaserDueDate.type = 'text';
 
   taskTeaserDueDate.innerHTML = taskDueDateDisplay.value;
-  console.log(taskDueDateDisplay);
-    taskTeaser.appendChild(taskTeaserDueDate);
+
+    
 
 
-  const taskTeaserDetails = document.createElement('button');
-  taskTeaserDetails.innerHTML = 'Show details';
+  const taskTeaserDetails = document.createElement('div');
+  taskTeaserDetails.classList.add('taskTeaserDetails');
+  taskTeaserDetails.innerHTML = 'MORE';
   taskTeaserDetails.addEventListener('click', () => {
     if (taskElement.classList.contains('hidden')) {
       taskElement.classList.remove('hidden');
@@ -173,23 +174,27 @@ function createTaskDisplay(task) {
   });
   // taskTeaser.appendChild(taskTeaserDetails);
 
-  const taskTeaserDelete = document.createElement('button');
-  taskTeaserDelete.innerHTML = 'Delete task'
+  const taskTeaserDelete = document.createElement('div');
+  taskTeaserDelete.classList.add('taskTeaserDelete');
+  taskTeaserDelete.innerHTML = 'DELETE'
   taskTeaserDelete.addEventListener('click', () => {
     deleteTask(task);
   })
 
 if(task.priority === 'low') {
-  taskTeaser.style.backgroundColor = 'green';
+  taskTeaser.style.backgroundColor = 'rgb(178, 217, 156)';
 } else if(task.priority === 'medium') {
-  taskTeaser.style.backgroundColor = 'yellow'
+  taskTeaser.style.backgroundColor = 'rgb(255, 245, 157)'
 } else if(task.priority === 'high') {
-  taskTeaser.style.backgroundColor = 'red';
+  taskTeaser.style.backgroundColor = 'rgb(219, 106, 106)';
 }
 
-const taskTeaserButtons = document.createElement('div');
-taskTeaserButtons.appendChild(taskTeaserDetails);
-taskTeaserButtons.appendChild(taskTeaserDelete);
+const taskTeaserRight = document.createElement('div');
+taskTeaserRight.classList.add('taskTeaserRight');
+taskTeaserRight.appendChild(taskTeaserDueDate);
+taskTeaserRight.appendChild(taskTeaserDetails);
+taskTeaserRight.appendChild(taskTeaserDelete);
+
 
 
 
@@ -285,10 +290,10 @@ taskTeaserButtons.appendChild(taskTeaserDelete);
 
   [
     taskTeaserName,
-    taskTeaserDueDate,
+    // taskTeaserDueDate,
     // taskTeaserDetails,
     // taskTeaserDelete
-    taskTeaserButtons
+    taskTeaserRight
   ].forEach((item) => taskTeaser.appendChild(item));
   console.log(taskTeaser);
   // projectTasksContainer.appendChild(taskTeaser);
