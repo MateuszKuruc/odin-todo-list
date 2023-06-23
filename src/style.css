@@ -254,5 +254,19 @@ background-color: green;
 }
 
 .projectTasksContainer {
-  border: 2px solid red;
+  /* border: 2px solid red; */
+}
+
+.taskTeaser {
+  /* border: 2px solid orange; */
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+.completeTaskElement {
+
 }
