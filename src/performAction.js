@@ -120,7 +120,7 @@ function createTaskDisplay(task) {
   taskTitleDisplay.readOnly = true;
 
   const taskDescriptionDisplay = document.createElement("textarea");
-  // taskDescriptionDisplay.type = "text";
+
   taskDescriptionDisplay.classList.add("taskDescriptionDisplay");
   taskDescriptionDisplay.value =
     task.description.charAt(0).toUpperCase() + task.description.slice(1);
@@ -144,8 +144,6 @@ function createTaskDisplay(task) {
   prioritySelect.classList.add("prioritySelect");
   prioritySelect.classList.add("hidden");
 
-  // testing new approach to display
-
   const taskTeaser = document.createElement("div");
   taskTeaser.classList.add("taskTeaser");
 
@@ -155,7 +153,6 @@ function createTaskDisplay(task) {
   taskTeaser.appendChild(taskTeaserName);
 
   const taskTeaserDueDate = document.createElement("p");
-  // taskTeaserDueDate.type = 'text';
 
   taskTeaserDueDate.innerHTML = taskDueDateDisplay.value;
 
@@ -171,7 +168,6 @@ function createTaskDisplay(task) {
       taskTeaserDetails.innerHTML = "MORE";
     }
   });
-  // taskTeaser.appendChild(taskTeaserDetails);
 
   const taskTeaserDelete = document.createElement("div");
   taskTeaserDelete.classList.add("taskTeaserDelete");
@@ -193,10 +189,6 @@ function createTaskDisplay(task) {
   taskTeaserRight.appendChild(taskTeaserDueDate);
   taskTeaserRight.appendChild(taskTeaserDetails);
   taskTeaserRight.appendChild(taskTeaserDelete);
-
-  // test end
-
-  // projectTasksContainer.appendChild(taskTeaser);
 
   prioritySelect.options[prioritySelect.options.length] = new Option(
     "Low",
@@ -257,17 +249,11 @@ function createTaskDisplay(task) {
   taskDelete.classList.add("taskDelete");
   taskDelete.innerHTML = "Delete task";
 
-  // taskDelete.addEventListener('click', () => {
-  //   deleteTask(task);
-  // })
-
   taskDelete.addEventListener("click", () => {
     task.removeTask(generalTaskList);
     displayCurrentTab();
     updateLocalStorage();
   });
-
-  // const taskTeaserDelete = taskDelete;
 
   [
     titleLabel,
@@ -283,21 +269,14 @@ function createTaskDisplay(task) {
     taskDelete,
   ].forEach((item) => taskElement.appendChild(item));
 
-  [
-    taskTeaserName,
-    // taskTeaserDueDate,
-    // taskTeaserDetails,
-    // taskTeaserDelete
-    taskTeaserRight,
-  ].forEach((item) => taskTeaser.appendChild(item));
-  // projectTasksContainer.appendChild(taskTeaser);
+  [taskTeaserName, taskTeaserRight].forEach((item) =>
+    taskTeaser.appendChild(item)
+  );
 
   completeTaskElement.appendChild(taskTeaser);
   completeTaskElement.appendChild(taskElement);
 
   projectTasksContainer.appendChild(completeTaskElement);
-
-  // projectTasksContainer.appendChild(taskElement);
 }
 
 export function displayAllTasks() {
@@ -326,18 +305,10 @@ function displayProjectTasks() {
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
-  // const projectNameInfo = document.querySelector(".projectNameInfo");
+
   toggleProjectNameInfo();
 
   projectTasksContainer.innerHTML = "";
-  // projectTasksContainer.appendChild(projectNameInfo);
-
-  // if (currentProjectId !== null) {
-  //   const currentProject = Project.findProjectById(currentProjectId);
-  //   const currentProjectName = currentProject.name;
-  //   projectNameInfo.innerHTML = `Project: '${currentProjectName}'`;
-  //   projectNameInfo.classList.remove('hidden');
-  // }
 
   const projectTasks = generalTaskList.filter(
     (task) => task.projectId === currentProjectId
