@@ -3,7 +3,7 @@ import calendar from "./img/calendar.svg";
 import inbox from "./img/inbox1.svg";
 import listofprojects from "./img/listofprojects.svg";
 import project from "./img/project.svg";
-import house from './img/house.svg';
+import house from "./img/house.svg";
 import today from "./img/star.svg";
 import github from "./img/github.svg";
 import {
@@ -36,22 +36,17 @@ export function createMain() {
   const sidebar = document.createElement("div");
   sidebar.classList.add("sidebar");
 
-  
-
   const home = document.createElement("div");
   home.classList.add("home");
 
- 
-
-  const homeImg = document.createElement('img');
+  const homeImg = document.createElement("img");
   homeImg.src = house;
-
 
   const homeTitle = document.createElement("h2");
   homeTitle.innerHTML = "Home";
 
-  const homeHead = document.createElement('div');
-  homeHead.classList.add('homeHead');
+  const homeHead = document.createElement("div");
+  homeHead.classList.add("homeHead");
   homeHead.appendChild(homeImg);
   homeHead.appendChild(homeTitle);
 
@@ -314,12 +309,7 @@ function createFooter() {
 }
 
 export function startWebsite() {
-  // const content = document.getElementById("content");
   const body = document.body;
-
-  // content.appendChild(createHeader());
-  // content.appendChild(createMain());
-  // content.appendChild(createFooter());
 
   body.appendChild(createHeader());
   body.appendChild(createMain());

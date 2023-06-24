@@ -41,7 +41,6 @@ export class Task {
     this.projectId = currentProjectId;
     this.finished = false;
     generalTaskList.push(this);
-
   }
 
   removeTask(generalTaskList) {
@@ -52,13 +51,6 @@ export class Task {
     if (taskIndex !== -1) {
       generalTaskList.splice(taskIndex, 1);
     }
-
-    // if (this.projectId !== null) {
-    //     const projectTaskIndex = this.projectId.taskList.findIndex((task) => task.id === this.id);
-    //     if (projectTaskIndex !== -1) {
-    //         this.projectId.taskList.splice(projectTaskIndex, 1);
-    //     }
-    // }
   }
 }
 

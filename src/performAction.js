@@ -27,7 +27,7 @@ export function createProject() {
       updateLocalStorage();
       return newProject;
     } else if (inputProject.value.length > 16) {
-      inputProject.value = '';
+      inputProject.value = "";
       alert("Enter project name below 16 characters!");
     }
   });
@@ -40,27 +40,26 @@ export function createTask() {
 
   getPriorityChoice();
 
-  // if (
-  //   taskTitleInput.value != "" &&
-  //   taskTitleInput.value.length != 0 &&
-  //   currentProjectId === null
-  // ) 
-  
-  if(taskTitleInput.value === '' || taskTitleInput.value.length === 0) {
-    alert('Enter task name');
+  if (taskTitleInput.value === "" || taskTitleInput.value.length === 0) {
+    alert("Enter task name");
     console.log(dueDateInput.value);
     return;
-  } else if(!dueDateInput.value || dueDateInput.value === null || dueDateInput.value === undefined || dueDateInput.value === 'dd/mm/yyy') {
-    alert('Please pick date');
+  } else if (
+    !dueDateInput.value ||
+    dueDateInput.value === null ||
+    dueDateInput.value === undefined ||
+    dueDateInput.value === "dd/mm/yyy"
+  ) {
+    alert("Please pick date");
     return;
-  }
-
-else if (
+  } else if (
     taskTitleInput.value != "" &&
     taskTitleInput.value.length != 0 &&
-    currentProjectId === null && dueDateInput !== null && dueDateInput !== undefined && dueDateInput.value
-  ) 
-  {
+    currentProjectId === null &&
+    dueDateInput !== null &&
+    dueDateInput !== undefined &&
+    dueDateInput.value
+  ) {
     new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
@@ -167,7 +166,6 @@ function createTaskDisplay(task) {
   const taskTeaserCheckbox = document.createElement("input");
   taskTeaserCheckbox.classList.add("taskTeaserCheckbox");
   taskTeaserCheckbox.type = "checkbox";
-  // taskTeaser.appendChild(taskTeaserCheckbox);
 
   const taskTeaserName = document.createElement("h4");
   taskTeaserName.classList.add("taskTeaserName");
@@ -422,15 +420,15 @@ export function displayTodayTasks() {
       return dateA.getTime() - dateB.getTime();
     });
 
-    sortedTasks.sort((a, b) => {
-      if (a.finished && !b.finished) {
-        return 1;
-      } else if (!a.finished && b.finished) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
+  sortedTasks.sort((a, b) => {
+    if (a.finished && !b.finished) {
+      return 1;
+    } else if (!a.finished && b.finished) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 
   sortedTasks.forEach((task) => {
     if (task.dueDate === formattedTodayDate) {
@@ -464,15 +462,15 @@ function displayWeekTasks() {
       return dateA.getTime() - dateB.getTime();
     });
 
-    sortedTasks.sort((a, b) => {
-      if (a.finished && !b.finished) {
-        return 1;
-      } else if (!a.finished && b.finished) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
+  sortedTasks.sort((a, b) => {
+    if (a.finished && !b.finished) {
+      return 1;
+    } else if (!a.finished && b.finished) {
+      return -1;
+    } else {
+      return 0;
+    }
+  });
 
   sortedTasks.forEach((task) => {
     const checkingInterval = isWithinInterval(new Date(task.dueDate), {
