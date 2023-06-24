@@ -39,7 +39,9 @@ export class Task {
     this.priority = priority;
     this.dueDate = dueDate;
     this.projectId = currentProjectId;
+    this.finished = false;
     generalTaskList.push(this);
+
   }
 
   removeTask(generalTaskList) {

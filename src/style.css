@@ -228,11 +228,10 @@ input {
 }
 
 .taskElement {
-  /* width: max(100%, 500px); */
-  /* max-width: 100%; */
+ 
   width: min(80%, 600px);
   display: flex;
-  /* flex: 1 1 auto; */
+  
   flex-direction: column;
   border: 3px solid black;
   border-radius: 0.75rem;
@@ -243,8 +242,7 @@ input {
     rgba(245, 203, 134, 1) 8%,
     rgba(126, 89, 54, 1) 92%
   );
-  /* justify-content: start; */
-  /* background-color: cadetblue; */
+ 
   align-items: center;
   align-self: center;
   margin: 0.25rem;
@@ -313,19 +311,17 @@ input {
 
 .projectName {
   display: flex;
-  /* width: min(95%, 200px); */
+ 
   width: 100%;
   align-items: center;
   justify-content: space-between;
   background-color: darkgoldenrod;
-  /* background-color: rgb(218, 165, 32); */
+  
   color: white;
-  /* word-wrap: wrap; */
+  
   gap: 0.5rem;
   margin: 0;
 
-  /* max-width: 100%; */
-  /* width: min(80%, 125px) */
 }
 
 .projectName:hover {
@@ -352,13 +348,10 @@ input {
 .taskTitleDisplay,
 .taskPriorityDisplay,
 .taskDueDateDisplay {
-  /* width: 90%; */
   width: 80%;
   height: auto;
   font-size: 18px;
   font-weight: 900;
-  /* padding: 2rem; */
-  /* font-family:Verdana, Geneva, Tahoma, sans-serif; */
 }
 
 .taskDescriptionDisplay {
@@ -413,7 +406,6 @@ input {
 }
 
 .taskTeaser {
-  /* border: 2px solid orange; */
   display: flex;
   justify-content: space-between;
   padding: 1rem;
@@ -449,4 +441,11 @@ input {
 .taskTeaserDelete:hover,
 .taskTeaserDetails:hover {
   cursor: pointer;
+}
+
+.finished {
+  text-decoration: line-through;
+  text-decoration-style: solid;
+  text-decoration-thickness: 2px;;
+  color: rgb(112, 128, 144);
 }

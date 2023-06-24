@@ -23,9 +23,10 @@ window.onload = () => {
         task.description,
         task.priority,
         task.dueDate,
-        task.projectId
+        task.projectId,
       );
       newTask.id = task.id;
+      newTask.finished = task.finished;
     });
   }
 

@@ -27,6 +27,7 @@ export function createProject() {
       updateLocalStorage();
       return newProject;
     } else if (inputProject.value.length > 16) {
+      inputProject.value = '';
       alert("Enter project name below 16 characters!");
     }
   });
@@ -148,14 +149,9 @@ function createTaskDisplay(task) {
   taskTeaser.classList.add("taskTeaser");
 
   const taskTeaserCheckbox = document.createElement("input");
-  taskTeaserCheckbox.classList.add('taskTeaserCheckbox');
-  taskTeaserCheckbox.type = 'checkbox';
-  taskTeaser.appendChild(taskTeaserCheckbox);
-  taskTeaserCheckbox.addEventListener('click', () => {
-    if(taskTeaserCheckbox.checked === true) {
-      taskTeaser.style.backgroundColor = 'white';
-    }
-  });
+  taskTeaserCheckbox.classList.add("taskTeaserCheckbox");
+  taskTeaserCheckbox.type = "checkbox";
+  // taskTeaser.appendChild(taskTeaserCheckbox);
 
   const taskTeaserName = document.createElement("h4");
   taskTeaserName.classList.add("taskTeaserName");
@@ -163,6 +159,7 @@ function createTaskDisplay(task) {
   taskTeaser.appendChild(taskTeaserName);
 
   const taskTeaserDueDate = document.createElement("p");
+  taskTeaserDueDate.classList.add("taskTeaserDueDate");
 
   taskTeaserDueDate.innerHTML = taskDueDateDisplay.value;
 
@@ -187,35 +184,50 @@ function createTaskDisplay(task) {
     deleteTask(task);
   });
 
-  if (task.priority === "low") {
-    taskTeaser.style.backgroundColor = "rgb(178, 217, 156)";
-  } else if (task.priority === "medium") {
-    taskTeaser.style.backgroundColor = "rgb(255, 245, 157)";
-  } else if (task.priority === "high") {
-    taskTeaser.style.backgroundColor = "rgb(219, 106, 106)";
+  function taskPriorityColor() {
+    if (task.finished === false) {
+      taskTeaserName.classList.remove("finished");
+      taskTeaserDueDate.classList.remove("finished");
+      if (task.priority === "low") {
+        taskTeaser.style.backgroundColor = "rgb(178, 217, 156)";
+      } else if (task.priority === "medium") {
+        taskTeaser.style.backgroundColor = "rgb(255, 245, 157)";
+      } else if (task.priority === "high") {
+        taskTeaser.style.backgroundColor = "rgb(219, 106, 106)";
+      }
+    } else if (task.finished === true) {
+      taskTeaser.style.backgroundColor = "rgb(112, 128, 144, 0.4)";
+      taskTeaserCheckbox.checked = true;
+      taskTeaserName.classList.add("finished");
+      taskTeaserDueDate.classList.add("finished");
+    }
   }
+  taskPriorityColor();
+
+  taskTeaserCheckbox.addEventListener("click", () => {
+    if (task.finished === false) {
+      taskTeaserCheckbox.checked = true;
+      task.finished = true;
+    } else if (task.finished === true) {
+      taskTeaserCheckbox.checked = false;
+      task.finished = false;
+    }
+
+    taskPriorityColor();
+    displayCurrentTab();
+    updateLocalStorage();
+  });
+
+  const taskTeaserLeft = document.createElement("div");
+  taskTeaserLeft.classList.add("taskTeaserLeft");
+  taskTeaserLeft.appendChild(taskTeaserCheckbox);
+  taskTeaser.appendChild(taskTeaserLeft);
 
   const taskTeaserRight = document.createElement("div");
   taskTeaserRight.classList.add("taskTeaserRight");
   taskTeaserRight.appendChild(taskTeaserDueDate);
   taskTeaserRight.appendChild(taskTeaserDetails);
   taskTeaserRight.appendChild(taskTeaserDelete);
-
-  // function setPrioritySelectIndex(prioritySelect, taskPriority) {
-  //   switch (taskPriority) {
-  //     case "low":
-  //       prioritySelect.selectedIndex = 0;
-  //       break;
-  //     case "medium":
-  //       prioritySelect.selectedIndex = 1;
-  //       break;
-  //     case "high":
-  //       prioritySelect.selectedIndex = 2;
-  //       break;
-  //     default:
-  //       prioritySelect.selectedIndex = -1;
-  //   }
-  // }
 
   prioritySelect.options[prioritySelect.options.length] = new Option(
     "Low",
@@ -313,6 +325,7 @@ export function displayAllTasks() {
   const projectTasksContainer = document.querySelector(
     ".projectTasksContainer"
   );
+
   projectTasksContainer.innerHTML = "";
   currentProjectId = null;
 
@@ -322,6 +335,16 @@ export function displayAllTasks() {
     const dateA = new Date(a.dueDate);
     const dateB = new Date(b.dueDate);
     return dateA.getTime() - dateB.getTime();
+  });
+
+  sortedTasks.sort((a, b) => {
+    if (a.finished && !b.finished) {
+      return 1;
+    } else if (!a.finished && b.finished) {
+      return -1;
+    } else {
+      return 0;
+    }
   });
 
   sortedTasks.forEach((task) => {
@@ -346,6 +369,16 @@ function displayProjectTasks() {
     const dateA = new Date(a.dueDate);
     const dateB = new Date(b.dueDate);
     return dateA.getTime() - dateB.getTime();
+  });
+
+  sortedProjectTasks.sort((a, b) => {
+    if (a.finished && !b.finished) {
+      return 1;
+    } else if (!a.finished && b.finished) {
+      return -1;
+    } else {
+      return 0;
+    }
   });
 
   sortedProjectTasks.forEach((task) => {
