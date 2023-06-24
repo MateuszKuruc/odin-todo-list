@@ -419,9 +419,15 @@ input {
   flex-direction: column;
 }
 
+.taskTeaserLeft {
+  width: 1.5rem;
+}
+
+
 .taskTeaserRight {
   display: flex;
   flex-direction: row;
+  /* margin-left: auto; */
   gap: 2rem;
   font-weight: 900;
 }

@@ -40,11 +40,27 @@ export function createTask() {
 
   getPriorityChoice();
 
-  if (
+  // if (
+  //   taskTitleInput.value != "" &&
+  //   taskTitleInput.value.length != 0 &&
+  //   currentProjectId === null
+  // ) 
+  
+  if(taskTitleInput.value === '' || taskTitleInput.value.length === 0) {
+    alert('Enter task name');
+    console.log(dueDateInput.value);
+    return;
+  } else if(!dueDateInput.value || dueDateInput.value === null || dueDateInput.value === undefined || dueDateInput.value === 'dd/mm/yyy') {
+    alert('Please pick date');
+    return;
+  }
+
+else if (
     taskTitleInput.value != "" &&
     taskTitleInput.value.length != 0 &&
-    currentProjectId === null
-  ) {
+    currentProjectId === null && dueDateInput !== null && dueDateInput !== undefined && dueDateInput.value
+  ) 
+  {
     new Task(
       taskTitleInput.value,
       taskDescriptionInput.value,
