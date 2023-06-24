@@ -469,9 +469,25 @@ input {
   cursor: pointer;
 }
 
+.taskTeaserDelete:hover {
+  color: red;
+}
+
+.taskTeaserDetails:hover {
+  color: blue;
+}
+
+.taskTeaserCheckbox:hover {
+  cursor: pointer;
+}
+
 .finished {
   text-decoration: line-through;
   text-decoration-style: solid;
   text-decoration-thickness: 2px;;
   color: rgb(112, 128, 144);
+}
+
+.finishedElement {
+  background-color: rgb(112, 128, 144);
 }
