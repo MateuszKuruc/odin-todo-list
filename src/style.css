@@ -7,6 +7,68 @@
 
 #content {
   display: grid;
+  /* min-height: 100vh; */
+}
+
+html {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+}
+
+.header {
+  min-height: 10vh;
+  display: flex;
+  /* min-width: 100vw; */
+  flex-grow: 1;
+  
+  /* width: auto; */
+  /* background-color: chocolate; */
+  justify-content: center;
+  align-items: center;
+  background: rgb(245, 203, 134);
+  background: linear-gradient(
+    34deg,
+    rgba(245, 203, 134, 1) 8%,
+    rgba(126, 89, 54, 1) 92%
+  );
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  background-color: lightblue;
+  background-color: rgb(165, 42, 42);
+  background-color: cadetblue;
+min-height: 80vh;
+
+  padding: 0.75rem;
+  gap: 1rem;
+  width: min(100%, 250px);
+  /* max-width: 50%; */
+}
+
+.footer {
+  display: flex;
+  height: 10vh;
+  margin-top: auto;
+  /* background-color: chocolate; */
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgb(245, 203, 134);
+  background: linear-gradient(
+    34deg,
+    rgba(245, 203, 134, 1) 8%,
+    rgba(126, 89, 54, 1) 92%
+  );
 }
 
 .taskButton {
@@ -81,20 +143,6 @@ cursor: pointer;
   /* border: 2px solid yellow; */
 }
 
-.header {
-  height: 10vh;
-  display: flex;
-  /* background-color: chocolate; */
-  justify-content: center;
-  align-items: center;
-  background: rgb(245, 203, 134);
-  background: linear-gradient(
-    34deg,
-    rgba(245, 203, 134, 1) 8%,
-    rgba(126, 89, 54, 1) 92%
-  );
-}
-
 .addProject {
   display: flex;
   flex-direction: row-reverse;
@@ -114,41 +162,12 @@ cursor: pointer;
   cursor: pointer;
 }
 
-.footer {
-  display: flex;
-  height: 10vh;
-  /* background-color: chocolate; */
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  background: rgb(245, 203, 134);
-  background: linear-gradient(
-    34deg,
-    rgba(245, 203, 134, 1) 8%,
-    rgba(126, 89, 54, 1) 92%
-  );
-}
-
 .main {
   display: grid;
-  height: 80vh;
+  /* height: 80vh; */
   grid-template-columns: 1fr 4fr;
   /* border: 5px solid red; */
   /* background-color: red; */
-}
-
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  background-color: lightblue;
-  background-color: rgb(165, 42, 42);
-  background-color: cadetblue;
-
-  /* border: 1px solid black; */
-  padding: 0.75rem;
-  gap: 1rem;
-  width: min(100%, 250px);
-  /* max-width: 50%; */
 }
 
 .home {
@@ -396,6 +415,7 @@ input {
   
   font-size: 24px;
   background-color: cadetblue;
+  
 }
 
 .projectTasksContainer {

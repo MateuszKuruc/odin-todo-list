@@ -314,11 +314,16 @@ function createFooter() {
 }
 
 export function startWebsite() {
-  const content = document.getElementById("content");
+  // const content = document.getElementById("content");
+  const body = document.body;
 
-  content.appendChild(createHeader());
-  content.appendChild(createMain());
-  content.appendChild(createFooter());
+  // content.appendChild(createHeader());
+  // content.appendChild(createMain());
+  // content.appendChild(createFooter());
+
+  body.appendChild(createHeader());
+  body.appendChild(createMain());
+  body.appendChild(createFooter());
 
   createProject();
   displayProjectList();
