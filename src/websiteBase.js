@@ -2,7 +2,6 @@ import addproject from "./img/addproject.svg";
 import calendar from "./img/calendar.svg";
 import inbox from "./img/inbox1.svg";
 import listofprojects from "./img/listofprojects.svg";
-import project from "./img/project.svg";
 import house from "./img/house.svg";
 import today from "./img/star.svg";
 import github from "./img/github.svg";
