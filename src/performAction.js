@@ -406,6 +406,16 @@ export function displayTodayTasks() {
       return dateA.getTime() - dateB.getTime();
     });
 
+    sortedTasks.sort((a, b) => {
+      if (a.finished && !b.finished) {
+        return 1;
+      } else if (!a.finished && b.finished) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
   sortedTasks.forEach((task) => {
     if (task.dueDate === formattedTodayDate) {
       createTaskDisplay(task);
@@ -436,6 +446,16 @@ function displayWeekTasks() {
       const dateA = new Date(a.dueDate);
       const dateB = new Date(b.dueDate);
       return dateA.getTime() - dateB.getTime();
+    });
+
+    sortedTasks.sort((a, b) => {
+      if (a.finished && !b.finished) {
+        return 1;
+      } else if (!a.finished && b.finished) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
 
   sortedTasks.forEach((task) => {
