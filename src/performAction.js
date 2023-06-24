@@ -147,6 +147,16 @@ function createTaskDisplay(task) {
   const taskTeaser = document.createElement("div");
   taskTeaser.classList.add("taskTeaser");
 
+  const taskTeaserCheckbox = document.createElement("input");
+  taskTeaserCheckbox.classList.add('taskTeaserCheckbox');
+  taskTeaserCheckbox.type = 'checkbox';
+  taskTeaser.appendChild(taskTeaserCheckbox);
+  taskTeaserCheckbox.addEventListener('click', () => {
+    if(taskTeaserCheckbox.checked === true) {
+      taskTeaser.style.backgroundColor = 'white';
+    }
+  });
+
   const taskTeaserName = document.createElement("h4");
   taskTeaserName.classList.add("taskTeaserName");
   taskTeaserName.innerHTML = taskTitleDisplay.value;
@@ -166,6 +176,7 @@ function createTaskDisplay(task) {
     } else if (!taskElement.classList.contains("hidden")) {
       taskElement.classList.add("hidden");
       taskTeaserDetails.innerHTML = "MORE";
+      displayCurrentTab();
     }
   });
 
@@ -190,21 +201,21 @@ function createTaskDisplay(task) {
   taskTeaserRight.appendChild(taskTeaserDetails);
   taskTeaserRight.appendChild(taskTeaserDelete);
 
-  function setPrioritySelectIndex(prioritySelect, taskPriority) {
-    switch (taskPriority) {
-      case "low":
-        prioritySelect.selectedIndex = 0;
-        break;
-      case "medium":
-        prioritySelect.selectedIndex = 1;
-        break;
-      case "high":
-        prioritySelect.selectedIndex = 2;
-        break;
-      default:
-        prioritySelect.selectedIndex = -1; // Default index if priority is not found
-    }
-  }
+  // function setPrioritySelectIndex(prioritySelect, taskPriority) {
+  //   switch (taskPriority) {
+  //     case "low":
+  //       prioritySelect.selectedIndex = 0;
+  //       break;
+  //     case "medium":
+  //       prioritySelect.selectedIndex = 1;
+  //       break;
+  //     case "high":
+  //       prioritySelect.selectedIndex = 2;
+  //       break;
+  //     default:
+  //       prioritySelect.selectedIndex = -1;
+  //   }
+  // }
 
   prioritySelect.options[prioritySelect.options.length] = new Option(
     "Low",
@@ -218,7 +229,7 @@ function createTaskDisplay(task) {
     "High",
     "high"
   );
-  // prioritySelect.selectedIndex = 1;
+
   setPrioritySelectIndex(prioritySelect, task.priority);
 
   const taskEdit = document.createElement("button");
@@ -483,7 +494,6 @@ function displayCurrentTab() {
   const allTasks = document.querySelector(".allTasks");
   const todayTasks = document.querySelector(".todayTasks");
   const weekTasks = document.querySelector(".weekTasks");
-  const taskElement = document.querySelector(".taskElement");
 
   if (allTasks.classList.contains("activeButton")) {
     displayAllTasks();
@@ -519,5 +529,21 @@ function toggleProjectNameInfo() {
     projectNameInfo.classList.remove("hidden");
   } else if (currentProjectId === null) {
     projectNameInfo.classList.add("hidden");
+  }
+}
+
+function setPrioritySelectIndex(prioritySelect, taskPriority) {
+  switch (taskPriority) {
+    case "low":
+      prioritySelect.selectedIndex = 0;
+      break;
+    case "medium":
+      prioritySelect.selectedIndex = 1;
+      break;
+    case "high":
+      prioritySelect.selectedIndex = 2;
+      break;
+    default:
+      prioritySelect.selectedIndex = -1;
   }
 }

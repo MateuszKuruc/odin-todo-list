@@ -156,6 +156,13 @@ cursor: pointer;
   flex-direction: column;
 }
 
+.homeHead {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .mainDisplay {
   background-color: white;
   display: flex;
@@ -338,6 +345,7 @@ input {
   /* border: 1px solid red; */
   display: flex;
   flex-direction: column;
+  gap: 0.25rem;
 }
 
 .taskDescriptionDisplay,
