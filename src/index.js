@@ -3,7 +3,7 @@ import { startWebsite } from "./websiteBase";
 import { Project, Task } from "./createItems";
 
 window.onload = () => {
-//   localStorage.clear();
+  //   localStorage.clear();
 
   const storedProjectList = JSON.parse(localStorage.getItem("projectList"));
   const storedGeneralTaskList = JSON.parse(
@@ -23,7 +23,7 @@ window.onload = () => {
         task.description,
         task.priority,
         task.dueDate,
-        task.projectId,
+        task.projectId
       );
       newTask.id = task.id;
       newTask.finished = task.finished;
