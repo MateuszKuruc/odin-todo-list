@@ -24,3 +24,4 @@ The app has got the option to set 'due date' for each item and provide them with
 <h2>Visual representation</h2>
 <img width="500px" src="src/img/todo_1.png" alt="todo-list-app" />
 
+In case of any questions, feel free to contact me directly.
