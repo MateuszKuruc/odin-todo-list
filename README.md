@@ -1,5 +1,8 @@
 # odin-todo-list
-To-do list app built with JavaScript, HTML and CSS
+To-do list app built with JavaScript, HTML and CSS.
+
+
+🌐 [To-do list app live](https://mateuszkuruc.github.io/odin-todo-list/)
 <h2>Goals</h2>
 <p>
 The aim is to create an app that will allow the user to create separate projects and assign individual task ('todo' items) to them.
