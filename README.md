@@ -19,5 +19,5 @@ The app has got the option to set 'due date' for each item and provide them with
 </ul>
 
 <h2>Visual representation</h2>
-![To-do app](https://github.com/MateuszKuruc/odin-todo-list/blob/main/src/img/todo_1.png?raw=true)
+<img width="500px" src="src/img/todo_1.png" alt="todo-list-app" />
 
